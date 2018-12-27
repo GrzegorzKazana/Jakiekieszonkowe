@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Page from "../../Common/Page";
 import KidsEntry from "./KidsEntry";
 import KidsSummaryEntry from "./KidsSummaryEntry";

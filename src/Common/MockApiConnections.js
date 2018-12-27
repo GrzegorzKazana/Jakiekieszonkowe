@@ -169,6 +169,8 @@ export const addKid = kid => {
 export const editKid = (kid, kidIdx) => {
   console.log(kidIdx);
   console.log(kid);
+  kid.prevPaymentDate = "--------";
+  kid.nextPaymentDate = "--------";
   kidList = kidList.map(k => (k.id === kidIdx ? kid : k));
   return new Promise((resolve, reject) =>
     setTimeout(function() {

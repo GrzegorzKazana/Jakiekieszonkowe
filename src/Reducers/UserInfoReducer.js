@@ -103,6 +103,14 @@ const UserInfoReducer = (state = defaultState, action) => {
           metaNotification: false
         }
       };
+    case "USER_UPDATE_KID_LIST":
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          kids: action.kidList
+        }
+      };
     default:
       return state;
   }

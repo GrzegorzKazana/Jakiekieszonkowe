@@ -60,3 +60,8 @@ export const deleteKid = kidIdx => ({
   type: "USER_DELETE_KID",
   kidIdx
 });
+
+export const updateKidList = kidList => ({
+  type: "USER_UPDATE_KID_LIST",
+  kidList
+});

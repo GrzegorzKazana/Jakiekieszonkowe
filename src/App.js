@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import ContentLoggedIn from "./Components/LoggedInContents/ContentLoggedIn";
 import LogInPage from "./Components/NotLoggedInContents/LogInPage/LogInPage";
 import DefaultSnackbar from "./Components/Common/DefaultSnackbar";
@@ -58,7 +58,13 @@ class App extends React.Component {
   mockOnlyAutoLogIn = (email, pass) => {
     this.props.dispatch(requestUserValidation());
     validateUserApiCall(email, pass)
-      .then(response => this.props.dispatch(userValidated(response.userData)))
+      .then(response =>
+        this.props.dispatch(
+          response.success
+            ? userValidated(response.userData)
+            : requestUserValidationFailed()
+        )
+      )
       .catch(err => {
         this.props.dispatch(requestUserValidationFailed());
         console.log("failed to authorize in auto log in mode");

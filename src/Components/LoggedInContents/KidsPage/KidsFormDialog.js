@@ -16,10 +16,6 @@ import {
   FormControl,
   Select
 } from "@material-ui/core";
-import {
-  DaysToPaymentPeriod,
-  SchoolIndexToName
-} from "../../../Common/ValuesToStringMappings";
 import { connect } from "react-redux";
 
 const mapStateToProps = state => ({
@@ -94,7 +90,18 @@ class KidsFormDialog extends React.Component {
 
   checkAndSubmitForm = () => {
     if (!Object.values(this.state).some(o => o === "")) {
-      this.props.handleSubmit(this.state);
+      const child = {
+        name: this.state.name,
+        age: this.state.age,
+        schoolTypeId: this.state.schoolType,
+        quota: this.state.quota,
+        paymentPeriodId: this.state.paymentPeriod,
+        paymentDate: this.state.paymentDate,
+        provinceId: this.state.provinceId,
+        cityId: this.state.cityId,
+        moneyIncludes: this.state.moneyIncludes
+      };
+      this.props.handleSubmit(child);
       this.cancelForm();
     } else {
       this.setState({ underValidation: true });
@@ -142,9 +149,9 @@ class KidsFormDialog extends React.Component {
           onChange={this.handleChange("schoolType")}
           input={<Input id="overlap-simple" />}
         >
-          {Object.keys(SchoolIndexToName).map((key, idx) => (
-            <MenuItem value={Number(key)} key={idx}>
-              {SchoolIndexToName[key]}
+          {this.props.schoolTypes.map((st, idx) => (
+            <MenuItem value={st.id} key={idx}>
+              {st.name}
             </MenuItem>
           ))}
         </Select>
@@ -178,10 +185,10 @@ class KidsFormDialog extends React.Component {
           onChange={this.handleChange("paymentPeriod")}
           input={<Input id="name-simple" />}
         >
-          {Object.keys(DaysToPaymentPeriod).map((key, idx) => {
+          {this.props.paymentPeriods.map((pp, idx) => {
             return (
-              <MenuItem value={Number(key)} key={idx}>
-                {DaysToPaymentPeriod[key]}
+              <MenuItem value={pp.id} key={idx}>
+                {pp.name}
               </MenuItem>
             );
           })}

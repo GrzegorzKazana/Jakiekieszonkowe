@@ -39,13 +39,11 @@ export default class KidsSummaryEntry extends React.Component {
   };
 
   submitDialog = data => {
-    const kiddo = KidObject.fromObject(data);
-    this.props.onAddKid(kiddo);
+    this.props.onAddKid(data);
   };
 
   submitEditDialog = data => {
-    const kiddo = KidObject.fromObject(data);
-    this.props.onEditKid(kiddo, this.state.expanded);
+    this.props.onEditKid(data, this.state.expanded);
   };
 
   handleExpandChange = changedId => {
@@ -84,6 +82,8 @@ export default class KidsSummaryEntry extends React.Component {
                 onEditKid={this.openEditDialog}
                 kidInfo={kid}
                 moneyIncludes={this.props.moneyIncludes}
+                paymentPeriods={this.props.paymentPeriods}
+                schoolTypes={this.props.schoolTypes}
               />
             );
           })}
@@ -124,6 +124,8 @@ export default class KidsSummaryEntry extends React.Component {
                 !this.state.dialogEditMode && this.state.dialogFormOpen
               }
               moneyIncludes={this.props.moneyIncludes}
+              paymentPeriods={this.props.paymentPeriods}
+              schoolTypes={this.props.schoolTypes}
             />
           )}
           <ConfirmDialog

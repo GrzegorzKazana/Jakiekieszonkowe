@@ -11,12 +11,14 @@ import {
   Button
 } from "@material-ui/core";
 import { ExpandMore, Person, Add } from "@material-ui/icons";
-import {
-  DaysToPaymentPeriod,
-  SchoolIndexToName
-} from "../../../Common/ValuesToStringMappings";
 
 export default class KidsExpandableCard extends React.Component {
+  mapPaymentPeriodIdToName = id =>
+    this.props.paymentPeriods.find(pp => pp.id === id).name;
+
+  mapSchoolTypeIdToName = id =>
+    this.props.schoolTypes.find(st => st.id === id).name;
+
   render() {
     const {
       kidInfo,
@@ -71,7 +73,8 @@ export default class KidsExpandableCard extends React.Component {
             <ListItem>
               <ListItemText
                 primary={
-                  "Rodzaj szkoły: " + SchoolIndexToName[kidInfo.schoolType]
+                  "Rodzaj szkoły: " +
+                  this.mapSchoolTypeIdToName(kidInfo.schoolTypeId)
                 }
               />
             </ListItem>
@@ -83,7 +86,8 @@ export default class KidsExpandableCard extends React.Component {
             <ListItem>
               <ListItemText
                 primary={
-                  "Okres wypłat: " + DaysToPaymentPeriod[kidInfo.paymentPeriod]
+                  "Okres wypłat: " +
+                  this.mapPaymentPeriodIdToName(kidInfo.paymentPeriodId)
                 }
               />
             </ListItem>

@@ -23,9 +23,9 @@ export const validateUserApiCall = (email, pass) =>
                 {
                   name: "Jan",
                   age: 15,
-                  schoolType: 1,
+                  schoolTypeId: 1,
                   quota: 10,
-                  paymentPeriod: 7,
+                  paymentPeriodId: 0,
                   paymentDate: "2018-01-01",
                   prevPaymentDate: "2018-12-21",
                   nextPaymentDate: "2019-01-28",
@@ -36,9 +36,9 @@ export const validateUserApiCall = (email, pass) =>
                 {
                   name: "Ewa",
                   age: 18,
-                  schoolType: 2,
+                  schoolTypeId: 2,
                   quota: 300,
-                  paymentPeriod: 14,
+                  paymentPeriodId: 2,
                   paymentDate: "2018-09-25",
                   prevPaymentDate: "2018-12-21",
                   nextPaymentDate: "2019-01-28",

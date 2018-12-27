@@ -12,7 +12,9 @@ import {
 
 const mapStateToProps = state => ({
   ...state.userInfo,
-  ...state.moneyIncludesDictionary
+  ...state.moneyIncludesDictionary,
+  ...state.schoolTypeDictionary,
+  ...state.paymentPeriodDictionary
 });
 class KidsPage extends React.Component {
   handleAddKid = kid => {
@@ -48,6 +50,8 @@ class KidsPage extends React.Component {
           onEditKid={this.handleEditKid}
           kidsArray={user.kids}
           moneyIncludes={this.props.moneyIncludes}
+          paymentPeriods={this.props.paymentPeriod}
+          schoolTypes={this.props.schoolType}
         />
       </Page>
     );

@@ -4,7 +4,6 @@ import PageEntry from "../../Common/PageEntry";
 import KidsExpandableCard from "./KidsExpandableCard";
 import Add from "@material-ui/icons/Add";
 import KidsFormDialog from "./KidsFormDialog";
-import KidObject from "../../../Common/KidObject";
 import ConfirmDialog from "../../Common/ConfirmDialog";
 
 export default class KidsSummaryEntry extends React.Component {

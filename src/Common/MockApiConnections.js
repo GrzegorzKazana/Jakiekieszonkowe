@@ -238,7 +238,7 @@ export const dictionaryChange = data => {
   console.log(data);
 };
 
-export const getProvinceBasicStats = () =>
+export const getCountryBasicStats = () =>
   new Promise((resolve, reject) =>
     setTimeout(function() {
       resolve({
@@ -248,7 +248,22 @@ export const getProvinceBasicStats = () =>
           avg: 243.14973649546104,
           std: 65.67327514784398,
           count: 3574
-        },
+        }
+      });
+    }, API_DELAY)
+  );
+
+export const getProvinceBasicStats = () =>
+  new Promise((resolve, reject) =>
+    setTimeout(function() {
+      resolve({
+        // countryData: {
+        //   id: 0,
+        //   name: "Polska",
+        //   avg: 243.14973649546104,
+        //   std: 65.67327514784398,
+        //   count: 3574
+        // },
         provinceData: {
           list: [
             {

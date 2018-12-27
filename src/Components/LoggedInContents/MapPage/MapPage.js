@@ -8,6 +8,7 @@ import { Button } from "@material-ui/core";
 import { ArrowForwardIos, Comment } from "@material-ui/icons";
 import "leaflet/dist/leaflet.css";
 import {
+  getCountryBasicStats,
   getProvinceBasicStats,
   getCityBasicStats,
   getComments,
@@ -32,6 +33,7 @@ class MapPage extends React.Component {
     countryStats: null,
     cityStatsFetching: false,
     provinceStatsFetching: false,
+    countryStatsFetching: false,
     selectedStatistic: null,
     parametersState: {
       ageRangeValue: { min: 10, max: 90 },
@@ -112,9 +114,7 @@ class MapPage extends React.Component {
         ).avg;
         this.setState({
           provinceStatsFetching: false,
-          provinceStats: data.provinceData,
-          countryStats: data.countryData,
-          selectedStatistic: data.countryData
+          provinceStats: data.provinceData
         });
       })
       .catch(err => {
@@ -125,7 +125,28 @@ class MapPage extends React.Component {
       });
   };
 
+  fetchCountryStats = () => {
+    this.setState({
+      countryStatsFetching: true
+    });
+    getCountryBasicStats()
+      .then(data =>
+        this.setState({
+          countryStatsFetching: false,
+          countryStats: data.countryData,
+          selectedStatistic: data.countryData
+        })
+      )
+      .catch(err => {
+        console.log("failed to fetch country data");
+        this.setState({
+          countryStatsFetching: false
+        });
+      });
+  };
+
   componentDidMount = () => {
+    this.fetchCountryStats();
     this.fetchProvinceStats();
   };
 

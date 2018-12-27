@@ -42,7 +42,7 @@ export default class KidsSummaryEntry extends React.Component {
   };
 
   submitEditDialog = data => {
-    this.props.onEditKid(data, this.state.expanded);
+    this.props.onEditKid(data, this.props.kidsArray[this.state.expanded].id);
   };
 
   handleExpandChange = changedId => {
@@ -61,7 +61,7 @@ export default class KidsSummaryEntry extends React.Component {
   };
 
   doDeleteKid = () => {
-    this.props.onDeleteKid(this.state.expanded);
+    this.props.onDeleteKid(this.props.kidsArray[this.state.expanded].id);
     this.setState({ deleteKidConfirmDialog: false });
   };
 

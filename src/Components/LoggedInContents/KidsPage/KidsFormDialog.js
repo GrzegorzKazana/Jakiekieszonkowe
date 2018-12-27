@@ -33,9 +33,9 @@ class KidsFormDialog extends React.Component {
         underValidation: false,
         name: "",
         age: "",
-        schoolType: "",
+        schoolTypeId: "",
         quota: "",
-        paymentPeriod: "",
+        paymentPeriodId: "",
         paymentDate: "",
         provinceId: "",
         cityId: "",
@@ -93,9 +93,9 @@ class KidsFormDialog extends React.Component {
       const child = {
         name: this.state.name,
         age: this.state.age,
-        schoolTypeId: this.state.schoolType,
+        schoolTypeId: this.state.schoolTypeId,
         quota: this.state.quota,
-        paymentPeriodId: this.state.paymentPeriod,
+        paymentPeriodId: this.state.paymentPeriodId,
         paymentDate: this.state.paymentDate,
         provinceId: this.state.provinceId,
         cityId: this.state.cityId,
@@ -141,12 +141,12 @@ class KidsFormDialog extends React.Component {
     const schoolTypeForm = (
       <FormControl
         style={{ width: "32%", margin: "5px 0px" }}
-        error={this.state.underValidation && this.state.schoolType === ""}
+        error={this.state.underValidation && this.state.schoolTypeId === ""}
       >
         <InputLabel htmlFor="overlap-simple">Rodzaj szkoły</InputLabel>
         <Select
-          value={this.state.schoolType}
-          onChange={this.handleChange("schoolType")}
+          value={this.state.schoolTypeId}
+          onChange={this.handleChange("schoolTypeId")}
           input={<Input id="overlap-simple" />}
         >
           {this.props.schoolTypes.map((st, idx) => (
@@ -177,12 +177,12 @@ class KidsFormDialog extends React.Component {
     const paymentPeriodForm = (
       <FormControl
         style={{ width: "32%", margin: "auto" }}
-        error={this.state.underValidation && this.state.paymentPeriod === ""}
+        error={this.state.underValidation && this.state.paymentPeriodId === ""}
       >
         <InputLabel htmlFor="name-simple">Okres wypłat</InputLabel>
         <Select
-          value={this.state.paymentPeriod}
-          onChange={this.handleChange("paymentPeriod")}
+          value={this.state.paymentPeriodId}
+          onChange={this.handleChange("paymentPeriodId")}
           input={<Input id="name-simple" />}
         >
           {this.props.paymentPeriods.map((pp, idx) => {

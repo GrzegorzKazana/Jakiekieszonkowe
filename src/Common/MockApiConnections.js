@@ -387,7 +387,7 @@ export const getProvinceBasicStats = () =>
 export const getCityBasicStats = provId =>
   new Promise((resolve, reject) =>
     setTimeout(function() {
-      let data = { cityData: [] };
+      let data = { cityData: { list: [] } };
       switch (provId) {
         case 11:
           data = {

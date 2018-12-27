@@ -5,8 +5,10 @@ import {
   FormControl,
   FormControlLabel,
   Checkbox,
-  Button
+  Button,
+  IconButton
 } from "@material-ui/core";
+import { Clear } from "@material-ui/icons";
 import InputRange from "react-input-range";
 import xd from "react-input-range/lib/css/index.css";
 
@@ -98,14 +100,31 @@ class MapDrawerContentFilters extends React.Component {
         }}
       >
         <Divider style={{ margin: "0px 16px 16px 16px" }} />
-        <Button
-          fullWidth
-          variant="contained"
-          color="primary"
-          onClick={() => this.props.onClick(this.state)}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between"
+          }}
         >
-          Filtruj
-        </Button>
+          <Button
+            variant="outlined"
+            color="default"
+            onClick={() => this.props.onResetClick(this.state)}
+            style={{ flexGrow: "1" }}
+          >
+            Reset
+          </Button>
+          <div style={{ width: "16px" }} />
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={() => this.props.onFilterClick(this.state)}
+            style={{ flexGrow: "1" }}
+          >
+            Filtruj
+          </Button>
+        </div>
       </div>
     );
     return (

@@ -21,6 +21,11 @@ const mapStateToProps = state => ({
   ...state.moneyIncludesDictionary
 });
 class MapPage extends React.Component {
+  defaultFilterParameters = {
+    ageRangeValue: { min: 1, max: 99 },
+    moneyIncludes: this.props.moneyIncludes.map(moneyInclude => moneyInclude.id)
+  };
+
   state = {
     filerDrawerOpen: false,
     commentDrawerOpen: false,
@@ -35,12 +40,8 @@ class MapPage extends React.Component {
     provinceStatsFetching: false,
     countryStatsFetching: false,
     selectedStatistic: null,
-    parametersState: {
-      ageRangeValue: { min: 10, max: 90 },
-      moneyIncludes: this.props.moneyIncludes.map(
-        moneyInclude => moneyInclude.id
-      )
-    }
+    parametersState: this.defaultFilterParameters,
+    parametersActive: false
   };
 
   clickedOnCity = id => {
@@ -72,8 +73,23 @@ class MapPage extends React.Component {
     }));
   };
 
+  // reloadSelectedStatistic = () => {
+  //   if(this.state.selectedCityId === null && this.state.selectedProvinceId === null){
+  //     // currently displaying country stat
+  //     this.fetchCountryStats();
+  //     this.fetchProvinceStats();
+  //   }else if(this.state.selectedCityId === null && this.state.selectedProvinceId !== null){
+  //     //currently displaying province stat
+  //     this.clickedOnProvince(this.state.selectedProvinceId)
+  //   }else{
+  //     //currently displaying city stat
+  //     this.clickedOnCity(this.state.selectedCityId)
+  //   }
+  // }
+
   fetchCityStats = provId => {
     //delay in order to let zoom animation end
+    console.log(provId);
     const delay = 300;
     this.setState({
       cityStatsFetching: true
@@ -82,10 +98,22 @@ class MapPage extends React.Component {
       () =>
         getCityBasicStats(provId)
           .then(data => {
-            this.setState({
-              cityStatsFetching: false,
-              cityStats: data.cityData
-            });
+            //if city is currently selected and refetching stats e.g. after filter change
+            //selected statistic needs to be updated
+            this.setState(state =>
+              state.selectedProvinceId !== null && state.selectedCityId !== null
+                ? {
+                    cityStatsFetching: false,
+                    cityStats: data.cityData,
+                    selectedStatistic: data.cityData.list.find(
+                      cd => cd.id === state.selectedCityId
+                    )
+                  }
+                : {
+                    cityStatsFetching: false,
+                    cityStats: data.cityData
+                  }
+            );
           })
           .catch(err => {
             console.log("failed to getch basic city map data", err);
@@ -112,10 +140,22 @@ class MapPage extends React.Component {
           (prev, curr) => (curr.avg > prev.avg ? curr : prev),
           data.provinceData.list[0]
         ).avg;
-        this.setState({
-          provinceStatsFetching: false,
-          provinceStats: data.provinceData
-        });
+        //if province is currently selected and refetching stats e.g. after filter change
+        //selected statistic needs to be updated
+        this.setState(state =>
+          state.selectedProvinceId !== null && state.selectedCityId === null
+            ? {
+                provinceStatsFetching: false,
+                provinceStats: data.provinceData,
+                selectedStatistic: data.provinceData.list.find(
+                  pd => pd.id === state.selectedProvinceId
+                )
+              }
+            : {
+                provinceStatsFetching: false,
+                provinceStats: data.provinceData
+              }
+        );
       })
       .catch(err => {
         console.log("failed to getch basic map data", err);
@@ -131,11 +171,20 @@ class MapPage extends React.Component {
     });
     getCountryBasicStats()
       .then(data =>
-        this.setState({
-          countryStatsFetching: false,
-          countryStats: data.countryData,
-          selectedStatistic: data.countryData
-        })
+        //if city is currently selected and refetching stats e.g. after filter change
+        //selected statistic needs to be updated
+        this.setState(state =>
+          state.selectedProvinceId === null && state.selectedCityId === null
+            ? {
+                countryStatsFetching: false,
+                countryStats: data.countryData,
+                selectedStatistic: data.countryData
+              }
+            : {
+                countryStatsFetching: false,
+                countryStats: data.countryData
+              }
+        )
       )
       .catch(err => {
         console.log("failed to fetch country data");
@@ -151,7 +200,25 @@ class MapPage extends React.Component {
   };
 
   submitFilters = parameters => {
-    this.setState({ filerDrawerOpen: false, parametersState: parameters });
+    this.setState({
+      parametersActive: true,
+      filerDrawerOpen: false,
+      parametersState: parameters
+    });
+    this.fetchCountryStats();
+    this.fetchProvinceStats();
+    this.fetchCityStats(this.state.selectedProvinceId);
+  };
+
+  resetFilters = () => {
+    this.setState({
+      parametersActive: false,
+      filerDrawerOpen: false,
+      parametersState: this.defaultFilterParameters
+    });
+    this.fetchCountryStats();
+    this.fetchProvinceStats();
+    this.fetchCityStats(this.state.selectedProvinceId);
   };
 
   openCommentDrawer = () => {
@@ -208,7 +275,8 @@ class MapPage extends React.Component {
       >
         <MapDrawerContentFilters
           style={{ width: drawerWidth, padding: "16px" }}
-          onClick={this.submitFilters}
+          onFilterClick={this.submitFilters}
+          onResetClick={this.resetFilters}
           filterState={
             !this.state.filerDrawerOpen && this.state.parametersState
           }

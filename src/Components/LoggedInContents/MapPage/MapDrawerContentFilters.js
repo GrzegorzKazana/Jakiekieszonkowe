@@ -6,16 +6,21 @@ import {
   FormControlLabel,
   Checkbox,
   Button,
-  IconButton
+  InputLabel,
+  Select,
+  Input,
+  MenuItem
 } from "@material-ui/core";
-import { Clear } from "@material-ui/icons";
 import InputRange from "react-input-range";
 import xd from "react-input-range/lib/css/index.css";
 
 class MapDrawerContentFilters extends React.Component {
   state = {
     ageRangeValue: { min: 10, max: 90 },
-    moneyIncludes: this.props.moneyIncludes.map(moneyInclude => moneyInclude.id)
+    moneyIncludes: this.props.moneyIncludes.map(
+      moneyInclude => moneyInclude.id
+    ),
+    schoolTypeId: ""
   };
 
   static getDerivedStateFromProps = (props, state) => {
@@ -65,7 +70,24 @@ class MapDrawerContentFilters extends React.Component {
             onChange={ageRangeValue => this.setState({ ageRangeValue })}
           />
         </div>
-        <Divider style={{ margin: "16px 0px" }} />
+        <Divider style={{ margin: "8px 0px" }} />
+        <FormControl fullWidth margin="dense">
+          <InputLabel htmlFor="name-simple">Rodzaj szkoły</InputLabel>
+          <Select
+            value={this.state.schoolTypeId}
+            onChange={e => this.setState({ schoolTypeId: e.target.value })}
+            input={<Input id="name-simple" />}
+          >
+            {this.props.schoolTypes.map((st, idx) => {
+              return (
+                <MenuItem value={st.id} key={idx}>
+                  {st.name}
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </FormControl>
+        <Divider style={{ margin: "8px 0px" }} />
         {this.props.moneyIncludes.map((moneyInclude, idx) => (
           <FormControl fullWidth key={idx}>
             <FormControlLabel

@@ -18,12 +18,16 @@ import {
 import { connect } from "react-redux";
 
 const mapStateToProps = state => ({
-  ...state.moneyIncludesDictionary
+  ...state.moneyIncludesDictionary,
+  ...state.schoolTypeDictionary
 });
 class MapPage extends React.Component {
   defaultFilterParameters = {
     ageRangeValue: { min: 1, max: 99 },
-    moneyIncludes: this.props.moneyIncludes.map(moneyInclude => moneyInclude.id)
+    moneyIncludes: this.props.moneyIncludes.map(
+      moneyInclude => moneyInclude.id
+    ),
+    schoolTypeId: ""
   };
 
   state = {
@@ -286,6 +290,7 @@ class MapPage extends React.Component {
             !this.state.filerDrawerOpen && this.state.parametersState
           }
           moneyIncludes={this.props.moneyIncludes}
+          schoolTypes={this.props.schoolType}
         />
       </MapDrawer>
     );

@@ -18,7 +18,7 @@ import {
   validateNewPassword
 } from "../../../Common/InputValidation";
 import { displaySnackbarMessage } from "../../../Actions/InfoSnackbarActions";
-import { registerUser } from "../../../Common/MockApiConnections";
+import { registerUser } from "../../../Common/MockApiConnections/UserApi";
 import { connect } from "react-redux";
 
 const mapStateToProps = state => ({

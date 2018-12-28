@@ -14,7 +14,7 @@ import {
   addKid as addKidNotifyApi,
   editKid as editKidNotifyApi,
   deleteKid as deleteKidNotifyApi
-} from "../../../Common/MockApiConnections";
+} from "../../../Common/MockApiConnections/UserApi";
 
 const mapStateToProps = state => ({
   ...state.userInfo,

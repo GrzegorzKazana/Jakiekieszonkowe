@@ -20,7 +20,7 @@ import {
   userValidated,
   requestUserValidationFailed
 } from "../../../Actions/UserInfoActions";
-import { validateUserApiCall } from "../../../Common/MockApiConnections";
+import { validateUserApiCall } from "../../../Common/MockApiConnections/UserApi";
 
 const mapStateToProps = state => ({});
 class LogInForm extends React.Component {

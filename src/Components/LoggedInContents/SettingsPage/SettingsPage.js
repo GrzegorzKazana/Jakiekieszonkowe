@@ -18,7 +18,7 @@ import {
   deleteNotification as deleteNotificationNotifyApi,
   addMetaNotification as addMetaNotificationNotifyApi,
   deleteMetaNotification as deleteMetaNotificationNotifyApi
-} from "../../../Common/MockApiConnections";
+} from "../../../Common/MockApiConnections/UserApi";
 import { connect } from "react-redux";
 
 const mapStateToProps = state => ({

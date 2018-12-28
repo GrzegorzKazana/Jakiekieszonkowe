@@ -10,11 +10,13 @@ import "leaflet/dist/leaflet.css";
 import {
   getCountryBasicStats,
   getProvinceBasicStats,
-  getCityBasicStats,
+  getCityBasicStats
+} from "../../../Common/MockApiConnections/MapStatsApi";
+import {
   getComments,
   addComment,
   toggleCommentUpvote
-} from "../../../Common/MockApiConnections";
+} from "../../../Common/MockApiConnections/CommentsApi";
 import { connect } from "react-redux";
 
 const mapStateToProps = state => ({

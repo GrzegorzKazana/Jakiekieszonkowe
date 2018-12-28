@@ -4,7 +4,7 @@ import MapDrawer from "../../Common/DrawerCustomBeta2";
 import MapDrawerContentFilters from "./MapDrawerContentFilters";
 import MapDrawerContentComments from "./MapDrawerContentComments";
 import MapContent from "./MapContent";
-import { Button } from "@material-ui/core";
+import { Button, LinearProgress } from "@material-ui/core";
 import { ArrowForwardIos, Comment } from "@material-ui/icons";
 import "leaflet/dist/leaflet.css";
 import {
@@ -369,8 +369,25 @@ class MapPage extends React.Component {
       </Button>
     );
 
+    const progressBar = (
+      <LinearProgress
+        color="secondary"
+        style={{
+          position: "absolute",
+          top: "0px",
+          left: "0px",
+          right: "0px",
+          zIndex: "1000"
+        }}
+      />
+    );
+
     return (
       <div style={{ position: "relative", ...this.props.style }}>
+        {(this.state.countryStatsFetching ||
+          this.state.provinceStatsFetching ||
+          this.state.cityStatsFetching) &&
+          progressBar}
         <MapContent
           provinceData={this.state.provinceStats}
           cityData={this.state.cityStats}

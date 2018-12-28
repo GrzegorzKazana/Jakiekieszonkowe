@@ -13,7 +13,10 @@ import {
 } from "@material-ui/core";
 import { Edit, Delete, Add } from "@material-ui/icons";
 import ConfirmDialog from "./../Common/ConfirmDialog";
-import { dictionaryChange } from "./../../Common/MockApiConnections/AdminApi";
+import {
+  dictionaryChange,
+  dictionaryRowDelete
+} from "./../../Common/MockApiConnections/AdminApi";
 import DictionaryRowInputDialog from "./DictionaryRowInputDialog";
 
 export default class DictionaryPage extends React.Component {
@@ -24,7 +27,7 @@ export default class DictionaryPage extends React.Component {
   };
 
   submitDelete = () => {
-    console.log(this.state.selectedDictionaryRow.id);
+    dictionaryRowDelete(this.state.selectedDictionaryRow.id);
     this.setState({ confirmDialogOpen: false, selectedDictionaryRow: null });
   };
 

@@ -27,7 +27,6 @@ class AdminPanel extends React.Component {
 
   handlePageChange = selectedPageContent => {
     this.setState({ selectedPageContent });
-    // console.log(selectedPageContent);
   };
 
   render() {

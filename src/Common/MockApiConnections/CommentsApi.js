@@ -1,4 +1,4 @@
-const API_DELAY = 50;
+const API_DELAY = 1000;
 
 let comments = {
   list: [

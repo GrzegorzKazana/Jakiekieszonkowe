@@ -346,6 +346,7 @@ class MapPage extends React.Component {
           comments={this.state.comments}
           onCommentUpvoteChange={this.handleCommentUpvoteChange}
           onCommentPost={this.handleCommentPost}
+          loading={this.state.commentsFetching}
         />
       </MapDrawer>
     );

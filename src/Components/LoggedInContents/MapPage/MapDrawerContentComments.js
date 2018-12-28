@@ -1,5 +1,11 @@
 import React from "react";
-import { TextField, IconButton, Divider, Typography } from "@material-ui/core";
+import {
+  TextField,
+  IconButton,
+  Divider,
+  Typography,
+  LinearProgress
+} from "@material-ui/core";
 import { Person, Star, StarBorder, Send } from "@material-ui/icons";
 
 const CommentComponent = props => (
@@ -86,6 +92,19 @@ class CommentInput extends React.Component {
 
 class MapDrawerContentComments extends React.Component {
   render() {
+    const progressBar = (
+      <LinearProgress
+        color="secondary"
+        style={{
+          position: "absolute",
+          top: "0px",
+          left: "0px",
+          right: "0px",
+          zIndex: "1000"
+        }}
+      />
+    );
+
     return (
       <div
         style={{
@@ -97,6 +116,7 @@ class MapDrawerContentComments extends React.Component {
           animation: "slide-up 0.4s ease"
         }}
       >
+        {this.props.loading && progressBar}
         <Typography variant="h4" style={{ padding: "8px 8px 0px 8px" }}>
           Komentarze
         </Typography>

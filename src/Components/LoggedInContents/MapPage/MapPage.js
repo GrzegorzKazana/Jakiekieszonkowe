@@ -257,6 +257,7 @@ class MapPage extends React.Component {
       .liked;
     // perform change locally for greater UX
     this.setState(state => ({
+      commentsFetching: true,
       comments: state.comments.map(x =>
         x.id === commentId
           ? { ...x, liked: !x.liked, upvotes: x.upvotes + (x.liked ? -1 : 1) }

@@ -17,16 +17,24 @@ export default class DictionaryRowInputDialog extends React.Component {
     };
   }
 
+  dictRowIsValid = () => {
+    // is valid when form values are not "", except id which can be "" when adding new dict row
+    return Object.entries(this.state).reduce(
+      (isCorrect, [currKey, currVal]) =>
+        isCorrect ? (currKey === "id" ? true : currVal !== "") : false,
+      true
+    );
+  };
+
   checkAndSubmitForm = () => {
-    this.props.onSubmit(this.state);
+    if (this.dictRowIsValid()) {
+      this.props.onSubmit(this.state);
+    }
   };
 
   render() {
     const { open } = this.props;
     const { onClose } = this.props;
-    const { onSubmit } = this.props;
-    // const { prefill } = this.props;
-    // console.log(prefill)
     return (
       <Dialog
         disableBackdropClick
@@ -40,10 +48,10 @@ export default class DictionaryRowInputDialog extends React.Component {
             {Object.entries(this.state).map(([key, val], idx) => (
               <FormControl margin="dense" required fullWidth key={idx}>
                 <TextField
+                  disabled={key === "id"}
                   label={key}
                   value={val}
                   type="text"
-                  //   autoFocus
                   fullWidth
                   onChange={e => {
                     this.setState({ [key]: e.target.value });
@@ -51,15 +59,6 @@ export default class DictionaryRowInputDialog extends React.Component {
                 />
               </FormControl>
             ))}
-            {/* <FormControl margin="dense" required fullWidth>
-              <TextField
-                label="Stare hasło"
-                type="text"
-                autoFocus
-                fullWidth
-                onChange={() => {}}
-              />
-            </FormControl> */}
           </form>
         </DialogContent>
         <DialogActions>

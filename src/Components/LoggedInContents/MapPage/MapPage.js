@@ -73,30 +73,19 @@ class MapPage extends React.Component {
     }));
   };
 
-  // reloadSelectedStatistic = () => {
-  //   if(this.state.selectedCityId === null && this.state.selectedProvinceId === null){
-  //     // currently displaying country stat
-  //     this.fetchCountryStats();
-  //     this.fetchProvinceStats();
-  //   }else if(this.state.selectedCityId === null && this.state.selectedProvinceId !== null){
-  //     //currently displaying province stat
-  //     this.clickedOnProvince(this.state.selectedProvinceId)
-  //   }else{
-  //     //currently displaying city stat
-  //     this.clickedOnCity(this.state.selectedCityId)
-  //   }
-  // }
-
   fetchCityStats = provId => {
     //delay in order to let zoom animation end
-    console.log(provId);
     const delay = 300;
     this.setState({
       cityStatsFetching: true
     });
     setTimeout(
       () =>
-        getCityBasicStats(provId)
+        getCityBasicStats(
+          provId,
+          this.state.parametersActive,
+          this.state.parametersState
+        )
           .then(data => {
             //if city is currently selected and refetching stats e.g. after filter change
             //selected statistic needs to be updated
@@ -129,7 +118,10 @@ class MapPage extends React.Component {
     this.setState({
       provinceStatsFetching: true
     });
-    getProvinceBasicStats()
+    getProvinceBasicStats(
+      this.state.parametersActive,
+      this.state.parametersState
+    )
       .then(data => {
         // add min max to provinces
         data.provinceData.min = data.provinceData.list.reduce(
@@ -169,22 +161,27 @@ class MapPage extends React.Component {
     this.setState({
       countryStatsFetching: true
     });
-    getCountryBasicStats()
+    getCountryBasicStats(
+      this.state.parametersActive,
+      this.state.parametersState
+    )
       .then(data =>
         //if city is currently selected and refetching stats e.g. after filter change
         //selected statistic needs to be updated
-        this.setState(state =>
-          state.selectedProvinceId === null && state.selectedCityId === null
-            ? {
-                countryStatsFetching: false,
-                countryStats: data.countryData,
-                selectedStatistic: data.countryData
-              }
-            : {
-                countryStatsFetching: false,
-                countryStats: data.countryData
-              }
-        )
+        {
+          this.setState(state =>
+            state.selectedProvinceId === null && state.selectedCityId === null
+              ? {
+                  countryStatsFetching: false,
+                  countryStats: data.countryData,
+                  selectedStatistic: data.countryData
+                }
+              : {
+                  countryStatsFetching: false,
+                  countryStats: data.countryData
+                }
+          );
+        }
       )
       .catch(err => {
         console.log("failed to fetch country data");
@@ -200,25 +197,33 @@ class MapPage extends React.Component {
   };
 
   submitFilters = parameters => {
-    this.setState({
-      parametersActive: true,
-      filerDrawerOpen: false,
-      parametersState: parameters
-    });
-    this.fetchCountryStats();
-    this.fetchProvinceStats();
-    this.fetchCityStats(this.state.selectedProvinceId);
+    this.setState(
+      {
+        parametersActive: true,
+        filerDrawerOpen: false,
+        parametersState: parameters
+      },
+      () => {
+        this.fetchCountryStats();
+        this.fetchProvinceStats();
+        this.fetchCityStats(this.state.selectedProvinceId);
+      }
+    );
   };
 
   resetFilters = () => {
-    this.setState({
-      parametersActive: false,
-      filerDrawerOpen: false,
-      parametersState: this.defaultFilterParameters
-    });
-    this.fetchCountryStats();
-    this.fetchProvinceStats();
-    this.fetchCityStats(this.state.selectedProvinceId);
+    this.setState(
+      {
+        parametersActive: false,
+        filerDrawerOpen: false,
+        parametersState: this.defaultFilterParameters
+      },
+      () => {
+        this.fetchCountryStats();
+        this.fetchProvinceStats();
+        this.fetchCityStats(this.state.selectedProvinceId);
+      }
+    );
   };
 
   openCommentDrawer = () => {

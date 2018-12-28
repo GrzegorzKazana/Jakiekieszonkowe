@@ -238,7 +238,7 @@ export const dictionaryChange = data => {
   console.log(data);
 };
 
-export const getCountryBasicStats = () =>
+export const getCountryBasicStats = (useParams, params) =>
   new Promise((resolve, reject) =>
     setTimeout(function() {
       resolve({
@@ -247,13 +247,13 @@ export const getCountryBasicStats = () =>
           name: "Polska",
           avg: 243.14973649546104,
           std: 65.67327514784398,
-          count: 3574
+          count: useParams ? 100 : 3574
         }
       });
     }, API_DELAY)
   );
 
-export const getProvinceBasicStats = () =>
+export const getProvinceBasicStats = (useParams, params) =>
   new Promise((resolve, reject) =>
     setTimeout(function() {
       resolve({
@@ -384,7 +384,7 @@ export const getProvinceBasicStats = () =>
     }, API_DELAY)
   );
 
-export const getCityBasicStats = provId =>
+export const getCityBasicStats = (provId, useParams, params) =>
   new Promise((resolve, reject) =>
     setTimeout(function() {
       let data = { cityData: { list: [] } };

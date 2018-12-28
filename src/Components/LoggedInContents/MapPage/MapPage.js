@@ -241,7 +241,9 @@ class MapPage extends React.Component {
 
   fetchComments = () => {
     getComments(this.state.selectedProvinceId, this.state.selectedCityId)
-      .then(data => this.setState({ comments: data, commentsFetching: false }))
+      .then(data =>
+        this.setState({ comments: data.list, commentsFetching: false })
+      )
       .catch(err => {
         console.log("failed to fetch comments");
         this.setState({ commentsFetching: false, comments: [] });
@@ -260,15 +262,29 @@ class MapPage extends React.Component {
       )
     }));
     // propably should noify back end about upvote change
-    toggleCommentUpvote(commentId, !oldLikedState);
+    toggleCommentUpvote(commentId, !oldLikedState)
+      .then(data =>
+        this.setState({ comments: data.list, commentsFetching: false })
+      )
+      .catch(err => {
+        console.log("failed to refetch comments");
+        this.setState({ commentsFetching: false, comments: [] });
+      });
   };
 
   handleCommentPost = text => {
-    // notify back end, and only then update comment list (?)
+    // notify back end, and in return get new comment list
+    this.setState({ commentsFetching: true });
     addComment(this.state.selectedProvinceId, this.state.selectedCityId, {
       content: text
-    });
-    this.fetchComments();
+    })
+      .then(data =>
+        this.setState({ comments: data.list, commentsFetching: false })
+      )
+      .catch(err => {
+        console.log("failed to refetch comments");
+        this.setState({ commentsFetching: false, comments: [] });
+      });
   };
 
   render() {

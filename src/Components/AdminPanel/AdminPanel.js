@@ -1,12 +1,9 @@
 import React from "react";
-import { AppBar, Drawer, Grid } from "@material-ui/core";
 import NavBarAdmin from "./NavBarAdmin";
-import DrawerCustom from "../Common/DrawerCustomBeta2";
 import AdminPanelDrawer from "./AdminPanelDrawer";
 import DictionaryPage from "./DictionaryPage";
 import { connect } from "react-redux";
 import { logOut } from "../../Actions/UserInfoActions";
-import { BorderColor } from "@material-ui/icons";
 
 const mapStateToProps = state => ({
   ...state.userInfo,

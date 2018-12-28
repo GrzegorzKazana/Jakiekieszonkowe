@@ -37,9 +37,9 @@ class KidsFormDialog extends React.Component {
         quota: "",
         paymentPeriodId: "",
         paymentDate: "",
-        provinceId: "",
-        cityId: "",
-        cityDisabled: true,
+        provinceId: this.props.user.provinceId,
+        cityId: this.props.user.cityId,
+        cityDisabled: false,
         moneyIncludes: []
       };
     } else {

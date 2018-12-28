@@ -38,8 +38,10 @@ class SettingsPage extends React.Component {
   };
 
   handleUserDataChange = data => {
-    this.props.dispatch(changeUserData(data));
-    changeUserDataNotifyApi(data);
+    // this.props.dispatch(changeUserData(data));
+    changeUserDataNotifyApi(data)
+      .then(data => this.props.dispatch(changeUserData(data)))
+      .catch(err => this.props.dispatch(displaySnackbarMessage(err.message)));
   };
 
   handleAddNotification = data => {

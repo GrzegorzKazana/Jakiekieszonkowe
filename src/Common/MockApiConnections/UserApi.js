@@ -37,6 +37,22 @@ let kidList = [
   }
 ];
 
+let userData = (email, pass) => ({
+  isAdmin: email === adminEmail && pass === adminPass,
+  email: email,
+  // password: pass,
+  accountActivationDate: "2018-01-01",
+  accountLastLogInDate: "2018-10-15",
+  country: "Polska",
+  provinceId: 0,
+  cityId: 0,
+  province: "Śląskie",
+  city: "Gliwice",
+  kids: kidList,
+  metaNotification: false,
+  notifications: []
+});
+
 export const validateUserApiCall = (email, pass) =>
   new Promise((resolve, reject) =>
     setTimeout(function() {
@@ -45,21 +61,7 @@ export const validateUserApiCall = (email, pass) =>
         ? resolve({
             success: true,
             message: "Autoryzacja zakończona sukcesem",
-            userData: {
-              isAdmin: email === adminEmail && pass === adminPass,
-              email: email,
-              // password: pass,
-              accountActivationDate: "2018-01-01",
-              accountLastLogInDate: "2018-10-15",
-              country: "Polska",
-              provinceId: 0,
-              cityId: 0,
-              province: "Śląskie",
-              city: "Gliwice",
-              kids: kidList,
-              metaNotification: false,
-              notifications: []
-            }
+            userData: userData(email, pass)
           })
         : reject({
             success: false,
@@ -129,6 +131,16 @@ export const changePassword = (oldPassword, newPassword) => {
 
 export const changeUserData = data => {
   console.log(data);
+  const oldUserData = userData(userEmail, userPass);
+  userData = () => ({
+    ...oldUserData,
+    ...data
+  });
+  return new Promise((resolve, reject) =>
+    setTimeout(function() {
+      resolve(userData(userEmail, userPass));
+    }, API_DELAY)
+  );
 };
 
 export const addNotification = data => {

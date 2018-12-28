@@ -24,22 +24,17 @@ export default class NotificationDialog extends React.Component {
 
   checkAndSubmitForm = () => {
     this.setState({ underValidation: true });
-    if (
-      !this.validateOldPassword() ||
-      !this.validateNewPassword() ||
-      !this.validateNewPasswordRepeat()
-    ) {
+    if (!this.validateNewPassword() || !this.validateNewPasswordRepeat()) {
       return;
     }
 
     const passes = {
-      oldPassword: this.props.oldPassword,
+      oldPassword: this.state.oldPassword,
       newPassword: this.state.newPassword
     };
     this.props.onSubmit(passes);
   };
 
-  validateOldPassword = () => this.state.oldPassword === this.props.oldPassword;
   validateNewPassword = () => validatePassword(this.state.newPassword);
   validateNewPasswordRepeat = () =>
     this.validateNewPassword() &&
@@ -67,9 +62,9 @@ export default class NotificationDialog extends React.Component {
                 autoFocus
                 fullWidth
                 onChange={this.handleChange("oldPassword")}
-                error={
-                  this.state.underValidation && !this.validateOldPassword()
-                }
+                // error={
+                //   this.state.underValidation && !this.validateOldPassword()
+                // }
               />
             </FormControl>
             <FormControl margin="dense" required fullWidth>

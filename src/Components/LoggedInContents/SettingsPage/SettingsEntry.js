@@ -81,7 +81,6 @@ export default class SettingsEntry extends React.Component {
           </div>
         </Grid>
         <ResetPasswordDialog
-          oldPassword={user.password}
           open={this.state.resetPasswordDialog}
           onSubmit={this.handleSubmitResetPasswordDialog}
           onClose={this.handleCloseResetPassword}

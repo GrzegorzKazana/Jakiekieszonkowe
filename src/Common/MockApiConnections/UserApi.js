@@ -1,5 +1,11 @@
 const API_DELAY = 50;
 
+let userEmail = "user";
+let userPass = "user";
+
+let adminEmail = "admin";
+let adminPass = "admin";
+
 let kidList = [
   {
     id: 0,
@@ -34,15 +40,15 @@ let kidList = [
 export const validateUserApiCall = (email, pass) =>
   new Promise((resolve, reject) =>
     setTimeout(function() {
-      (email === "user" && pass === "user") ||
-      (email === "admin" && pass === "admin")
+      (email === userEmail && pass === userPass) ||
+      (email === adminEmail && pass === adminPass)
         ? resolve({
             success: true,
             message: "Autoryzacja zakończona sukcesem",
             userData: {
-              isAdmin: email === "admin" && pass === "admin",
+              isAdmin: email === adminEmail && pass === adminPass,
               email: email,
-              password: pass,
+              // password: pass,
               accountActivationDate: "2018-01-01",
               accountLastLogInDate: "2018-10-15",
               country: "Polska",
@@ -103,8 +109,22 @@ export const deleteKid = kidIdx => {
   );
 };
 
-export const changePassword = newPassword => {
-  console.log(newPassword);
+export const changePassword = (oldPassword, newPassword) => {
+  console.log(oldPassword, newPassword);
+  if (oldPassword === userPass) {
+    userPass = newPassword;
+    return new Promise((resolve, reject) =>
+      setTimeout(function() {
+        resolve({ success: true });
+      }, API_DELAY)
+    );
+  } else {
+    return new Promise((resolve, reject) =>
+      setTimeout(function() {
+        reject({ success: false, message: "Niepoprawne stare hasło" });
+      }, API_DELAY)
+    );
+  }
 };
 
 export const changeUserData = data => {

@@ -11,6 +11,7 @@ import {
   addMetaNotification,
   deleteMetaNotification
 } from "../../../Actions/UserInfoActions";
+import { displaySnackbarMessage } from "../../../Actions/InfoSnackbarActions";
 import {
   changePassword as changePasswordNotifyApi,
   changeUserData as changeUserDataNotifyApi,
@@ -26,8 +27,14 @@ const mapStateToProps = state => ({
 });
 class SettingsPage extends React.Component {
   handlePasswordChange = data => {
-    this.props.dispatch(changePassword(data.newPassword));
-    changePasswordNotifyApi(data.newPassword);
+    // this.props.dispatch(changePassword(data.newPassword));
+    changePasswordNotifyApi(data.oldPassword, data.newPassword)
+      .then(data =>
+        this.props.dispatch(
+          displaySnackbarMessage("Zmienino hasło z powodzeniem")
+        )
+      )
+      .catch(err => this.props.dispatch(displaySnackbarMessage(err.message)));
   };
 
   handleUserDataChange = data => {

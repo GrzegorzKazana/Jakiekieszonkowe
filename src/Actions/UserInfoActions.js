@@ -65,3 +65,8 @@ export const updateKidList = kidList => ({
   type: "USER_UPDATE_KID_LIST",
   kidList
 });
+
+export const updateNotificationList = notificationList => ({
+  type: "USER_UPDATE_NOTIFICATION_LIST",
+  notificationList
+});

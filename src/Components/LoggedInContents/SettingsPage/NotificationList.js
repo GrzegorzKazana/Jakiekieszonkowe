@@ -29,7 +29,7 @@ export default class NotificationList extends React.Component {
                 <ListItemSecondaryAction>
                   <IconButton
                     aria-label="Delete"
-                    onClick={() => handleDelete(idx)}
+                    onClick={() => handleDelete(notif.id)}
                   >
                     <DeleteIcon />
                   </IconButton>

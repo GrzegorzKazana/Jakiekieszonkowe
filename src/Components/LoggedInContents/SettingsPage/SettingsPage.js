@@ -9,7 +9,8 @@ import {
   addUserNotification,
   deleteUserNotification,
   addMetaNotification,
-  deleteMetaNotification
+  deleteMetaNotification,
+  updateNotificationList
 } from "../../../Actions/UserInfoActions";
 import { displaySnackbarMessage } from "../../../Actions/InfoSnackbarActions";
 import {
@@ -45,13 +46,17 @@ class SettingsPage extends React.Component {
   };
 
   handleAddNotification = data => {
-    this.props.dispatch(addUserNotification(data));
-    addNotificationNotifyApi(data);
+    // this.props.dispatch(addUserNotification(data));
+    addNotificationNotifyApi(data)
+      .then(data => this.props.dispatch(updateNotificationList(data.list)))
+      .catch(err => this.props.dispatch(displaySnackbarMessage(err.message)));
   };
 
   handleDeleteNotification = idx => {
-    this.props.dispatch(deleteUserNotification(idx));
-    deleteNotificationNotifyApi(idx);
+    // this.props.dispatch(deleteUserNotification(idx));
+    deleteNotificationNotifyApi(idx)
+      .then(data => this.props.dispatch(updateNotificationList(data.list)))
+      .catch(err => this.props.dispatch(displaySnackbarMessage(err.message)));
   };
 
   handleAddMetaNotification = () => {

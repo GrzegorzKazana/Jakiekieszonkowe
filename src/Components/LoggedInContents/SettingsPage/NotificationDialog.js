@@ -12,7 +12,7 @@ import Select from "@material-ui/core/Select";
 
 export default class NotificationDialog extends React.Component {
   state = {
-    name: "",
+    kidId: "",
     notificationOverLap: "",
     underValidation: false,
     userDataLoaded: false
@@ -21,7 +21,7 @@ export default class NotificationDialog extends React.Component {
   static getDerivedStateFromProps = (nextProps, prevState) => {
     if (!prevState.userDataLoaded) {
       return {
-        name: "",
+        kidId: "",
         notificationOverLap: "",
         underValidation: false,
         userDataLoaded: true
@@ -38,7 +38,7 @@ export default class NotificationDialog extends React.Component {
     this.setState({ underValidation: true });
     if (!Object.values(this.state).some(o => o === "")) {
       const notification = {
-        name: this.state.name,
+        kidId: this.state.kidId,
         notificationOverLap: this.state.notificationOverLap
       };
       this.props.handleSubmit(notification);
@@ -66,16 +66,16 @@ export default class NotificationDialog extends React.Component {
           <form style={{ display: "flex", flexWrap: "wrap" }}>
             <FormControl
               style={{ minWidth: 200, margin: 5 }}
-              error={this.state.underValidation && this.state.name === ""}
+              error={this.state.underValidation && this.state.kidId === ""}
             >
               <InputLabel htmlFor="name-simple">Imię</InputLabel>
               <Select
-                value={this.state.name}
-                onChange={this.handleChange("name")}
+                value={this.state.kidId}
+                onChange={this.handleChange("kidId")}
                 input={<Input id="name-simple" />}
               >
                 {user.kids.map((kid, idx) => (
-                  <MenuItem value={kid.name} key={idx}>
+                  <MenuItem value={kid.id} key={idx}>
                     {kid.name}
                   </MenuItem>
                 ))}

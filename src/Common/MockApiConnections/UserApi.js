@@ -37,6 +37,8 @@ let kidList = [
   }
 ];
 
+let notifications = [];
+
 let userData = (email, pass) => ({
   isAdmin: email === adminEmail && pass === adminPass,
   email: email,
@@ -50,7 +52,7 @@ let userData = (email, pass) => ({
   city: "Gliwice",
   kids: kidList,
   metaNotification: false,
-  notifications: []
+  notifications: notifications
 });
 
 export const validateUserApiCall = (email, pass) =>
@@ -145,10 +147,30 @@ export const changeUserData = data => {
 
 export const addNotification = data => {
   console.log(data);
+  const newId =
+    notifications.reduce((prev, curr) => (prev.id > curr.id ? prev : curr), {
+      id: 0
+    }).id + 1;
+  notifications = notifications.concat({ ...data, id: newId });
+  return new Promise((resolve, reject) =>
+    setTimeout(function() {
+      resolve({
+        list: notifications.map(n => ({ ...n, name: "jakies dziecko" }))
+      });
+    }, API_DELAY)
+  );
 };
 
-export const deleteNotification = data => {
-  console.log(data);
+export const deleteNotification = notificationId => {
+  console.log(notificationId);
+  notifications = notifications.filter(n => n.id !== notificationId);
+  return new Promise((resolve, reject) =>
+    setTimeout(function() {
+      resolve({
+        list: notifications.map(n => ({ ...n, name: "jakies dziecko" }))
+      });
+    }, API_DELAY)
+  );
 };
 
 export const addMetaNotification = () => {

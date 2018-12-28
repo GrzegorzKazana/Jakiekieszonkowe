@@ -42,7 +42,7 @@ export default class KidsSummaryEntry extends React.Component {
   };
 
   submitEditDialog = data => {
-    this.props.onEditKid(data, this.props.kidsArray[this.state.expanded].id);
+    this.props.onEditKid(data, this.props.userKids[this.state.expanded].id);
   };
 
   handleExpandChange = changedId => {
@@ -61,16 +61,16 @@ export default class KidsSummaryEntry extends React.Component {
   };
 
   doDeleteKid = () => {
-    this.props.onDeleteKid(this.props.kidsArray[this.state.expanded].id);
+    this.props.onDeleteKid(this.props.userKids[this.state.expanded].id);
     this.setState({ deleteKidConfirmDialog: false });
   };
 
   render() {
-    const { kidsArray } = this.props;
+    const { userKids } = this.props;
     return (
-      <PageEntry title="Wypłacane kieszonkowe" loading={true}>
+      <PageEntry title="Wypłacane kieszonkowe" loading={this.props.loading}>
         <div style={{ margin: "15px 0px 0px 0px" }}>
-          {kidsArray.map((kid, idx) => {
+          {userKids.map((kid, idx) => {
             return (
               <KidsExpandableCard
                 key={idx}
@@ -117,7 +117,7 @@ export default class KidsSummaryEntry extends React.Component {
                   : this.submitDialog
               }
               prefillKid={
-                this.state.dialogEditMode && kidsArray[this.state.expanded]
+                this.state.dialogEditMode && userKids[this.state.expanded]
               }
               prefillPlaces={
                 !this.state.dialogEditMode && this.state.dialogFormOpen

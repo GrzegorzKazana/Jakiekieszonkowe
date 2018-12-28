@@ -34,9 +34,7 @@ export default class NotificationSettingsEntry extends React.Component {
   };
 
   toggleMetaNotification = (e, val) => {
-    val
-      ? this.props.onAddMetaNotification()
-      : this.props.onDeleteMetaNotification();
+    this.props.onToggleMetaNotification(val);
   };
 
   render() {
@@ -50,6 +48,7 @@ export default class NotificationSettingsEntry extends React.Component {
             wypłatach kieszonkowego.
           </div>
         }
+        loading={this.props.loading}
       >
         {this.props.userNotifications.length > 0 && (
           <NotificationList

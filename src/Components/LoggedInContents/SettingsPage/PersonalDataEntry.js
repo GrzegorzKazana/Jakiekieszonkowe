@@ -32,7 +32,7 @@ export default class PersonalDataEntry extends React.Component {
   render() {
     const { userData } = this.props;
     return (
-      <PageEntry title="Dane osobowe">
+      <PageEntry title="Dane osobowe" loading={this.props.loading}>
         <Grid
           container
           direction="column"

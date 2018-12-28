@@ -4,9 +4,11 @@ import SettingsEntry from "./SettingsEntry";
 import PersonalDataEntry from "./PersonalDataEntry";
 import NotificationSettingsEntry from "./NotificationSettingsEntry";
 import {
+  requestChangeUserData,
   changeUserData,
   updateNotificationList,
-  changeMetaNotification
+  changeMetaNotification,
+  requestUpdateNotificationList
 } from "../../../Actions/UserInfoActions";
 import { displaySnackbarMessage } from "../../../Actions/InfoSnackbarActions";
 import {
@@ -22,19 +24,30 @@ const mapStateToProps = state => ({
   ...state.userInfo
 });
 class SettingsPage extends React.Component {
+  state = {
+    passwordChangeIssued: false,
+    metaNotificationChangeIssued: false
+  };
+
   handlePasswordChange = data => {
     // this.props.dispatch(changePassword(data.newPassword));
+    this.setState({ passwordChangeIssued: true });
     changePasswordNotifyApi(data.oldPassword, data.newPassword)
-      .then(data =>
+      .then(data => {
         this.props.dispatch(
           displaySnackbarMessage("Zmienino hasło z powodzeniem")
-        )
-      )
-      .catch(err => this.props.dispatch(displaySnackbarMessage(err.message)));
+        );
+        this.setState({ passwordChangeIssued: false });
+      })
+      .catch(err => {
+        this.props.dispatch(displaySnackbarMessage(err.message));
+        this.setState({ passwordChangeIssued: false });
+      });
   };
 
   handleUserDataChange = data => {
     // this.props.dispatch(changeUserData(data));
+    this.props.dispatch(requestChangeUserData());
     changeUserDataNotifyApi(data)
       .then(data => this.props.dispatch(changeUserData(data)))
       .catch(err => this.props.dispatch(displaySnackbarMessage(err.message)));
@@ -42,6 +55,7 @@ class SettingsPage extends React.Component {
 
   handleAddNotification = data => {
     // this.props.dispatch(addUserNotification(data));
+    this.props.dispatch(requestUpdateNotificationList());
     addNotificationNotifyApi(data)
       .then(data => this.props.dispatch(updateNotificationList(data.list)))
       .catch(err => this.props.dispatch(displaySnackbarMessage(err.message)));
@@ -49,27 +63,24 @@ class SettingsPage extends React.Component {
 
   handleDeleteNotification = idx => {
     // this.props.dispatch(deleteUserNotification(idx));
+    this.props.dispatch(requestUpdateNotificationList());
     deleteNotificationNotifyApi(idx)
       .then(data => this.props.dispatch(updateNotificationList(data.list)))
       .catch(err => this.props.dispatch(displaySnackbarMessage(err.message)));
   };
 
-  handleAddMetaNotification = () => {
-    // this.props.dispatch(addMetaNotification());
-    changeMetaNotificationNotifyApi(true)
-      .then(data =>
-        this.props.dispatch(changeMetaNotification(data.userMetaNotification))
-      )
-      .catch(err => this.props.dispatch(displaySnackbarMessage(err.message)));
-  };
-
-  handleDeleteMetaNotification = () => {
+  handleToggleMetaNotification = isSubscribed => {
     // this.props.dispatch(deleteMetaNotification());
-    changeMetaNotificationNotifyApi(false)
-      .then(data =>
-        this.props.dispatch(changeMetaNotification(data.userMetaNotification))
-      )
-      .catch(err => this.props.dispatch(displaySnackbarMessage(err.message)));
+    this.setState({ metaNotificationChangeIssued: true });
+    changeMetaNotificationNotifyApi(isSubscribed)
+      .then(data => {
+        this.props.dispatch(changeMetaNotification(data.userMetaNotification));
+        this.setState({ metaNotificationChangeIssued: false });
+      })
+      .catch(err => {
+        this.props.dispatch(displaySnackbarMessage(err.message));
+        this.setState({ metaNotificationChangeIssued: false });
+      });
   };
 
   render() {
@@ -78,10 +89,12 @@ class SettingsPage extends React.Component {
         <SettingsEntry
           userData={this.props.userData}
           onPasswordChange={this.handlePasswordChange}
+          loading={this.state.passwordChangeIssued}
         />
         <PersonalDataEntry
           userData={this.props.userData}
           onUserDataChange={this.handleUserDataChange}
+          loading={this.props.userDataFetching}
         />
         <NotificationSettingsEntry
           userKids={this.props.userKids}
@@ -89,8 +102,11 @@ class SettingsPage extends React.Component {
           userMetaNotification={this.props.userMetaNotification}
           onAddNotification={this.handleAddNotification}
           onDeleteNotification={this.handleDeleteNotification}
-          onAddMetaNotification={this.handleAddMetaNotification}
-          onDeleteMetaNotification={this.handleDeleteMetaNotification}
+          onToggleMetaNotification={this.handleToggleMetaNotification}
+          loading={
+            this.props.userNotificationsFetching ||
+            this.state.metaNotificationChangeIssued
+          }
         />
       </Page>
     );

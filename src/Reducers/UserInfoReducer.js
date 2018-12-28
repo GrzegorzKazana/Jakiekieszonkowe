@@ -43,6 +43,11 @@ const UserInfoReducer = (state = defaultState, action) => {
         userKidsFetching: false,
         userNotificationsFetching: false
       };
+    case "REQUEST_CHANGE_USER_DATA":
+      return {
+        ...state,
+        userDataFetching: true
+      };
     case "CHANGE_USER_DATA":
       return {
         ...state,
@@ -59,6 +64,16 @@ const UserInfoReducer = (state = defaultState, action) => {
         userKidsFetching: false,
         userKidsLoaded: true,
         userKids: action.kidList
+      };
+    case "REQUEST_UPDATE_KID_LIST":
+      return {
+        ...state,
+        userKidsFetching: true
+      };
+    case "REQUEST_USER_UPDATE_NOTIFICATION_LIST":
+      return {
+        ...state,
+        userNotificationsFetching: true
       };
     case "USER_UPDATE_NOTIFICATION_LIST":
       return {

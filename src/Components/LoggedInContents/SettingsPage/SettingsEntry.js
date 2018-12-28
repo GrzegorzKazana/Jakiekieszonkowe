@@ -32,7 +32,7 @@ export default class SettingsEntry extends React.Component {
   render() {
     const { userData } = this.props;
     return (
-      <PageEntry title="Ustawienia konta">
+      <PageEntry title="Ustawienia konta" loading={this.props.loading}>
         <Grid
           container
           direction="column"

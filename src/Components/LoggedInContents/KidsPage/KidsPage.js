@@ -4,7 +4,10 @@ import KidsEntry from "./KidsEntry";
 import KidsSummaryEntry from "./KidsSummaryEntry";
 import { connect } from "react-redux";
 import { displaySnackbarMessage } from "../../../Actions/InfoSnackbarActions";
-import { updateKidList } from "../../../Actions/UserInfoActions";
+import {
+  updateKidList,
+  requestUpdateKidList
+} from "../../../Actions/UserInfoActions";
 import {
   addKid as addKidNotifyApi,
   editKid as editKidNotifyApi,
@@ -20,6 +23,7 @@ const mapStateToProps = state => ({
 class KidsPage extends React.Component {
   handleAddKid = kid => {
     // this.props.dispatch(addKid(kid));
+    this.props.dispatch(requestUpdateKidList());
     addKidNotifyApi(kid)
       .then(response => this.props.dispatch(updateKidList(response.kids)))
       .catch(err => this.props.dispatch(displaySnackbarMessage(err.message)));
@@ -27,6 +31,7 @@ class KidsPage extends React.Component {
 
   handleDeleteKid = kidIdx => {
     // this.props.dispatch(deleteKid(kidIdx));
+    this.props.dispatch(requestUpdateKidList());
     deleteKidNotifyApi(kidIdx)
       .then(response => this.props.dispatch(updateKidList(response.kids)))
       .catch(err => this.props.dispatch(displaySnackbarMessage(err.message)));
@@ -34,6 +39,7 @@ class KidsPage extends React.Component {
 
   handleEditKid = (kid, kidIdx) => {
     // this.props.dispatch(editKid(kid, kidIdx));
+    this.props.dispatch(requestUpdateKidList());
     editKidNotifyApi(kid, kidIdx)
       .then(response => this.props.dispatch(updateKidList(response.kids)))
       .catch(err => this.props.dispatch(displaySnackbarMessage(err.message)));
@@ -54,7 +60,8 @@ class KidsPage extends React.Component {
           onAddKid={this.handleAddKid}
           onDeleteKid={this.handleDeleteKid}
           onEditKid={this.handleEditKid}
-          kidsArray={this.props.userKids}
+          userKids={this.props.userKids}
+          loading={this.props.userKidsFetching}
           moneyIncludes={this.props.moneyIncludes}
           paymentPeriods={this.props.paymentPeriod}
           schoolTypes={this.props.schoolType}

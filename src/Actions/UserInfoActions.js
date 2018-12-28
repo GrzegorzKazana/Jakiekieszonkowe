@@ -21,6 +21,10 @@ export const requestUserValidationFailed = () => ({
   type: "REQUEST_USER_VALIDATION_FAILED"
 });
 
+export const requestChangeUserData = () => ({
+  type: "REQUEST_CHANGE_USER_DATA"
+});
+
 export const changeUserData = userData => ({
   type: "CHANGE_USER_DATA",
   userData
@@ -29,6 +33,14 @@ export const changeUserData = userData => ({
 export const updateKidList = kidList => ({
   type: "USER_UPDATE_KID_LIST",
   kidList
+});
+
+export const requestUpdateKidList = () => ({
+  type: "REQUEST_UPDATE_KID_LIST"
+});
+
+export const requestUpdateNotificationList = () => ({
+  type: "REQUEST_USER_UPDATE_NOTIFICATION_LIST"
 });
 
 export const updateNotificationList = notificationList => ({

@@ -4,10 +4,10 @@ import SettingsEntry from "./SettingsEntry";
 import PersonalDataEntry from "./PersonalDataEntry";
 import NotificationSettingsEntry from "./NotificationSettingsEntry";
 import {
-  changePassword,
+  // changePassword,
   changeUserData,
-  addUserNotification,
-  deleteUserNotification,
+  // addUserNotification,
+  // deleteUserNotification,
   addMetaNotification,
   deleteMetaNotification,
   updateNotificationList

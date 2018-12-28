@@ -60,15 +60,17 @@ class SettingsPage extends React.Component {
   };
 
   handleAddMetaNotification = () => {
-    console.log("added meta notification");
-    this.props.dispatch(addMetaNotification());
-    addMetaNotificationNotifyApi();
+    // this.props.dispatch(addMetaNotification());
+    addMetaNotificationNotifyApi()
+      .then(data => this.props.dispatch(addMetaNotification()))
+      .catch(err => this.props.dispatch(displaySnackbarMessage(err.message)));
   };
 
   handleDeleteMetaNotification = () => {
-    console.log("delete meta notification");
-    this.props.dispatch(deleteMetaNotification());
-    deleteMetaNotificationNotifyApi();
+    // this.props.dispatch(deleteMetaNotification());
+    deleteMetaNotificationNotifyApi()
+      .then(data => this.props.dispatch(deleteMetaNotification()))
+      .catch(err => this.props.dispatch(displaySnackbarMessage(err.message)));
   };
 
   render() {

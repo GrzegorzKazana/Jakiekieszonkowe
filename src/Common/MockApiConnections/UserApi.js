@@ -175,8 +175,34 @@ export const deleteNotification = notificationId => {
 
 export const addMetaNotification = () => {
   console.log("adding meta notification");
+  const oldUserData = userData(userEmail, userPass);
+  userData = () => ({
+    ...oldUserData,
+    metaNotification: true
+  });
+  return new Promise((resolve, reject) =>
+    setTimeout(function() {
+      resolve({
+        success: true,
+        metaNotifiaction: true
+      });
+    }, API_DELAY)
+  );
 };
 
 export const deleteMetaNotification = () => {
   console.log("removing meta notification");
+  const oldUserData = userData(userEmail, userPass);
+  userData = () => ({
+    ...oldUserData,
+    metaNotification: false
+  });
+  return new Promise((resolve, reject) =>
+    setTimeout(function() {
+      resolve({
+        success: true,
+        metaNotifiaction: false
+      });
+    }, API_DELAY)
+  );
 };

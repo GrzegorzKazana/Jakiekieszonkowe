@@ -1,34 +1,26 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import InputLabel from "@material-ui/core/InputLabel";
-import Input from "@material-ui/core/Input";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  InputLabel,
+  Input,
+  MenuItem,
+  FormControl,
+  Select
+} from "@material-ui/core";
 
 export default class NotificationDialog extends React.Component {
-  state = {
-    kidId: "",
-    notificationOverLap: "",
-    underValidation: false,
-    userDataLoaded: false
-  };
-
-  static getDerivedStateFromProps = (nextProps, prevState) => {
-    if (!prevState.userDataLoaded) {
-      return {
-        kidId: "",
-        notificationOverLap: "",
-        underValidation: false,
-        userDataLoaded: true
-      };
-    }
-    return prevState;
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      kidId: "",
+      notificationOverLap: "",
+      underValidation: false
+    };
+  }
 
   handleChange = name => event => {
     this.setState({ [name]: event.target.value });
@@ -42,12 +34,10 @@ export default class NotificationDialog extends React.Component {
         notificationOverLap: this.state.notificationOverLap
       };
       this.props.handleSubmit(notification);
-      this.setState({ userDataLoaded: false });
     }
   };
 
   cancelForm = () => {
-    this.setState({ userDataLoaded: false });
     this.props.handleClose();
   };
 

@@ -76,12 +76,14 @@ export default class PersonalDataEntry extends React.Component {
             </Button>
           </div>
         </Grid>
-        <PersonalDataDialog
-          userData={userData}
-          open={this.state.editPersonalDataDialog}
-          onSubmit={this.handleSubmitPersonalDataDialog}
-          onClose={this.handleCloseEditData}
-        />
+        {this.state.editPersonalDataDialog && (
+          <PersonalDataDialog
+            userData={userData}
+            open={this.state.editPersonalDataDialog}
+            onSubmit={this.handleSubmitPersonalDataDialog}
+            onClose={this.handleCloseEditData}
+          />
+        )}
       </PageEntry>
     );
   }

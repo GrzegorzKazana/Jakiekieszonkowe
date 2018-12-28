@@ -18,30 +18,19 @@ const mapStateToProps = state => ({
   ...state.cityDictionary
 });
 class PersonalDataDialog extends React.Component {
-  state = {
-    province: "",
-    city: "",
-    provinceId: "",
-    cityId: "",
-    cityDisabled: true,
-    underValidation: false,
-    userDataLoaded: false
-  };
-
-  static getDerivedStateFromProps = (nextProps, prevState) => {
-    if (!prevState.userDataLoaded) {
-      return {
-        province: nextProps.userData.province,
-        city: nextProps.userData.city,
-        provinceId: nextProps.userData.provinceId,
-        cityId: nextProps.userData.cityId,
-        cityDisabled: false,
-        underValidation: false,
-        userDataLoaded: true
-      };
-    }
-    return prevState;
-  };
+  constructor(props) {
+    super(props);
+    // later, it will be resonable to remove province nad city,
+    // since, back end will attach these when submitting changes
+    this.state = {
+      province: props.userData.province,
+      city: props.userData.city,
+      provinceId: props.userData.provinceId,
+      cityId: props.userData.cityId,
+      cityDisabled: false,
+      underValidation: false
+    };
+  }
 
   checkAndSubmitForm = () => {
     this.setState({ underValidation: true });
@@ -54,17 +43,14 @@ class PersonalDataDialog extends React.Component {
       provinceId: this.state.provinceId,
       cityId: this.state.cityId
     };
-    this.setState({ userDataLoaded: false });
     this.props.onSubmit(personalData);
   };
 
   cancelForm = () => {
-    this.setState({ userDataLoaded: false });
     this.props.onClose();
   };
 
   handleProvinceChange = event => {
-    // console.log(event.target);
     const provinceIdx = event.target.value;
     const province = this.props.provinces.find(x => x.id === provinceIdx).name;
     this.setState({

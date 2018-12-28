@@ -1,7 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   Button,
-  Grid,
   Checkbox,
   Typography,
   FormControlLabel
@@ -86,12 +85,14 @@ export default class NotificationSettingsEntry extends React.Component {
             <Add />
           </Button>
         </div>
-        <NotificationDialog
-          userKids={this.props.userKids}
-          open={this.state.dialogOpen}
-          handleClose={this.closeDialog}
-          handleSubmit={this.submitDialog}
-        />
+        {this.state.dialogOpen && (
+          <NotificationDialog
+            userKids={this.props.userKids}
+            open={this.state.dialogOpen}
+            handleClose={this.closeDialog}
+            handleSubmit={this.submitDialog}
+          />
+        )}
       </PageEntry>
     );
   }

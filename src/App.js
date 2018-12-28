@@ -51,7 +51,7 @@ class App extends React.Component {
     this.loadPaymentPeriod();
     this.loadMoneyIncludes();
     // this.mockOnlyAutoLogIn("admin", "admin");
-    // this.mockOnlyAutoLogIn("user", "user");
+    this.mockOnlyAutoLogIn("user", "user");
   };
 
   // mockup only, auto log in

@@ -1,4 +1,4 @@
-const API_DELAY = 50;
+const API_DELAY = 1000;
 
 let userEmail = "user";
 let userPass = "user";
@@ -37,10 +37,10 @@ let kidList = [
   }
 ];
 
-let notifications = [];
+let notificationList = [];
 
 let userData = (email, pass) => ({
-  isAdmin: email === adminEmail && pass === adminPass,
+  // isAdmin: email === adminEmail && pass === adminPass,
   email: email,
   // password: pass,
   accountActivationDate: "2018-01-01",
@@ -49,10 +49,18 @@ let userData = (email, pass) => ({
   provinceId: 0,
   cityId: 0,
   province: "Śląskie",
-  city: "Gliwice",
-  kids: kidList,
-  metaNotification: false,
-  notifications: notifications
+  city: "Gliwice"
+  // kids: kidList,
+  // metaNotification: false,
+  // notifications: notifications
+});
+
+let response = (email, pass) => ({
+  isAdmin: email === adminEmail && pass === adminPass,
+  userData: userData(email),
+  userKids: kidList,
+  userNotifications: notificationList,
+  userMetaNotification: false
 });
 
 export const validateUserApiCall = (email, pass) =>
@@ -63,7 +71,7 @@ export const validateUserApiCall = (email, pass) =>
         ? resolve({
             success: true,
             message: "Autoryzacja zakończona sukcesem",
-            userData: userData(email, pass)
+            response: response(email, pass)
           })
         : reject({
             success: false,
@@ -148,14 +156,14 @@ export const changeUserData = data => {
 export const addNotification = data => {
   console.log(data);
   const newId =
-    notifications.reduce((prev, curr) => (prev.id > curr.id ? prev : curr), {
+    notificationList.reduce((prev, curr) => (prev.id > curr.id ? prev : curr), {
       id: 0
     }).id + 1;
-  notifications = notifications.concat({ ...data, id: newId });
+  notificationList = notificationList.concat({ ...data, id: newId });
   return new Promise((resolve, reject) =>
     setTimeout(function() {
       resolve({
-        list: notifications.map(n => ({ ...n, name: "jakies dziecko" }))
+        list: notificationList.map(n => ({ ...n, name: "jakies dziecko" }))
       });
     }, API_DELAY)
   );
@@ -163,46 +171,46 @@ export const addNotification = data => {
 
 export const deleteNotification = notificationId => {
   console.log(notificationId);
-  notifications = notifications.filter(n => n.id !== notificationId);
+  notificationList = notificationList.filter(n => n.id !== notificationId);
   return new Promise((resolve, reject) =>
     setTimeout(function() {
       resolve({
-        list: notifications.map(n => ({ ...n, name: "jakies dziecko" }))
+        list: notificationList.map(n => ({ ...n, name: "jakies dziecko" }))
       });
     }, API_DELAY)
   );
 };
 
-export const addMetaNotification = () => {
+export const changeMetaNotification = isSubscribed => {
   console.log("adding meta notification");
-  const oldUserData = userData(userEmail, userPass);
-  userData = () => ({
-    ...oldUserData,
-    metaNotification: true
+  const oldResponse = response(userEmail, userPass);
+  response = () => ({
+    ...oldResponse,
+    userMetaNotification: isSubscribed
   });
   return new Promise((resolve, reject) =>
     setTimeout(function() {
       resolve({
         success: true,
-        metaNotifiaction: true
+        userMetaNotification: isSubscribed
       });
     }, API_DELAY)
   );
 };
 
-export const deleteMetaNotification = () => {
-  console.log("removing meta notification");
-  const oldUserData = userData(userEmail, userPass);
-  userData = () => ({
-    ...oldUserData,
-    metaNotification: false
-  });
-  return new Promise((resolve, reject) =>
-    setTimeout(function() {
-      resolve({
-        success: true,
-        metaNotifiaction: false
-      });
-    }, API_DELAY)
-  );
-};
+// export const deleteMetaNotification = () => {
+//   console.log("removing meta notification");
+//   const oldResponse = response(userEmail, userPass);
+//   response = () => ({
+//     ...oldResponse,
+//     userMetaNotification: false
+//   });
+//   return new Promise((resolve, reject) =>
+//     setTimeout(function() {
+//       resolve({
+//         success: true,
+//         metaNotifiaction: false
+//       });
+//     }, API_DELAY)
+//   );
+// };

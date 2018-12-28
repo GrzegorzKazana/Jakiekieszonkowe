@@ -50,19 +50,23 @@ class App extends React.Component {
     this.loadSchoolTypes();
     this.loadPaymentPeriod();
     this.loadMoneyIncludes();
-    this.mockOnlyAutoLogIn("admin", "admin");
-    // this.mockOnlyAutoLogIn("user", "user");
+    // this.mockOnlyAutoLogIn("admin", "admin");
+    this.mockOnlyAutoLogIn("user", "user");
   };
 
   // mockup only, auto log in
   mockOnlyAutoLogIn = (email, pass) => {
     this.props.dispatch(requestUserValidation());
     validateUserApiCall(email, pass)
-      .then(response =>
+      .then(data =>
         this.props.dispatch(
-          response.success
-            ? userValidated(response.userData)
-            : requestUserValidationFailed()
+          userValidated(
+            data.response.userData,
+            data.response.userKids,
+            data.response.userNotifications,
+            data.response.isAdmin,
+            data.response.userMetaNotification
+          )
         )
       )
       .catch(err => {
@@ -109,9 +113,9 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        {!this.props.userLoaded && <LogInPage />}
-        {this.props.userLoaded &&
-          (this.props.user.isAdmin ? <AdminPanel /> : <ContentLoggedIn />)}
+        {!this.props.userDataLoaded && <LogInPage />}
+        {this.props.userDataLoaded &&
+          (this.props.isAdmin ? <AdminPanel /> : <ContentLoggedIn />)}
         <DefaultSnackbar
           text={this.props.snackbarMessage}
           open={this.props.snackbarOpen}

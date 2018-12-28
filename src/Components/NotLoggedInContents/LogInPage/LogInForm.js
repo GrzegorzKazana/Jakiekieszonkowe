@@ -7,7 +7,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import LockIcon from "@material-ui/icons/LockOutlined";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import { TextField, Paper } from "@material-ui/core";
+import { TextField, Paper, CircularProgress } from "@material-ui/core";
 
 import {
   validateInputEmail,
@@ -22,7 +22,9 @@ import {
 } from "../../../Actions/UserInfoActions";
 import { validateUserApiCall } from "../../../Common/MockApiConnections/UserApi";
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  ...state.userInfo
+});
 class LogInForm extends React.Component {
   state = {
     email: "",
@@ -68,8 +70,19 @@ class LogInForm extends React.Component {
       return;
     }
     this.props.dispatch(requestUserValidation());
+    console.log(user);
     validateUserApiCall(user.email, user.password)
-      .then(response => this.props.dispatch(userValidated(response.userData)))
+      .then(data =>
+        this.props.dispatch(
+          userValidated(
+            data.response.userData,
+            data.response.userKids,
+            data.response.userNotifications,
+            data.response.isAdmin,
+            data.response.userMetaNotification
+          )
+        )
+      )
       .catch(err => {
         this.props.dispatch(requestUserValidationFailed());
         this.props.dispatch(displaySnackbarMessage(err.message));
@@ -94,9 +107,38 @@ class LogInForm extends React.Component {
             alignItems="center"
             style={{ padding: "10px" }}
           >
-            <Avatar style={{ width: "80px", height: "80px" }}>
-              <LockIcon style={{ width: "60px", height: "60px" }} />
-            </Avatar>
+            <div
+              style={{
+                width: "80px",
+                height: "80px",
+                position: "relative"
+              }}
+            >
+              <Avatar
+                style={{
+                  width: "80px",
+                  height: "80px"
+                }}
+              >
+                <LockIcon
+                  style={{
+                    width: "60px",
+                    height: "60px"
+                  }}
+                />
+              </Avatar>
+              {this.props.userDataFetching && (
+                <CircularProgress
+                  size={80}
+                  thickness={2}
+                  style={{
+                    position: "absolute",
+                    top: "0px",
+                    left: "0px"
+                  }}
+                />
+              )}
+            </div>
             <Typography component="h1" variant="h5" style={{ margin: "15px" }}>
               Zaloguj się
             </Typography>

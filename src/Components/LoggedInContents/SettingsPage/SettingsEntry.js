@@ -30,7 +30,7 @@ export default class SettingsEntry extends React.Component {
   };
 
   render() {
-    const { user } = this.props;
+    const { userData } = this.props;
     return (
       <PageEntry title="Ustawienia konta">
         <Grid
@@ -46,7 +46,7 @@ export default class SettingsEntry extends React.Component {
                   <Typography variant="subheading">Adres e-mail:</Typography>
                 </TableCell>
                 <TableCell numeric>
-                  <Typography variant="h6">{user.email}</Typography>
+                  <Typography variant="h6">{userData.email}</Typography>
                 </TableCell>
               </TableRow>
               <TableRow>
@@ -65,7 +65,7 @@ export default class SettingsEntry extends React.Component {
                 </TableCell>
                 <TableCell numeric>
                   <Typography variant="h6">
-                    {user.accountActivationDate}
+                    {userData.accountActivationDate}
                   </Typography>
                 </TableCell>
               </TableRow>

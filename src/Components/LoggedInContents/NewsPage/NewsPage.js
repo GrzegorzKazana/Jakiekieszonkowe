@@ -12,8 +12,8 @@ class NewsPage extends React.Component {
     console.log(this.props.style);
     return (
       <Page style={this.props.style}>
-        <NewsEntry lastLogInDate={this.props.user.accountLastLogInDate} />
-        <CurrentPaymentsEntry kidsArray={this.props.user.kids} />
+        <NewsEntry lastLogInDate={this.props.userData.accountLastLogInDate} />
+        <CurrentPaymentsEntry kidsArray={this.props.userKids} />
       </Page>
     );
   }

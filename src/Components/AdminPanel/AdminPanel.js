@@ -50,7 +50,7 @@ class AdminPanel extends React.Component {
       >
         <NavBarAdmin
           onLogOut={this.handleLogOut}
-          userEmail={this.props.user.email}
+          userEmail={this.props.userData.email}
         />
         <div
           style={{

@@ -4,13 +4,9 @@ import SettingsEntry from "./SettingsEntry";
 import PersonalDataEntry from "./PersonalDataEntry";
 import NotificationSettingsEntry from "./NotificationSettingsEntry";
 import {
-  // changePassword,
   changeUserData,
-  // addUserNotification,
-  // deleteUserNotification,
-  addMetaNotification,
-  deleteMetaNotification,
-  updateNotificationList
+  updateNotificationList,
+  changeMetaNotification
 } from "../../../Actions/UserInfoActions";
 import { displaySnackbarMessage } from "../../../Actions/InfoSnackbarActions";
 import {
@@ -18,8 +14,7 @@ import {
   changeUserData as changeUserDataNotifyApi,
   addNotification as addNotificationNotifyApi,
   deleteNotification as deleteNotificationNotifyApi,
-  addMetaNotification as addMetaNotificationNotifyApi,
-  deleteMetaNotification as deleteMetaNotificationNotifyApi
+  changeMetaNotification as changeMetaNotificationNotifyApi
 } from "../../../Common/MockApiConnections/UserApi";
 import { connect } from "react-redux";
 
@@ -61,15 +56,19 @@ class SettingsPage extends React.Component {
 
   handleAddMetaNotification = () => {
     // this.props.dispatch(addMetaNotification());
-    addMetaNotificationNotifyApi()
-      .then(data => this.props.dispatch(addMetaNotification()))
+    changeMetaNotificationNotifyApi(true)
+      .then(data =>
+        this.props.dispatch(changeMetaNotification(data.userMetaNotification))
+      )
       .catch(err => this.props.dispatch(displaySnackbarMessage(err.message)));
   };
 
   handleDeleteMetaNotification = () => {
     // this.props.dispatch(deleteMetaNotification());
-    deleteMetaNotificationNotifyApi()
-      .then(data => this.props.dispatch(deleteMetaNotification()))
+    changeMetaNotificationNotifyApi(false)
+      .then(data =>
+        this.props.dispatch(changeMetaNotification(data.userMetaNotification))
+      )
       .catch(err => this.props.dispatch(displaySnackbarMessage(err.message)));
   };
 
@@ -77,15 +76,17 @@ class SettingsPage extends React.Component {
     return (
       <Page style={this.props.style}>
         <SettingsEntry
-          user={this.props.user}
+          userData={this.props.userData}
           onPasswordChange={this.handlePasswordChange}
         />
         <PersonalDataEntry
-          user={this.props.user}
+          userData={this.props.userData}
           onUserDataChange={this.handleUserDataChange}
         />
         <NotificationSettingsEntry
-          user={this.props.user}
+          userKids={this.props.userKids}
+          userNotifications={this.props.userNotifications}
+          userMetaNotification={this.props.userMetaNotification}
           onAddNotification={this.handleAddNotification}
           onDeleteNotification={this.handleDeleteNotification}
           onAddMetaNotification={this.handleAddMetaNotification}

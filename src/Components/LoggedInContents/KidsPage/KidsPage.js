@@ -4,12 +4,7 @@ import KidsEntry from "./KidsEntry";
 import KidsSummaryEntry from "./KidsSummaryEntry";
 import { connect } from "react-redux";
 import { displaySnackbarMessage } from "../../../Actions/InfoSnackbarActions";
-import {
-  addKid,
-  editKid,
-  deleteKid,
-  updateKidList
-} from "../../../Actions/UserInfoActions";
+import { updateKidList } from "../../../Actions/UserInfoActions";
 import {
   addKid as addKidNotifyApi,
   editKid as editKidNotifyApi,
@@ -45,13 +40,12 @@ class KidsPage extends React.Component {
   };
 
   render() {
-    const { user } = this.props;
     return (
       <Page style={this.props.style}>
         <KidsEntry
-          numberOfKids={user.kids.length}
+          numberOfKids={this.props.userKids.length}
           firstKidDate={
-            user.kids.reduce((prev, curr) => {
+            this.props.userKids.reduce((prev, curr) => {
               return prev.paymentDate < curr.paymentDate ? prev : curr;
             }, new Date()).paymentDate
           }
@@ -60,7 +54,7 @@ class KidsPage extends React.Component {
           onAddKid={this.handleAddKid}
           onDeleteKid={this.handleDeleteKid}
           onEditKid={this.handleEditKid}
-          kidsArray={user.kids}
+          kidsArray={this.props.userKids}
           moneyIncludes={this.props.moneyIncludes}
           paymentPeriods={this.props.paymentPeriod}
           schoolTypes={this.props.schoolType}

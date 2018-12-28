@@ -30,7 +30,7 @@ export default class PersonalDataEntry extends React.Component {
   };
 
   render() {
-    const { user } = this.props;
+    const { userData } = this.props;
     return (
       <PageEntry title="Dane osobowe">
         <Grid
@@ -46,7 +46,7 @@ export default class PersonalDataEntry extends React.Component {
                   <Typography variant="subheading">Kraj:</Typography>
                 </TableCell>
                 <TableCell numeric>
-                  <Typography variant="h6">{user.country}</Typography>
+                  <Typography variant="h6">{userData.country}</Typography>
                 </TableCell>
               </TableRow>
               <TableRow>
@@ -54,7 +54,7 @@ export default class PersonalDataEntry extends React.Component {
                   <Typography variant="subheading">Wojewódźtwo:</Typography>
                 </TableCell>
                 <TableCell numeric>
-                  <Typography variant="h6">{user.province}</Typography>
+                  <Typography variant="h6">{userData.province}</Typography>
                 </TableCell>
               </TableRow>
               <TableRow>
@@ -62,7 +62,7 @@ export default class PersonalDataEntry extends React.Component {
                   <Typography variant="subheading">Miasto:</Typography>
                 </TableCell>
                 <TableCell numeric>
-                  <Typography variant="h6">{user.city}</Typography>
+                  <Typography variant="h6">{userData.city}</Typography>
                 </TableCell>
               </TableRow>
             </TableBody>
@@ -77,7 +77,7 @@ export default class PersonalDataEntry extends React.Component {
           </div>
         </Grid>
         <PersonalDataDialog
-          user={user}
+          userData={userData}
           open={this.state.editPersonalDataDialog}
           onSubmit={this.handleSubmitPersonalDataDialog}
           onClose={this.handleCloseEditData}

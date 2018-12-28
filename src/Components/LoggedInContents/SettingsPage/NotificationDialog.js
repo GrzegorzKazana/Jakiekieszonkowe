@@ -53,7 +53,7 @@ export default class NotificationDialog extends React.Component {
 
   render() {
     const { open } = this.props;
-    const { user } = this.props;
+    const { userKids } = this.props;
     return (
       <Dialog
         disableBackdropClick
@@ -74,7 +74,7 @@ export default class NotificationDialog extends React.Component {
                 onChange={this.handleChange("kidId")}
                 input={<Input id="name-simple" />}
               >
-                {user.kids.map((kid, idx) => (
+                {userKids.map((kid, idx) => (
                   <MenuItem value={kid.id} key={idx}>
                     {kid.name}
                   </MenuItem>

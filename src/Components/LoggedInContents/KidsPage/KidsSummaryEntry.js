@@ -68,7 +68,7 @@ export default class KidsSummaryEntry extends React.Component {
   render() {
     const { kidsArray } = this.props;
     return (
-      <PageEntry title="Wypłacane kieszonkowe">
+      <PageEntry title="Wypłacane kieszonkowe" loading={true}>
         <div style={{ margin: "15px 0px 0px 0px" }}>
           {kidsArray.map((kid, idx) => {
             return (

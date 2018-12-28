@@ -31,10 +31,10 @@ class PersonalDataDialog extends React.Component {
   static getDerivedStateFromProps = (nextProps, prevState) => {
     if (!prevState.userDataLoaded) {
       return {
-        province: nextProps.user.province,
-        city: nextProps.user.city,
-        provinceId: nextProps.user.provinceId,
-        cityId: nextProps.user.cityId,
+        province: nextProps.userData.province,
+        city: nextProps.userData.city,
+        provinceId: nextProps.userData.provinceId,
+        cityId: nextProps.userData.cityId,
         cityDisabled: false,
         underValidation: false,
         userDataLoaded: true

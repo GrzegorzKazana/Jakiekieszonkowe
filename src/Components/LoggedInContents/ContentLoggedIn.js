@@ -41,7 +41,7 @@ class ContentLoggedIn extends React.Component {
         }}
       >
         <NavBar
-          userEmail={this.props.user.email}
+          userEmail={this.props.userData.email}
           onTabChange={this.handleTabChange}
           onLogOut={this.handleLogOut}
           selectedPageContent={selectedPageContent}

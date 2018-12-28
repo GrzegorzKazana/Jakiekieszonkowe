@@ -51,9 +51,9 @@ export default class NotificationSettingsEntry extends React.Component {
           </div>
         }
       >
-        {this.props.user.notifications.length > 0 && (
+        {this.props.userNotifications.length > 0 && (
           <NotificationList
-            notificationArray={this.props.user.notifications}
+            notificationArray={this.props.userNotifications}
             handleDelete={this.deleteNotification}
           />
         )}
@@ -61,7 +61,7 @@ export default class NotificationSettingsEntry extends React.Component {
           <FormControlLabel
             control={
               <Checkbox
-                checked={this.props.user.metaNotification}
+                checked={this.props.userMetaNotification}
                 onChange={this.toggleMetaNotification}
               />
             }
@@ -88,7 +88,7 @@ export default class NotificationSettingsEntry extends React.Component {
           </Button>
         </div>
         <NotificationDialog
-          user={this.props.user}
+          userKids={this.props.userKids}
           open={this.state.dialogOpen}
           handleClose={this.closeDialog}
           handleSubmit={this.submitDialog}

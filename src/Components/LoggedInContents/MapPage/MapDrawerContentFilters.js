@@ -21,7 +21,7 @@ class MapDrawerContentFilters extends React.Component {
     moneyIncludes: this.props.moneyIncludes.map(
       moneyInclude => moneyInclude.id
     ),
-    schoolTypeId: ""
+    schoolTypeId: -1
   };
 
   static getDerivedStateFromProps = (props, state) => {
@@ -75,7 +75,9 @@ class MapDrawerContentFilters extends React.Component {
         <FormControl fullWidth margin="dense">
           <InputLabel htmlFor="name-simple">Rodzaj szkoły</InputLabel>
           <Select
-            value={this.state.schoolTypeId}
+            value={
+              this.state.schoolTypeId === -1 ? "" : this.state.schoolTypeId
+            }
             onChange={e => this.setState({ schoolTypeId: e.target.value })}
             input={<Input id="name-simple" />}
           >

@@ -67,6 +67,8 @@ let response = (email, pass) => ({
  *
  * RESPONSE (if admin, isValidated and isAdmin is required only):
  * {
+ *    success: boolean,
+ *    message: string (empty, or error message)
  *    isValidated: boolean
  *    isAdmin: boolean,
  *    userData: {
@@ -285,6 +287,8 @@ export const changePassword = (oldPassword, newPassword) => {
  *
  * RESPONSE:
  * {
+ *    success: boolean,
+ *    message: string (empty, or error message)
  *    email: string,
  *    accountActivationDate: "YYYY-MM-DD",
  *    accountLastLogInDate: "YYYY-MM-DD",
@@ -318,6 +322,8 @@ export const changeUserData = data => {
  *
  * RESPONSE:
  * {
+ *    success: boolean,
+ *    message: string (empty, or error message)
  *    list: [{
  *      id: int,
  *      kidId: int,

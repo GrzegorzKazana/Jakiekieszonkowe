@@ -29,7 +29,7 @@ class MapPage extends React.Component {
     moneyIncludes: this.props.moneyIncludes.map(
       moneyInclude => moneyInclude.id
     ),
-    schoolTypeId: ""
+    schoolTypeId: -1
   };
 
   state = {

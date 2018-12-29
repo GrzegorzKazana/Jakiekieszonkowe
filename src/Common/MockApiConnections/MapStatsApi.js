@@ -1,7 +1,32 @@
 const API_DELAY = 1000;
 
-export const getCountryBasicStats = (useParams, params) =>
-  new Promise((resolve, reject) =>
+/**
+ * REQUEST:
+ * {
+ *    userFilters: boolean,
+ *    filters: {
+ *      ageRangeValue: {min: int, max: int},
+ *      moneyIncludes: [int, int, ...],
+ *      schoolTypeId: int (-1 when not filtering, single schoolTypeId otherwise)
+ *    }
+ * }
+ *
+ * RESPONSE (id is questionable, since its Poland only service):
+ * {
+ *    success: boolean,
+ *    message: string (empty, or error message)
+ *    countryData: {
+ *      id: int,
+ *      name: string,
+ *      avg: float,
+ *      std: float,
+ *      count: int
+ *    }
+ * }
+ */
+export const getCountryBasicStats = (useParams, params) => {
+  console.log(useParams, params);
+  return new Promise((resolve, reject) =>
     setTimeout(function() {
       resolve({
         countryData: {
@@ -14,7 +39,33 @@ export const getCountryBasicStats = (useParams, params) =>
       });
     }, API_DELAY)
   );
+};
 
+/**
+ * REQUEST:
+ * {
+ *    userFilters: boolean,
+ *    filters: {
+ *      ageRangeValue: {min: int, max: int},
+ *      moneyIncludes: [int, int, ...],
+ *      schoolTypeId: int (-1 when not filtering, single schoolTypeId otherwise)
+ *    }
+ * }
+ *
+ * RESPONSE (id is questionable, since its Poland only service):
+ * {
+ *    success: boolean,
+ *    message: string (empty, or error message)
+ *    provinceData: [{
+ *      id: int,
+ *      name: string,
+ *      avg: float,
+ *      std: float,
+ *      count: int
+ *    }, {...}, {...}, ...
+ *    ]
+ * }
+ */
 export const getProvinceBasicStats = (useParams, params) =>
   new Promise((resolve, reject) =>
     setTimeout(function() {
@@ -139,6 +190,34 @@ export const getProvinceBasicStats = (useParams, params) =>
     }, API_DELAY)
   );
 
+/**
+ * REQUEST:
+ * {
+ *    provinceId: int,
+ *    userFilters: boolean,
+ *    filters: {
+ *      ageRangeValue: {min: int, max: int},
+ *      moneyIncludes: [int, int, ...],
+ *      schoolTypeId: int (-1 when not filtering, single schoolTypeId otherwise)
+ *    }
+ * }
+ *
+ * RESPONSE (id is questionable, since its Poland only service):
+ * {
+ *    success: boolean,
+ *    message: string (empty, or error message)
+ *    cityData: [{
+ *      id: int,
+ *      provinceId: int,
+ *      name: string,
+ *      avg: float,
+ *      std: float,
+ *      count: int,
+ *      position: [float, float] (lattitude and logitude)
+ *    }, {...}, {...}, ...
+ *    ]
+ * }
+ */
 export const getCityBasicStats = (provId, useParams, params) =>
   new Promise((resolve, reject) =>
     setTimeout(function() {

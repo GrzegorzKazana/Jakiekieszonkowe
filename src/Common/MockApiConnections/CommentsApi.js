@@ -20,6 +20,33 @@ let comments = {
     }
   ]
 };
+
+/**
+ * REQUEST:
+ * {
+ *    provinceId: int,
+ *    cityId: int
+ * }
+ * (if pId and cId is -1, it means country comments,
+ * else if only cId is -1, it means province comments,
+ * else city comments)
+ * (dunno if -1 is better, or null)
+ *
+ * RESPONSE:
+ * {
+ *    success: boolean,
+ *    message: string (empty, or error message)
+ *    list: [
+ *      {
+ *        id: int,
+ *        author: string,
+ *        content: string,
+ *        upvotes: int,
+ *        liked: boolean (true if logged in user has liked the comment)
+ *      }
+ *    ]
+ * }
+ */
 export const getComments = (provId, cityId) =>
   new Promise((resolve, reject) =>
     setTimeout(function() {
@@ -27,6 +54,18 @@ export const getComments = (provId, cityId) =>
     }, API_DELAY)
   );
 
+/**
+ * REQUEST:
+ * {
+ *    provinceId: int,
+ *    cityId: int,
+ *    comment: string
+ * }
+ * (again, pId and cId may be -1)
+ *
+ * RESPONSE:
+ * just like getComments
+ */
 export const addComment = (provId, cityId, comment) => {
   const nextId =
     comments.list.reduce((prev, curr) => (prev.id > curr.id ? prev : curr)).id +
@@ -46,6 +85,16 @@ export const addComment = (provId, cityId, comment) => {
   );
 };
 
+/**
+ * REQUEST:
+ * {
+ *    commentId: int,
+ *    liked: boolean
+ * }
+ *
+ * RESPONSE:
+ * just like getComments
+ */
 export const toggleCommentUpvote = (commentId, liked) => {
   comments.list = comments.list.map(c =>
     c.id !== commentId

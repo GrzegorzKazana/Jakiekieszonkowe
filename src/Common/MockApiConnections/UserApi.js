@@ -51,6 +51,9 @@ let userData = (email, pass) => ({
 });
 
 let response = (email, pass) => ({
+  isValidated:
+    (email === adminEmail && pass === adminPass) ||
+    (email === userEmail && pass === userPass),
   isAdmin: email === adminEmail && pass === adminPass,
   userData: userData(email),
   userKids: kidList,
@@ -111,8 +114,6 @@ export const validateUserApiCall = (email, pass) =>
       (email === userEmail && pass === userPass) ||
       (email === adminEmail && pass === adminPass)
         ? resolve({
-            success: true,
-            message: "Autoryzacja zakończona sukcesem",
             response: response(email, pass)
           })
         : reject({
@@ -141,7 +142,7 @@ export const registerUser = user => {
   console.log(user);
   return new Promise((resolve, reject) =>
     setTimeout(function() {
-      resolve({ success: 1, message: "" });
+      resolve({ success: true, message: "" });
     }, API_DELAY)
   );
 };

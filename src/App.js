@@ -78,35 +78,45 @@ class App extends React.Component {
   loadProvinces = () => {
     this.props.dispatch(requestProvinceDictionary());
     getProvinceDictionary()
-      .then(data => this.props.dispatch(provinceDictionaryLoaded(data)))
+      .then(data =>
+        this.props.dispatch(provinceDictionaryLoaded(data.provinceList))
+      )
       .catch(e => console.log(e));
   };
 
   loadCities = () => {
     this.props.dispatch(requestCityDictionary());
     getCityDictionary()
-      .then(data => this.props.dispatch(provinceCityLoaded(data)))
+      .then(data => this.props.dispatch(provinceCityLoaded(data.cityList)))
       .catch(e => console.log(e));
   };
 
   loadSchoolTypes = () => {
     this.props.dispatch(requestSchoolTypeDictionary());
     getSchoolTypeDictionary()
-      .then(data => this.props.dispatch(schoolTypeDicitonaryLoaded(data)))
+      .then(data =>
+        this.props.dispatch(schoolTypeDicitonaryLoaded(data.schoolTypeList))
+      )
       .catch(e => console.log(e));
   };
 
   loadPaymentPeriod = () => {
     this.props.dispatch(requestPaymentPeriodDictionary());
     getPaymentPeriodDictionary()
-      .then(data => this.props.dispatch(paymentPeriodDictionaryLoaded(data)))
+      .then(data =>
+        this.props.dispatch(
+          paymentPeriodDictionaryLoaded(data.paymentPeriodList)
+        )
+      )
       .catch(e => console.log(e));
   };
 
   loadMoneyIncludes = () => {
     this.props.dispatch(requestMoneyIncludesList());
     getMoneyIncludes()
-      .then(data => this.props.dispatch(moneyIncludesLoaded(data)))
+      .then(data =>
+        this.props.dispatch(moneyIncludesLoaded(data.moneyIncludeList))
+      )
       .catch(e => console.log(e));
   };
 

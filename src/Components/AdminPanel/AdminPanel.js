@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 import { logOut } from "../../Actions/UserInfoActions";
 
 const mapStateToProps = state => ({
-  ...state.userInfo,
   ...state.cityDictionary,
   ...state.provinceDictionary,
   ...state.paymentPeriodDictionary,
@@ -48,10 +47,7 @@ class AdminPanel extends React.Component {
           flexDirection: "column"
         }}
       >
-        <NavBarAdmin
-          onLogOut={this.handleLogOut}
-          userEmail={this.props.userData.email}
-        />
+        <NavBarAdmin onLogOut={this.handleLogOut} userEmail="admin" />
         <div
           style={{
             display: "flex",

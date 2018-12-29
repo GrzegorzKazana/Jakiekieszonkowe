@@ -40,9 +40,7 @@ let kidList = [
 let notificationList = [];
 
 let userData = (email, pass) => ({
-  // isAdmin: email === adminEmail && pass === adminPass,
   email: email,
-  // password: pass,
   accountActivationDate: "2018-01-01",
   accountLastLogInDate: "2018-10-15",
   country: "Polska",
@@ -50,9 +48,6 @@ let userData = (email, pass) => ({
   cityId: 0,
   province: "Śląskie",
   city: "Gliwice"
-  // kids: kidList,
-  // metaNotification: false,
-  // notifications: notifications
 });
 
 let response = (email, pass) => ({
@@ -63,6 +58,51 @@ let response = (email, pass) => ({
   userMetaNotification: false
 });
 
+/**
+ * REQUEST:
+ * {
+ *    email: string,
+ *    password: string
+ * }
+ *
+ * RESPONSE (if admin, isValidated and isAdmin is required only):
+ * {
+ *    isValidated: boolean
+ *    isAdmin: boolean,
+ *    userData: {
+ *      email: string,
+ *      accountActivationDate: "YYYY-MM-DD",
+ *      accountLastLogInDate: "YYY-MM-DD",
+ *      country: string,
+ *      provinceId: int,
+ *      cityId: int,
+ *      province: string,
+ *      city: string
+ *    },
+ *    userKids: [{
+ *      id: int,
+ *      name: string,
+ *      age: int,
+ *      schoolTypeId: int,
+ *      quota: int,
+ *      paymentPeriodId: int,
+ *      paymentDate: "YYYY-MM-DD",
+ *      prevPaymentDate: "YYYY-MM-DD",
+ *      nextPaymentDate: "YYYY-MM-DD",
+ *      provinceId: int,
+ *      cityId: int,
+ *      moneyIncludes: [int, int, ...]
+ *      }, {...}, {...}, ...
+ *    ],
+ *    userNotifications: [{
+ *      id: int,
+ *      kidId: int,
+ *      notificationOverlap: int
+ *      }, {...}, {...}, ...
+ *    ],
+ *    userMetaNotification: boolean
+ * }
+ */
 export const validateUserApiCall = (email, pass) =>
   new Promise((resolve, reject) =>
     setTimeout(function() {
@@ -80,10 +120,65 @@ export const validateUserApiCall = (email, pass) =>
     }, API_DELAY)
   );
 
+/**
+ * REQUEST:
+ * {
+ *    email: string,
+ *    password: string,
+ *    provinceId: int,
+ *    city: int
+ * }
+ *
+ * RESPONSE:
+ * {
+ *    success: boolean,
+ *    message: string (empty or error messsage)
+ * }
+ */
 export const registerUser = user => {
   console.log(user);
+  return new Promise((resolve, reject) =>
+    setTimeout(function() {
+      resolve({ success: 1, message: "" });
+    }, API_DELAY)
+  );
 };
 
+/**
+ * REQUEST:
+ * {
+ *    age: int
+ *    name: string,
+ *    quota: int,
+ *    cityId: int,
+ *    provinceId: int,
+ *    moneyIncludes: [int, int, ...],
+ *    paymentDate: "YYYY-MM-DD",
+ *    paymentPeriodId: int,
+ *    schoolTypeId: int
+ * }
+ *
+ * RESPONSE:
+ * {
+ *    success: boolean,
+ *    message: string (empty or error message)
+ *    kids: [{
+ *      id: int,
+ *      name: string,
+ *      age: int,
+ *      schoolTypeId: int,
+ *      quota: int,
+ *      paymentPeriodId: int,
+ *      paymentDate: "YYYY-MM-DD",
+ *      prevPaymentDate: "YYYY-MM-DD",
+ *      nextPaymentDate: "YYYY-MM-DD",
+ *      provinceId: int,
+ *      cityId: int,
+ *      moneyIncludes: [int, int, ...]
+ *      }, {...}, {...}, ...
+ *    ]
+ * }
+ */
 export const addKid = kid => {
   kid.id =
     kidList.reduce((prev, curr) => (prev.id > curr.id ? prev : curr)).id + 1;
@@ -98,6 +193,24 @@ export const addKid = kid => {
   );
 };
 
+/**
+ * REQUEST:
+ * {
+ *    id: int
+ *    age: int
+ *    name: string,
+ *    quota: int,
+ *    cityId: int,
+ *    provinceId: int,
+ *    moneyIncludes: [int, int, ...],
+ *    paymentDate: "YYYY-MM-DD",
+ *    paymentPeriodId: int,
+ *    schoolTypeId: int
+ * }
+ *
+ * RESPONSE:
+ * just like addKid
+ */
 export const editKid = (kid, kidIdx) => {
   console.log(kidIdx);
   console.log(kid);
@@ -112,6 +225,15 @@ export const editKid = (kid, kidIdx) => {
   );
 };
 
+/**
+ * REQUEST:
+ * {
+ *    id: int
+ * }
+ *
+ * RESPONSE:
+ * just like addKid
+ */
 export const deleteKid = kidIdx => {
   console.log(kidIdx);
   kidList = kidList.filter(k => k.id !== kidIdx);
@@ -122,6 +244,18 @@ export const deleteKid = kidIdx => {
   );
 };
 
+/**
+ * REQUEST:
+ * {
+ *    newPassword: string
+ * }
+ *
+ * RESPONSE:
+ * {
+ *    success: boolean,
+ *    message: string (empty or error message)
+ * }
+ */
 export const changePassword = (oldPassword, newPassword) => {
   console.log(oldPassword, newPassword);
   if (oldPassword === userPass) {
@@ -140,6 +274,27 @@ export const changePassword = (oldPassword, newPassword) => {
   }
 };
 
+/**
+ * REQUEST (province and city is only needed for mockup, to be removed):
+ * {
+ *    cityId: int,
+ *    city: string,
+ *    provinceId: int,
+ *    province: string
+ * }
+ *
+ * RESPONSE:
+ * {
+ *    email: string,
+ *    accountActivationDate: "YYYY-MM-DD",
+ *    accountLastLogInDate: "YYYY-MM-DD",
+ *    country: string,
+ *    provinceId: int,
+ *    cityId: int,
+ *    province: string,
+ *    city: string
+ * }
+ */
 export const changeUserData = data => {
   console.log(data);
   const oldUserData = userData(userEmail, userPass);
@@ -154,6 +309,23 @@ export const changeUserData = data => {
   );
 };
 
+/**
+ * REQUEST:
+ * {
+ *    kidId: int,
+ *    notificationOverLap: int
+ * }
+ *
+ * RESPONSE:
+ * {
+ *    list: [{
+ *      id: int,
+ *      kidId: int,
+ *      notificationOverlap: int
+ *      }, {...}, {...}, ...
+ *    ]
+ * }
+ */
 export const addNotification = data => {
   console.log(data);
   const newId =
@@ -170,6 +342,15 @@ export const addNotification = data => {
   );
 };
 
+/**
+ * REQUEST:
+ * {
+ *    notificationId: int
+ * }
+ *
+ * RESPONSE:
+ * same as addNotification
+ */
 export const deleteNotification = notificationId => {
   console.log(notificationId);
   notificationList = notificationList.filter(n => n.id !== notificationId);
@@ -182,6 +363,19 @@ export const deleteNotification = notificationId => {
   );
 };
 
+/**
+ * REQUEST:
+ * {
+ *    isSubscribed: boolean
+ * }
+ *
+ * RESPONSE:
+ * {
+ *    success: boolean,
+ *    message: string (empty or error message)
+ *    userMetaNotification: boolean,
+ * }
+ */
 export const changeMetaNotification = isSubscribed => {
   console.log("adding meta notification");
   const oldResponse = response(userEmail, userPass);
@@ -198,20 +392,3 @@ export const changeMetaNotification = isSubscribed => {
     }, API_DELAY)
   );
 };
-
-// export const deleteMetaNotification = () => {
-//   console.log("removing meta notification");
-//   const oldResponse = response(userEmail, userPass);
-//   response = () => ({
-//     ...oldResponse,
-//     userMetaNotification: false
-//   });
-//   return new Promise((resolve, reject) =>
-//     setTimeout(function() {
-//       resolve({
-//         success: true,
-//         metaNotifiaction: false
-//       });
-//     }, API_DELAY)
-//   );
-// };

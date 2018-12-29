@@ -30,8 +30,8 @@ class SignInForm extends React.Component {
     email: "",
     password: "",
     passwordRepeat: "",
-    provinceIdx: "",
-    cityIdx: "",
+    provinceId: "",
+    cityId: "",
     acceptedTerms: false,
     underValidation: false,
     emailValid: false,
@@ -66,19 +66,19 @@ class SignInForm extends React.Component {
     });
   };
   handleProvinceChange = event => {
-    const provinceIdx = event.target.value;
+    const provinceId = event.target.value;
     this.setState({
-      provinceIdx: provinceIdx,
+      provinceId: provinceId,
       provinceValid: this.validateProvince(event.target.value),
       cityDisabled: false,
-      cityIdx: "",
+      cityId: "",
       cityValid: false
     });
   };
   handleCityChange = event => {
-    const cityIdx = event.target.value;
+    const cityId = event.target.value;
     this.setState({
-      cityIdx: cityIdx,
+      cityId: cityId,
       cityValid: this.validateCity(event.target.value)
     });
   };
@@ -109,14 +109,17 @@ class SignInForm extends React.Component {
     const userData = {
       email: this.state.email,
       password: this.state.password,
-      provinceIdx: this.state.provinceIdx,
-      cityIdx: this.state.cityIdx
+      provinceId: this.state.provinceId,
+      cityId: this.state.cityId
     };
 
-    this.showSnackbarMessage(
-      "Na konto email została wysłana wiadomość aktywacyjna"
-    );
-    registerUser(userData);
+    registerUser(userData)
+      .then(data =>
+        this.showSnackbarMessage(
+          "Na konto email została wysłana wiadomość aktywacyjna"
+        )
+      )
+      .catch(err => this.showSnackbarMessage(err.message));
     this.props.onCancel();
   };
 
@@ -167,7 +170,7 @@ class SignInForm extends React.Component {
               >
                 <InputLabel htmlFor="name-simple">Województwo</InputLabel>
                 <Select
-                  value={this.state.provinceIdx}
+                  value={this.state.provinceId}
                   onChange={this.handleProvinceChange}
                   input={<Input id="name-simple" />}
                 >
@@ -188,12 +191,12 @@ class SignInForm extends React.Component {
                 <InputLabel htmlFor="name-simple">Miasto</InputLabel>
                 <Select
                   disabled={this.state.cityDisabled}
-                  value={this.state.cityIdx}
+                  value={this.state.cityId}
                   onChange={this.handleCityChange}
                   input={<Input id="name-simple2" />}
                 >
                   {this.props.cities
-                    .filter(city => city.provinceId === this.state.provinceIdx)
+                    .filter(city => city.provinceId === this.state.provinceId)
                     .map((city, idx) => {
                       return (
                         <MenuItem value={city.id} key={city.id}>

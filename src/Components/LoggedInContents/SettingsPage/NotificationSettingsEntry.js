@@ -3,7 +3,8 @@ import {
   Button,
   Checkbox,
   Typography,
-  FormControlLabel
+  FormControlLabel,
+  Collapse
 } from "@material-ui/core";
 import PageEntry from "../../Common/PageEntry";
 import NotificationDialog from "./NotificationDialog";
@@ -49,12 +50,14 @@ export default class NotificationSettingsEntry extends React.Component {
         }
         loading={this.props.loading}
       >
-        {this.props.userNotifications.length > 0 && (
-          <NotificationList
-            notificationArray={this.props.userNotifications}
-            handleDelete={this.deleteNotification}
-          />
-        )}
+        <Collapse in={!this.props.loading}>
+          {this.props.userNotifications.length > 0 && (
+            <NotificationList
+              notificationArray={this.props.userNotifications}
+              handleDelete={this.deleteNotification}
+            />
+          )}
+        </Collapse>
         <div>
           <FormControlLabel
             control={

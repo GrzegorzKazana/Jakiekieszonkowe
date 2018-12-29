@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Grid } from "@material-ui/core";
+import { Button, Grid, Collapse } from "@material-ui/core";
 import PageEntry from "../../Common/PageEntry";
 import KidsExpandableCard from "./KidsExpandableCard";
 import Add from "@material-ui/icons/Add";
@@ -38,10 +38,12 @@ export default class KidsSummaryEntry extends React.Component {
   };
 
   submitDialog = data => {
+    this.setState({ expanded: null });
     this.props.onAddKid(data);
   };
 
   submitEditDialog = data => {
+    this.setState({ expanded: null });
     this.props.onEditKid(data, this.props.userKids[this.state.expanded].id);
   };
 
@@ -70,23 +72,24 @@ export default class KidsSummaryEntry extends React.Component {
     return (
       <PageEntry title="Wypłacane kieszonkowe" loading={this.props.loading}>
         <div style={{ margin: "15px 0px 0px 0px" }}>
-          {userKids.map((kid, idx) => {
-            return (
-              <KidsExpandableCard
-                key={idx}
-                id={idx}
-                isExpanded={this.state.expanded === idx}
-                handleChange={this.handleExpandChange}
-                onDeleteKid={this.handleDeleteKid}
-                onEditKid={this.openEditDialog}
-                kidInfo={kid}
-                moneyIncludes={this.props.moneyIncludes}
-                paymentPeriods={this.props.paymentPeriods}
-                schoolTypes={this.props.schoolTypes}
-              />
-            );
-          })}
-
+          <Collapse in={!this.props.loading}>
+            {userKids.map((kid, idx) => {
+              return (
+                <KidsExpandableCard
+                  key={idx}
+                  id={idx}
+                  isExpanded={this.state.expanded === idx}
+                  handleChange={this.handleExpandChange}
+                  onDeleteKid={this.handleDeleteKid}
+                  onEditKid={this.openEditDialog}
+                  kidInfo={kid}
+                  moneyIncludes={this.props.moneyIncludes}
+                  paymentPeriods={this.props.paymentPeriods}
+                  schoolTypes={this.props.schoolTypes}
+                />
+              );
+            })}
+          </Collapse>
           <Grid
             container
             direction="row"

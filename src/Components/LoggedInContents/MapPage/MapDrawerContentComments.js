@@ -7,6 +7,7 @@ import {
   LinearProgress
 } from "@material-ui/core";
 import { Person, Star, StarBorder, Send } from "@material-ui/icons";
+import CollapsingList from "../../Common/CollapsingList";
 
 const CommentComponent = props => (
   <div style={{ padding: "0px 4px" }}>
@@ -121,15 +122,17 @@ class MapDrawerContentComments extends React.Component {
           Komentarze
         </Typography>
         <Divider style={{ margin: "16px" }} />
-        {this.props.comments.map((comment, idx) => (
-          <div key={idx}>
-            <CommentComponent
-              comment={comment}
-              onCommentUpvoteChange={this.props.onCommentUpvoteChange}
-            />
-            <Divider />
-          </div>
-        ))}
+        <CollapsingList>
+          {this.props.comments.map((comment, idx) => (
+            <div key={idx}>
+              <CommentComponent
+                comment={comment}
+                onCommentUpvoteChange={this.props.onCommentUpvoteChange}
+              />
+              <Divider />
+            </div>
+          ))}
+        </CollapsingList>
         <CommentInput onCommentPost={this.props.onCommentPost} />
       </div>
     );

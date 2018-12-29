@@ -15,7 +15,6 @@ export default class KidsSummaryEntry extends React.Component {
   };
 
   openDialog = e => {
-    console.log(this.state);
     this.setState({ dialogFormOpen: true, dialogEditMode: false });
   };
 

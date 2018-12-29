@@ -9,7 +9,6 @@ const mapStateToProps = state => ({
 });
 class NewsPage extends React.Component {
   render() {
-    console.log(this.props.style);
     return (
       <Page style={this.props.style}>
         <NewsEntry lastLogInDate={this.props.userData.accountLastLogInDate} />

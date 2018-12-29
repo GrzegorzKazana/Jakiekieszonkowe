@@ -40,7 +40,7 @@ export default class NavBar extends React.Component {
       <AppBar position="static">
         <Toolbar>
           <Typography
-            variant="title"
+            variant="h6"
             color="inherit"
             style={{ flex: 1, display: "flex", flexDirection: "row" }}
           >

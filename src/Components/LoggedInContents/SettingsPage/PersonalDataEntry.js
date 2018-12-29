@@ -43,7 +43,7 @@ export default class PersonalDataEntry extends React.Component {
             <TableBody>
               <TableRow>
                 <TableCell>
-                  <Typography variant="subheading">Kraj:</Typography>
+                  <Typography variant="subtitle1">Kraj:</Typography>
                 </TableCell>
                 <TableCell numeric>
                   <Typography variant="h6">{userData.country}</Typography>
@@ -51,7 +51,7 @@ export default class PersonalDataEntry extends React.Component {
               </TableRow>
               <TableRow>
                 <TableCell>
-                  <Typography variant="subheading">Wojewódźtwo:</Typography>
+                  <Typography variant="subtitle1">Wojewódźtwo:</Typography>
                 </TableCell>
                 <TableCell numeric>
                   <Typography variant="h6">{userData.province}</Typography>
@@ -59,7 +59,7 @@ export default class PersonalDataEntry extends React.Component {
               </TableRow>
               <TableRow>
                 <TableCell>
-                  <Typography variant="subheading">Miasto:</Typography>
+                  <Typography variant="subtitle1">Miasto:</Typography>
                 </TableCell>
                 <TableCell numeric>
                   <Typography variant="h6">{userData.city}</Typography>

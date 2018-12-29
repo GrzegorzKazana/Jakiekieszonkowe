@@ -1,12 +1,5 @@
-import React, { Component } from "react";
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  IconButton,
-  Tabs,
-  Tab
-} from "@material-ui/core";
+import React from "react";
+import { AppBar, Toolbar, Typography, IconButton } from "@material-ui/core";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MainMenu from "./MainMenuAdmin";
 
@@ -37,7 +30,7 @@ export default class NavBarAdmin extends React.Component {
       <AppBar position="static">
         <Toolbar>
           <Typography
-            variant="title"
+            variant="h6"
             color="inherit"
             style={{ flex: 1, display: "flex", flexDirection: "row" }}
           >

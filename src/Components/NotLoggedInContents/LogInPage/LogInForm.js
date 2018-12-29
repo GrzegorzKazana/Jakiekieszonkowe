@@ -70,7 +70,6 @@ class LogInForm extends React.Component {
       return;
     }
     this.props.dispatch(requestUserValidation());
-    console.log(user);
     validateUserApiCall(user.email, user.password)
       .then(data =>
         this.props.dispatch(

@@ -43,7 +43,7 @@ export default class SettingsEntry extends React.Component {
             <TableBody>
               <TableRow>
                 <TableCell>
-                  <Typography variant="subheading">Adres e-mail:</Typography>
+                  <Typography variant="subtitle1">Adres e-mail:</Typography>
                 </TableCell>
                 <TableCell numeric>
                   <Typography variant="h6">{userData.email}</Typography>
@@ -51,7 +51,7 @@ export default class SettingsEntry extends React.Component {
               </TableRow>
               <TableRow>
                 <TableCell>
-                  <Typography variant="subheading">Hasło:</Typography>
+                  <Typography variant="subtitle1">Hasło:</Typography>
                 </TableCell>
                 <TableCell numeric>
                   <Typography variant="h6">********</Typography>
@@ -59,7 +59,7 @@ export default class SettingsEntry extends React.Component {
               </TableRow>
               <TableRow>
                 <TableCell>
-                  <Typography variant="subheading">
+                  <Typography variant="subtitle1">
                     Data założenia konta:
                   </Typography>
                 </TableCell>

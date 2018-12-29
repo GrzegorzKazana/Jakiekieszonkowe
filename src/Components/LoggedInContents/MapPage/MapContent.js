@@ -112,7 +112,6 @@ export default class MapContent extends React.Component {
   };
 
   render() {
-    const { provinceData } = this.props;
     const { cityData } = this.props;
     const position = [this.state.lat, this.state.lng];
     return (

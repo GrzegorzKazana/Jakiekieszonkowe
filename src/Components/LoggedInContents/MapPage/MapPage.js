@@ -402,7 +402,6 @@ class MapPage extends React.Component {
             position: "absolute",
             top: "8px",
             right: "8px",
-            minWidth: "20%",
             minWidth: "256px",
             zIndex: "999"
           }}

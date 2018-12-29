@@ -1,12 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   Paper,
   List,
   ListItem,
   ListItemText,
   ListItemSecondaryAction,
-  IconButton,
-  Divider
+  IconButton
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 

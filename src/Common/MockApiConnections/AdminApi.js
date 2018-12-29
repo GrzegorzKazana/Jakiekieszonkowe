@@ -1,4 +1,4 @@
-const API_DELAY = 1000;
+// const API_DELAY = 1000;
 
 export const dictionaryChange = data => {
   console.log(data);

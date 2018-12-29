@@ -240,6 +240,13 @@ export const getCityBasicStats = (provId, useParams, params) =>
             }
           };
           break;
+        default:
+          data = {
+            cityData: {
+              list: []
+            }
+          };
+          break;
       }
       resolve(data);
     }, API_DELAY)

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Menu, MenuItem, Divider } from "@material-ui/core";
 
 export default class MainMenuAdmin extends React.Component {

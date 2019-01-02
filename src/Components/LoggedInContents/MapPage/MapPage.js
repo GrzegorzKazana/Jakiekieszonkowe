@@ -17,6 +17,7 @@ import {
   addComment,
   toggleCommentUpvote
 } from "../../../Common/MockApiConnections/CommentsApi";
+import { getComments as getCommentsRealApi } from "../../../Common/RealApiConnections/CommentsApi";
 import { connect } from "react-redux";
 
 const mapStateToProps = state => ({
@@ -242,12 +243,13 @@ class MapPage extends React.Component {
   };
 
   fetchComments = () => {
-    getComments(this.state.selectedProvinceId, this.state.selectedCityId)
+    getCommentsRealApi(this.state.selectedProvinceId, this.state.selectedCityId)
       .then(data =>
         this.setState({ comments: data.list, commentsFetching: false })
       )
       .catch(err => {
         console.log("failed to fetch comments");
+        console.log(err);
         this.setState({ commentsFetching: false, comments: [] });
       });
   };

@@ -25,7 +25,6 @@ const API_DELAY = 1000;
  * }
  */
 export const getCountryBasicStats = (useParams, params) => {
-  console.log(useParams, params);
   return new Promise((resolve, reject) =>
     setTimeout(function() {
       resolve({

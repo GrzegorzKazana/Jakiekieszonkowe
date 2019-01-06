@@ -187,6 +187,7 @@ export const addKid = kid => {
     kidList.reduce((prev, curr) => (prev.id > curr.id ? prev : curr)).id + 1;
   kid.prevPaymentDate = "--------";
   kid.nextPaymentDate = "--------";
+  kid.age = 1;
   console.log(kid);
   kidList = kidList.concat(kid);
   return new Promise((resolve, reject) =>

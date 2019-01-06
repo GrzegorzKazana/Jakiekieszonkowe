@@ -32,7 +32,7 @@ class KidsFormDialog extends React.Component {
       this.state = {
         underValidation: false,
         name: "",
-        age: "",
+        dateOfBirth: "",
         schoolTypeId: "",
         quota: "",
         paymentPeriodId: "",
@@ -92,7 +92,7 @@ class KidsFormDialog extends React.Component {
     if (!Object.values(this.state).some(o => o === "")) {
       const child = {
         name: this.state.name,
-        age: this.state.age,
+        dateOfBirth: this.state.dateOfBirth,
         schoolTypeId: this.state.schoolTypeId,
         quota: this.state.quota,
         paymentPeriodId: this.state.paymentPeriodId,
@@ -124,16 +124,32 @@ class KidsFormDialog extends React.Component {
       </FormControl>
     );
 
+    // const ageForm = (
+    //   <FormControl style={{ width: "32%", margin: "auto" }}>
+    //     <TextField
+    //       id="standard-with-placeholder"
+    //       label="Wiek"
+    //       type="number"
+    //       defaultValue={this.state.age}
+    //       placeholder="Wiek"
+    //       onChange={this.handleNumnericChange("age")}
+    //       error={this.state.underValidation && this.state.age === ""}
+    //     />
+    //   </FormControl>
+    // );
+
     const ageForm = (
-      <FormControl style={{ width: "32%", margin: "auto" }}>
+      <FormControl style={{ width: "32%", margin: "auto " }}>
         <TextField
-          id="standard-with-placeholder"
-          label="Wiek"
-          type="number"
-          defaultValue={this.state.age}
-          placeholder="Wiek"
-          onChange={this.handleNumnericChange("age")}
-          error={this.state.underValidation && this.state.age === ""}
+          id="birthDate"
+          label="Data urodzin"
+          value={this.state.dateOfBirth}
+          onChange={this.handleChange("dateOfBirth")}
+          type="date"
+          error={this.state.underValidation && this.state.dateOfBirth === ""}
+          InputLabelProps={{
+            shrink: true
+          }}
         />
       </FormControl>
     );

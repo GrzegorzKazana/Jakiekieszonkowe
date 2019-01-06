@@ -84,7 +84,9 @@ class LogInForm extends React.Component {
       )
       .catch(err => {
         this.props.dispatch(requestUserValidationFailed());
-        this.props.dispatch(displaySnackbarMessage(err.message));
+        this.props.dispatch(
+          displaySnackbarMessage(err.message || "Nastąpił błąd")
+        );
       });
   };
 

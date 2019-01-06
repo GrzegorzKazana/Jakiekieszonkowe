@@ -114,12 +114,8 @@ class SignInForm extends React.Component {
     };
 
     registerUser(userData)
-      .then(data =>
-        this.showSnackbarMessage(
-          "Na konto email została wysłana wiadomość aktywacyjna"
-        )
-      )
-      .catch(err => this.showSnackbarMessage(err.message));
+      .then(data => this.showSnackbarMessage("Konto zostało aktywowane"))
+      .catch(err => this.showSnackbarMessage(err.message || "Nastąpił błąd"));
     this.props.onCancel();
   };
 

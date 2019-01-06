@@ -24,20 +24,12 @@
  *    ]
  * }
  */
-const baseUrl = "http://localhost:8080/";
-const esc = encodeURIComponent;
-const stringifyRequest = (url, params) =>
-  `${url}?${Object.keys(params)
-    .map(k => esc(k) + "=" + esc(params[k]))
-    .join("&")}`;
-
-// export const getComments = (provinceId, cityId) =>
-//   new Promise((resolve, reject) =>
-//     fetch(stringifyRequest(baseUrl + "endpoint", { provinceId, cityId }))
-//       .then(res => res.json())
-//       .then(json => resolve(json))
-//       .catch(err => reject(err))
-//   );
+// const baseUrl = "http://localhost:8080/";
+// const esc = encodeURIComponent;
+// const stringifyRequest = (url, params) =>
+//   `${url}?${Object.keys(params)
+//     .map(k => esc(k) + "=" + esc(params[k]))
+//     .join("&")}`;
 
 export const getComments = (provinceId, cityId) =>
   new Promise((resolve, reject) =>
@@ -45,7 +37,7 @@ export const getComments = (provinceId, cityId) =>
       "http://localhost:8080/api/comments/GetCommentsByProvinceAndCity?id_province=53&id_city=2"
     )
       .then(res => res.json())
-      .then(json => resolve(json))
+      .then(json => (json.success ? resolve(json) : reject(json)))
       .catch(err => reject(err))
   );
 
@@ -61,24 +53,15 @@ export const getComments = (provinceId, cityId) =>
  * RESPONSE:
  * just like getComments
  */
-// export const addComment = (provId, cityId, comment) => {
-//   const nextId =
-//     comments.list.reduce((prev, curr) => (prev.id > curr.id ? prev : curr)).id +
-//     1;
-//   comments.list = comments.list.concat({
-//     ...comment,
-//     id: nextId,
-//     author: "user",
-//     upvotes: 0,
-//     liked: false
-//   });
-//   console.log(comments);
-//   return new Promise((resolve, reject) =>
-//     setTimeout(function() {
-//       resolve(comments);
-//     }, API_DELAY)
-//   );
-// };
+export const addComment = (provId, cityId, comment) =>
+  new Promise((resolve, reject) =>
+    fetch(
+      "http://localhost:8080/api/comments/AddComment?provinceId=1&cityId=1&userId=1"
+    )
+      .then(res => res.json())
+      .then(json => (json.success ? resolve(json) : reject(json)))
+      .catch(err => reject(err))
+  );
 
 /**
  * REQUEST:
@@ -90,15 +73,12 @@ export const getComments = (provinceId, cityId) =>
  * RESPONSE:
  * just like getComments
  */
-// export const toggleCommentUpvote = (commentId, liked) => {
-//   comments.list = comments.list.map(c =>
-//     c.id !== commentId
-//       ? c
-//       : { ...c, liked, upvotes: c.upvotes + (liked ? 1 : -1) }
-//   );
-//   return new Promise((resolve, reject) =>
-//     setTimeout(function() {
-//       resolve(comments);
-//     }, API_DELAY)
-//   );
-// };
+export const toggleCommentUpvote = (commentId, liked) =>
+  new Promise((resolve, reject) =>
+    fetch(
+      "http://localhost:8080/api/comments/AddComment?provinceId=1&cityId=1&userId=1"
+    )
+      .then(res => res.json())
+      .then(json => (json.success ? resolve(json) : reject(json)))
+      .catch(err => reject(err))
+  );

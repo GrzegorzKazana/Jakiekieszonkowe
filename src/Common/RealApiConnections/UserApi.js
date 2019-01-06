@@ -1,4 +1,4 @@
-import { stringifyRequest, baseUrl } from "./Helpers";
+import { stringifyRequest, baseUrl, excludeKeyFromObject } from "./Helpers";
 /**
  * REQUEST:
  * {
@@ -125,7 +125,12 @@ export const registerUser = user =>
 const addKidEndpoint = "api/user/AddChild";
 export const addKid = (kid, token) =>
   new Promise((resolve, reject) =>
-    fetch(stringifyRequest(baseUrl, addKidEndpoint, { ...kid, token }))
+    fetch(
+      stringifyRequest(baseUrl, addKidEndpoint, {
+        ...excludeKeyFromObject(kid, "provinceId"),
+        token
+      })
+    )
       .then(res => res.json())
       .then(json => (json.success ? resolve(json) : reject(json)))
       .catch(err => reject(err))
@@ -155,7 +160,7 @@ export const editKid = (kid, kidIdx, token) =>
     fetch(
       stringifyRequest(baseUrl, editKidEndpoint, {
         childId: kidIdx,
-        ...kid,
+        ...excludeKeyFromObject(kid, "provinceId"),
         token
       })
     )

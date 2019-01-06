@@ -27,6 +27,10 @@ export const requestChangeUserData = () => ({
   type: "REQUEST_CHANGE_USER_DATA"
 });
 
+export const requestChangeUserDataFailed = () => ({
+  type: "REQUEST_CHANGE_USER_DATA_FAILED"
+});
+
 export const changeUserData = userData => ({
   type: "CHANGE_USER_DATA",
   userData
@@ -37,12 +41,21 @@ export const updateKidList = kidList => ({
   kidList
 });
 
+export const updateKidListFailed = kidList => ({
+  type: "USER_UPDATE_KID_LIST_FAILED",
+  kidList
+});
+
 export const requestUpdateKidList = () => ({
   type: "REQUEST_UPDATE_KID_LIST"
 });
 
 export const requestUpdateNotificationList = () => ({
   type: "REQUEST_USER_UPDATE_NOTIFICATION_LIST"
+});
+
+export const requestUpdateNotificationListFailed = () => ({
+  type: "REQUEST_USER_UPDATE_NOTIFICATION_LIST_FAILED"
 });
 
 export const updateNotificationList = notificationList => ({

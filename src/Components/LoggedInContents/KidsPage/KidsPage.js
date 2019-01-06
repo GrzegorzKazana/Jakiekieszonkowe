@@ -6,7 +6,8 @@ import { connect } from "react-redux";
 import { displaySnackbarMessage } from "../../../Actions/InfoSnackbarActions";
 import {
   updateKidList,
-  requestUpdateKidList
+  requestUpdateKidList,
+  updateKidListFailed
 } from "../../../Actions/UserInfoActions";
 import {
   addKid as addKidNotifyApi,
@@ -32,11 +33,12 @@ class KidsPage extends React.Component {
     // addKidNotifyApi(kid, this.props.token)
     addKidNotifyRealApi(kid, this.props.token)
       .then(response => this.props.dispatch(updateKidList(response.list)))
-      .catch(err =>
+      .catch(err => {
         this.props.dispatch(
           displaySnackbarMessage(err.message || "Operacja nie powiodła się")
-        )
-      );
+        );
+        this.props.dispatch(updateKidListFailed());
+      });
   };
 
   handleDeleteKid = kidIdx => {
@@ -45,11 +47,12 @@ class KidsPage extends React.Component {
     // deleteKidNotifyApi(kidIdx, this.props.token)
     deleteKidNotifyRealApi(kidIdx, this.props.token)
       .then(response => this.props.dispatch(updateKidList(response.list)))
-      .catch(err =>
+      .catch(err => {
         this.props.dispatch(
           displaySnackbarMessage(err.message || "Operacja nie powiodła się")
-        )
-      );
+        );
+        this.props.dispatch(updateKidListFailed());
+      });
   };
 
   handleEditKid = (kid, kidIdx) => {
@@ -58,11 +61,12 @@ class KidsPage extends React.Component {
     // editKidNotifyApi(kid, kidIdx, this.props.token)
     editKidNotifyRealApi(kid, kidIdx, this.props.token)
       .then(response => this.props.dispatch(updateKidList(response.list)))
-      .catch(err =>
+      .catch(err => {
         this.props.dispatch(
           displaySnackbarMessage(err.message || "Operacja nie powiodła się")
-        )
-      );
+        );
+        this.props.dispatch(updateKidListFailed());
+      });
   };
 
   render() {

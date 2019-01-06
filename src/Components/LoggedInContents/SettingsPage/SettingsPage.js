@@ -6,9 +6,11 @@ import NotificationSettingsEntry from "./NotificationSettingsEntry";
 import {
   requestChangeUserData,
   changeUserData,
+  requestChangeUserDataFailed,
   updateNotificationList,
-  changeMetaNotification,
-  requestUpdateNotificationList
+  requestUpdateNotificationList,
+  requestUpdateNotificationListFailed,
+  changeMetaNotification
 } from "../../../Actions/UserInfoActions";
 import { displaySnackbarMessage } from "../../../Actions/InfoSnackbarActions";
 import {
@@ -65,13 +67,14 @@ class SettingsPage extends React.Component {
     // changeUserDataNotifyApi(data, this.props.token)
     changeUserDataNotifyRealApi(data, this.props.token)
       .then(data => this.props.dispatch(changeUserData(data)))
-      .catch(err =>
+      .catch(err => {
         this.props.dispatch(
           displaySnackbarMessage(
             err.message || "Zmiana danych nie powiodła się"
           )
-        )
-      );
+        );
+        this.props.dispatch(requestChangeUserDataFailed());
+      });
   };
 
   handleAddNotification = data => {
@@ -80,13 +83,14 @@ class SettingsPage extends React.Component {
     // addNotificationNotifyApi(data, this.props.token)
     addNotificationNotifyRealApi(data, this.props.token)
       .then(data => this.props.dispatch(updateNotificationList(data.list)))
-      .catch(err =>
+      .catch(err => {
         this.props.dispatch(
           displaySnackbarMessage(
             err.message || "Dodanie powiadomienia nie powiodła się"
           )
-        )
-      );
+        );
+        this.props.dispatch(requestUpdateNotificationListFailed());
+      });
   };
 
   handleDeleteNotification = idx => {
@@ -95,13 +99,14 @@ class SettingsPage extends React.Component {
     // deleteNotificationNotifyApi(idx, this.props.token)
     deleteNotificationNotifyRealApi(idx, this.props.token)
       .then(data => this.props.dispatch(updateNotificationList(data.list)))
-      .catch(err =>
+      .catch(err => {
         this.props.dispatch(
           displaySnackbarMessage(
             err.message || "Usunięcie powiadomienia nie powiodła się"
           )
-        )
-      );
+        );
+        this.props.dispatch(requestUpdateNotificationListFailed());
+      });
   };
 
   handleToggleMetaNotification = isSubscribed => {

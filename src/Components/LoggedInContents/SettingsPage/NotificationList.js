@@ -22,7 +22,7 @@ export default class NotificationList extends React.Component {
               <ListItem key={idx} divider={idx !== lastElementId}>
                 <ListItemText primary={notif.name} />
                 <ListItemText
-                  primary={notif.notificationOverLap + " dzień/dni"}
+                  primary={notif.notificationOverlap + " dzień/dni"}
                 />
                 <ListItemSecondaryAction>
                   <IconButton

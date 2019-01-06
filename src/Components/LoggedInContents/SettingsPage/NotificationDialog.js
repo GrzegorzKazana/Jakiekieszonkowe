@@ -17,7 +17,7 @@ export default class NotificationDialog extends React.Component {
     super(props);
     this.state = {
       kidId: "",
-      notificationOverLap: "",
+      notificationOverlap: "",
       underValidation: false
     };
   }
@@ -31,7 +31,7 @@ export default class NotificationDialog extends React.Component {
     if (!Object.values(this.state).some(o => o === "")) {
       const notification = {
         kidId: this.state.kidId,
-        notificationOverLap: this.state.notificationOverLap
+        notificationOverlap: this.state.notificationOverlap
       };
       this.props.handleSubmit(notification);
     }
@@ -75,15 +75,15 @@ export default class NotificationDialog extends React.Component {
               style={{ minWidth: 200, margin: 5 }}
               error={
                 this.state.underValidation &&
-                this.state.notificationOverLap === ""
+                this.state.notificationOverlap === ""
               }
             >
               <InputLabel htmlFor="overlap-simple">
                 Wyprzedzenie (dni)
               </InputLabel>
               <Select
-                value={this.state.notificationOverLap}
-                onChange={this.handleChange("notificationOverLap")}
+                value={this.state.notificationOverlap}
+                onChange={this.handleChange("notificationOverlap")}
                 input={<Input id="overlap-simple" />}
               >
                 <MenuItem value={0}>0</MenuItem>

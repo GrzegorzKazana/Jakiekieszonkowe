@@ -149,7 +149,7 @@ export const addKid = (kid, token) =>
  * RESPONSE:
  * just like addKid
  */
-const editKidEndpoint = "api/user/Edithild";
+const editKidEndpoint = "api/user/EditChild";
 export const editKid = (kid, kidIdx, token) =>
   new Promise((resolve, reject) =>
     fetch(
@@ -173,7 +173,7 @@ export const editKid = (kid, kidIdx, token) =>
  * RESPONSE:
  * just like addKid
  */
-const deleteKidEndpoint = "api/user/Edithild";
+const deleteKidEndpoint = "api/user/DeleteChild";
 export const deleteKid = (kidIdx, token) =>
   new Promise((resolve, reject) =>
     fetch(

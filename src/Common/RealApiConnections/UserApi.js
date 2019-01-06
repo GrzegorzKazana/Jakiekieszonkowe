@@ -119,7 +119,7 @@ export const registerUser = user =>
 const addKidEndpoint = "api/user/AddChild";
 export const addKid = kid =>
   new Promise((resolve, reject) =>
-    fetch(stringifyRequest(baseUrl, addKidEndpoint, { email, password }))
+    fetch(stringifyRequest(baseUrl, addKidEndpoint, { ...kid }))
       .then(res => res.json())
       .then(json => (json.success ? resolve(json) : reject(json)))
       .catch(err => reject(err))
@@ -143,19 +143,16 @@ export const addKid = kid =>
  * RESPONSE:
  * just like addKid
  */
-export const editKid = (kid, kidIdx) => {
-  console.log(kidIdx);
-  console.log(kid);
-  kid.prevPaymentDate = "--------";
-  kid.nextPaymentDate = "--------";
-  kid.id = kidIdx;
-  kidList = kidList.map(k => (k.id === kidIdx ? kid : k));
-  return new Promise((resolve, reject) =>
-    setTimeout(function() {
-      resolve({ kids: kidList });
-    }, API_DELAY)
+const editKidEndpoint = "api/user/Edithild";
+export const editKid = (kid, kidIdx) =>
+  new Promise((resolve, reject) =>
+    fetch(
+      stringifyRequest(baseUrl, editKidEndpoint, { childId: kidIdx, ...kid })
+    )
+      .then(res => res.json())
+      .then(json => (json.success ? resolve(json) : reject(json)))
+      .catch(err => reject(err))
   );
-};
 
 /**
  * REQUEST:
@@ -166,15 +163,14 @@ export const editKid = (kid, kidIdx) => {
  * RESPONSE:
  * just like addKid
  */
-export const deleteKid = kidIdx => {
-  console.log(kidIdx);
-  kidList = kidList.filter(k => k.id !== kidIdx);
-  return new Promise((resolve, reject) =>
-    setTimeout(function() {
-      resolve({ kids: kidList });
-    }, API_DELAY)
+const deleteKidEndpoint = "api/user/Edithild";
+export const deleteKid = kidIdx =>
+  new Promise((resolve, reject) =>
+    fetch(stringifyRequest(baseUrl, deleteKidEndpoint, { childId: kidIdx }))
+      .then(res => res.json())
+      .then(json => (json.success ? resolve(json) : reject(json)))
+      .catch(err => reject(err))
   );
-};
 
 /**
  * REQUEST:
@@ -188,23 +184,14 @@ export const deleteKid = kidIdx => {
  *    message: string (empty or error message)
  * }
  */
-export const changePassword = (oldPassword, newPassword) => {
-  console.log(oldPassword, newPassword);
-  if (oldPassword === userPass) {
-    userPass = newPassword;
-    return new Promise((resolve, reject) =>
-      setTimeout(function() {
-        resolve({ success: true });
-      }, API_DELAY)
-    );
-  } else {
-    return new Promise((resolve, reject) =>
-      setTimeout(function() {
-        reject({ success: false, message: "Niepoprawne stare hasło" });
-      }, API_DELAY)
-    );
-  }
-};
+const changePasswordEndpoint = "api/user/ChangePassword";
+export const changePassword = (oldPassword, newPassword) =>
+  new Promise((resolve, reject) =>
+    fetch(stringifyRequest(baseUrl, changePasswordEndpoint, { newPassword }))
+      .then(res => res.json())
+      .then(json => (json.success ? resolve(json) : reject(json)))
+      .catch(err => reject(err))
+  );
 
 /**
  * REQUEST (province and city is only needed for mockup, to be removed):
@@ -229,19 +216,16 @@ export const changePassword = (oldPassword, newPassword) => {
  *    city: string
  * }
  */
-export const changeUserData = data => {
-  console.log(data);
-  const oldUserData = userData(userEmail, userPass);
-  userData = () => ({
-    ...oldUserData,
-    ...data
-  });
-  return new Promise((resolve, reject) =>
-    setTimeout(function() {
-      resolve(userData(userEmail, userPass));
-    }, API_DELAY)
+const changeUserDataEndpoint = "api/user/ChangeUserData";
+export const changeUserData = data =>
+  new Promise((resolve, reject) =>
+    fetch(
+      stringifyRequest(baseUrl, changeUserDataEndpoint, { cityId: data.cityId })
+    )
+      .then(res => res.json())
+      .then(json => (json.success ? resolve(json) : reject(json)))
+      .catch(err => reject(err))
   );
-};
 
 /**
  * REQUEST:
@@ -262,21 +246,19 @@ export const changeUserData = data => {
  *    ]
  * }
  */
-export const addNotification = data => {
-  console.log(data);
-  const newId =
-    notificationList.reduce((prev, curr) => (prev.id > curr.id ? prev : curr), {
-      id: 0
-    }).id + 1;
-  notificationList = notificationList.concat({ ...data, id: newId });
-  return new Promise((resolve, reject) =>
-    setTimeout(function() {
-      resolve({
-        list: notificationList.map(n => ({ ...n, name: "jakies dziecko" }))
-      });
-    }, API_DELAY)
+const addNotificationEndpoint = "api/user/AddNotification";
+export const addNotification = data =>
+  new Promise((resolve, reject) =>
+    fetch(
+      stringifyRequest(baseUrl, addNotificationEndpoint, {
+        childId: data.kidId,
+        notificationOverLap: data.notificationOverLap
+      })
+    )
+      .then(res => res.json())
+      .then(json => (json.success ? resolve(json) : reject(json)))
+      .catch(err => reject(err))
   );
-};
 
 /**
  * REQUEST:
@@ -287,17 +269,18 @@ export const addNotification = data => {
  * RESPONSE:
  * same as addNotification
  */
-export const deleteNotification = notificationId => {
-  console.log(notificationId);
-  notificationList = notificationList.filter(n => n.id !== notificationId);
-  return new Promise((resolve, reject) =>
-    setTimeout(function() {
-      resolve({
-        list: notificationList.map(n => ({ ...n, name: "jakies dziecko" }))
-      });
-    }, API_DELAY)
+const deleteNotificationEndpoint = "api/user/DeleteNotification";
+export const deleteNotification = notificationId =>
+  new Promise((resolve, reject) =>
+    fetch(
+      stringifyRequest(baseUrl, deleteNotificationEndpoint, {
+        notificationId
+      })
+    )
+      .then(res => res.json())
+      .then(json => (json.success ? resolve(json) : reject(json)))
+      .catch(err => reject(err))
   );
-};
 
 /**
  * REQUEST:
@@ -312,19 +295,15 @@ export const deleteNotification = notificationId => {
  *    userMetaNotification: boolean,
  * }
  */
-export const changeMetaNotification = isSubscribed => {
-  console.log("adding meta notification");
-  const oldResponse = response(userEmail, userPass);
-  response = () => ({
-    ...oldResponse,
-    userMetaNotification: isSubscribed
-  });
-  return new Promise((resolve, reject) =>
-    setTimeout(function() {
-      resolve({
-        success: true,
-        userMetaNotification: isSubscribed
-      });
-    }, API_DELAY)
+const changeMetaNotificationEndpoint = "api/user/ChangeMetaNotification";
+export const changeMetaNotification = isSubscribed =>
+  new Promise((resolve, reject) =>
+    fetch(
+      stringifyRequest(baseUrl, changeMetaNotificationEndpoint, {
+        isSubscribed
+      })
+    )
+      .then(res => res.json())
+      .then(json => (json.success ? resolve(json) : reject(json)))
+      .catch(err => reject(err))
   );
-};

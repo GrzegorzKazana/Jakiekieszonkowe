@@ -40,7 +40,9 @@ class SettingsPage extends React.Component {
         this.setState({ passwordChangeIssued: false });
       })
       .catch(err => {
-        this.props.dispatch(displaySnackbarMessage(err.message));
+        this.props.dispatch(
+          displaySnackbarMessage(err.message || "Zmiana hasła nie powiodła się")
+        );
         this.setState({ passwordChangeIssued: false });
       });
   };
@@ -50,7 +52,13 @@ class SettingsPage extends React.Component {
     this.props.dispatch(requestChangeUserData());
     changeUserDataNotifyApi(data)
       .then(data => this.props.dispatch(changeUserData(data)))
-      .catch(err => this.props.dispatch(displaySnackbarMessage(err.message)));
+      .catch(err =>
+        this.props.dispatch(
+          displaySnackbarMessage(
+            err.message || "Zmiana danych nie powiodła się"
+          )
+        )
+      );
   };
 
   handleAddNotification = data => {
@@ -58,7 +66,13 @@ class SettingsPage extends React.Component {
     this.props.dispatch(requestUpdateNotificationList());
     addNotificationNotifyApi(data)
       .then(data => this.props.dispatch(updateNotificationList(data.list)))
-      .catch(err => this.props.dispatch(displaySnackbarMessage(err.message)));
+      .catch(err =>
+        this.props.dispatch(
+          displaySnackbarMessage(
+            err.message || "Dodanie powiadomienia nie powiodła się"
+          )
+        )
+      );
   };
 
   handleDeleteNotification = idx => {
@@ -66,7 +80,13 @@ class SettingsPage extends React.Component {
     this.props.dispatch(requestUpdateNotificationList());
     deleteNotificationNotifyApi(idx)
       .then(data => this.props.dispatch(updateNotificationList(data.list)))
-      .catch(err => this.props.dispatch(displaySnackbarMessage(err.message)));
+      .catch(err =>
+        this.props.dispatch(
+          displaySnackbarMessage(
+            err.message || "Usunięcie powiadomienia nie powiodła się"
+          )
+        )
+      );
   };
 
   handleToggleMetaNotification = isSubscribed => {
@@ -78,7 +98,9 @@ class SettingsPage extends React.Component {
         this.setState({ metaNotificationChangeIssued: false });
       })
       .catch(err => {
-        this.props.dispatch(displaySnackbarMessage(err.message));
+        this.props.dispatch(
+          displaySnackbarMessage(err.message || "Operacja nie powiodła się")
+        );
         this.setState({ metaNotificationChangeIssued: false });
       });
   };

@@ -5,6 +5,7 @@ import DictionaryPage from "./DictionaryPage";
 import { connect } from "react-redux";
 import { logOut } from "../../Actions/UserInfoActions";
 import { logOutUser } from "../../Common/MockApiConnections/UserApi";
+import { logOutUser as logOutUserRealApi } from "../../Common/RealApiConnections/UserApi";
 
 const mapStateToProps = state => ({
   ...state.userInfo,
@@ -21,7 +22,8 @@ class AdminPanel extends React.Component {
 
   handleLogOut = () => {
     this.props.dispatch(logOut());
-    logOutUser(this.props.token);
+    // logOutUser(this.props.token);
+    logOutUserRealApi(this.props.token);
   };
 
   handlePageChange = selectedPageContent => {

@@ -13,6 +13,11 @@ import {
   editKid as editKidNotifyApi,
   deleteKid as deleteKidNotifyApi
 } from "../../../Common/MockApiConnections/UserApi";
+import {
+  addKid as addKidNotifyRealApi,
+  editKid as editKidNotifyRealApi,
+  deleteKid as deleteKidNotifyRealApi
+} from "../../../Common/RealApiConnections/UserApi";
 
 const mapStateToProps = state => ({
   ...state.userInfo,
@@ -24,8 +29,9 @@ class KidsPage extends React.Component {
   handleAddKid = kid => {
     // this.props.dispatch(addKid(kid));
     this.props.dispatch(requestUpdateKidList());
-    addKidNotifyApi(kid, this.props.token)
-      .then(response => this.props.dispatch(updateKidList(response.kids)))
+    // addKidNotifyApi(kid, this.props.token)
+    addKidNotifyRealApi(kid, this.props.token)
+      .then(response => this.props.dispatch(updateKidList(response.list)))
       .catch(err =>
         this.props.dispatch(
           displaySnackbarMessage(err.message || "Operacja nie powiodła się")
@@ -36,8 +42,9 @@ class KidsPage extends React.Component {
   handleDeleteKid = kidIdx => {
     // this.props.dispatch(deleteKid(kidIdx));
     this.props.dispatch(requestUpdateKidList());
-    deleteKidNotifyApi(kidIdx, this.props.token)
-      .then(response => this.props.dispatch(updateKidList(response.kids)))
+    // deleteKidNotifyApi(kidIdx, this.props.token)
+    deleteKidNotifyRealApi(kidIdx, this.props.token)
+      .then(response => this.props.dispatch(updateKidList(response.list)))
       .catch(err =>
         this.props.dispatch(
           displaySnackbarMessage(err.message || "Operacja nie powiodła się")
@@ -48,8 +55,9 @@ class KidsPage extends React.Component {
   handleEditKid = (kid, kidIdx) => {
     // this.props.dispatch(editKid(kid, kidIdx));
     this.props.dispatch(requestUpdateKidList());
-    editKidNotifyApi(kid, kidIdx, this.props.token)
-      .then(response => this.props.dispatch(updateKidList(response.kids)))
+    // editKidNotifyApi(kid, kidIdx, this.props.token)
+    editKidNotifyRealApi(kid, kidIdx, this.props.token)
+      .then(response => this.props.dispatch(updateKidList(response.list)))
       .catch(err =>
         this.props.dispatch(
           displaySnackbarMessage(err.message || "Operacja nie powiodła się")

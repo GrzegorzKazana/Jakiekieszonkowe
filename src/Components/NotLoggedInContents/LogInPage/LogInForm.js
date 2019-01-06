@@ -21,6 +21,7 @@ import {
   requestUserValidationFailed
 } from "../../../Actions/UserInfoActions";
 import { validateUserApiCall } from "../../../Common/MockApiConnections/UserApi";
+import { validateUserApiCall as validateUserApiCallRealApi } from "../../../Common/RealApiConnections/UserApi";
 
 const mapStateToProps = state => ({
   ...state.userInfo
@@ -70,16 +71,17 @@ class LogInForm extends React.Component {
       return;
     }
     this.props.dispatch(requestUserValidation());
-    validateUserApiCall(user.email, user.password)
+    // validateUserApiCall(user.email, user.password)
+    validateUserApiCallRealApi(user.email, user.password)
       .then(data =>
         this.props.dispatch(
           userValidated(
-            data.response.userData,
-            data.response.userKids,
-            data.response.userNotifications,
-            data.response.isAdmin,
-            data.response.userMetaNotification,
-            data.response.token
+            data.userData,
+            data.userKids,
+            data.userNotifications,
+            data.isAdmin,
+            data.userMetaNotification,
+            data.token
           )
         )
       )

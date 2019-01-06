@@ -115,9 +115,7 @@ export const validateUserApiCall = (email, pass) =>
     setTimeout(function() {
       (email === userEmail && pass === userPass) ||
       (email === adminEmail && pass === adminPass)
-        ? resolve({
-            response: response(email, pass)
-          })
+        ? resolve(response(email, pass))
         : reject({
             success: false,
             message: "Niepoprawne dane logowania"

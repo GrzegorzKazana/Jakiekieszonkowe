@@ -19,6 +19,7 @@ import {
 } from "../../../Common/InputValidation";
 import { displaySnackbarMessage } from "../../../Actions/InfoSnackbarActions";
 import { registerUser } from "../../../Common/MockApiConnections/UserApi";
+import { registerUser as registerUserRealApi } from "../../../Common/RealApiConnections/UserApi";
 import { connect } from "react-redux";
 
 const mapStateToProps = state => ({
@@ -113,7 +114,8 @@ class SignInForm extends React.Component {
       cityId: this.state.cityId
     };
 
-    registerUser(userData)
+    // registerUser(userData)
+    registerUserRealApi(userData)
       .then(data => this.showSnackbarMessage("Konto zostało aktywowane"))
       .catch(err => this.showSnackbarMessage(err.message || "Nastąpił błąd"));
     this.props.onCancel();

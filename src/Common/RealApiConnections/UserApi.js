@@ -75,7 +75,13 @@ export const validateUserApiCall = (email, password) =>
 const registerUserEndpoint = "api/user/RegisterUser";
 export const registerUser = user =>
   new Promise((resolve, reject) =>
-    fetch(stringifyRequest(baseUrl, registerUserEndpoint, { email, password }))
+    fetch(
+      stringifyRequest(baseUrl, registerUserEndpoint, {
+        email: user.email,
+        password: user.password,
+        cityId: user.cityId
+      })
+    )
       .then(res => res.json())
       .then(json => (json.success ? resolve(json) : reject(json)))
       .catch(err => reject(err))

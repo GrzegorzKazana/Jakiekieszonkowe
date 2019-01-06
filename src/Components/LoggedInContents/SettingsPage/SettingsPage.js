@@ -18,6 +18,13 @@ import {
   deleteNotification as deleteNotificationNotifyApi,
   changeMetaNotification as changeMetaNotificationNotifyApi
 } from "../../../Common/MockApiConnections/UserApi";
+import {
+  changePassword as changePasswordNotifyRealApi,
+  changeUserData as changeUserDataNotifyRealApi,
+  addNotification as addNotificationNotifyRealApi,
+  deleteNotification as deleteNotificationNotifyRealApi,
+  changeMetaNotification as changeMetaNotificationNotifyRealApi
+} from "../../../Common/RealApiConnections/UserApi";
 import { connect } from "react-redux";
 
 const mapStateToProps = state => ({
@@ -32,7 +39,8 @@ class SettingsPage extends React.Component {
   handlePasswordChange = data => {
     // this.props.dispatch(changePassword(data.newPassword));
     this.setState({ passwordChangeIssued: true });
-    changePasswordNotifyApi(
+    // changePasswordNotifyApi(
+    changePasswordNotifyRealApi(
       data.oldPassword,
       data.newPassword,
       this.props.token
@@ -54,7 +62,8 @@ class SettingsPage extends React.Component {
   handleUserDataChange = data => {
     // this.props.dispatch(changeUserData(data));
     this.props.dispatch(requestChangeUserData());
-    changeUserDataNotifyApi(data, this.props.token)
+    // changeUserDataNotifyApi(data, this.props.token)
+    changeUserDataNotifyRealApi(data, this.props.token)
       .then(data => this.props.dispatch(changeUserData(data)))
       .catch(err =>
         this.props.dispatch(
@@ -68,7 +77,8 @@ class SettingsPage extends React.Component {
   handleAddNotification = data => {
     // this.props.dispatch(addUserNotification(data));
     this.props.dispatch(requestUpdateNotificationList());
-    addNotificationNotifyApi(data, this.props.token)
+    // addNotificationNotifyApi(data, this.props.token)
+    addNotificationNotifyRealApi(data, this.props.token)
       .then(data => this.props.dispatch(updateNotificationList(data.list)))
       .catch(err =>
         this.props.dispatch(
@@ -82,7 +92,8 @@ class SettingsPage extends React.Component {
   handleDeleteNotification = idx => {
     // this.props.dispatch(deleteUserNotification(idx));
     this.props.dispatch(requestUpdateNotificationList());
-    deleteNotificationNotifyApi(idx, this.props.token)
+    // deleteNotificationNotifyApi(idx, this.props.token)
+    deleteNotificationNotifyRealApi(idx, this.props.token)
       .then(data => this.props.dispatch(updateNotificationList(data.list)))
       .catch(err =>
         this.props.dispatch(
@@ -96,7 +107,8 @@ class SettingsPage extends React.Component {
   handleToggleMetaNotification = isSubscribed => {
     // this.props.dispatch(deleteMetaNotification());
     this.setState({ metaNotificationChangeIssued: true });
-    changeMetaNotificationNotifyApi(isSubscribed, this.props.token)
+    // changeMetaNotificationNotifyApi(isSubscribed, this.props.token)
+    changeMetaNotificationNotifyRealApi(isSubscribed, this.props.token)
       .then(data => {
         this.props.dispatch(changeMetaNotification(data.userMetaNotification));
         this.setState({ metaNotificationChangeIssued: false });

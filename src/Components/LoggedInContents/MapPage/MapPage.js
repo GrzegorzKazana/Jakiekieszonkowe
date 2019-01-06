@@ -17,10 +17,10 @@ import {
   addComment,
   toggleCommentUpvote
 } from "../../../Common/MockApiConnections/CommentsApi";
-import {
-  getComments as getCommentsRealApi,
-  addComment as addCommentRealApi
-} from "../../../Common/RealApiConnections/CommentsApi";
+// import {
+//   getComments as getCommentsRealApi,
+//   addComment as addCommentRealApi
+// } from "../../../Common/RealApiConnections/CommentsApi";
 import { connect } from "react-redux";
 
 const mapStateToProps = state => ({
@@ -283,13 +283,9 @@ class MapPage extends React.Component {
   handleCommentPost = text => {
     // notify back end, and in return get new comment list
     this.setState({ commentsFetching: true });
-    addCommentRealApi(
-      this.state.selectedProvinceId,
-      this.state.selectedCityId,
-      {
-        content: text
-      }
-    )
+    addComment(this.state.selectedProvinceId, this.state.selectedCityId, {
+      content: text
+    })
       .then(data =>
         this.setState({ comments: data.list, commentsFetching: false })
       )

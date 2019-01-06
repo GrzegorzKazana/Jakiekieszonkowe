@@ -26,7 +26,11 @@ class KidsPage extends React.Component {
     this.props.dispatch(requestUpdateKidList());
     addKidNotifyApi(kid)
       .then(response => this.props.dispatch(updateKidList(response.kids)))
-      .catch(err => this.props.dispatch(displaySnackbarMessage(err.message)));
+      .catch(err =>
+        this.props.dispatch(
+          displaySnackbarMessage(err.message || "Operacja nie powiodła się")
+        )
+      );
   };
 
   handleDeleteKid = kidIdx => {
@@ -34,7 +38,11 @@ class KidsPage extends React.Component {
     this.props.dispatch(requestUpdateKidList());
     deleteKidNotifyApi(kidIdx)
       .then(response => this.props.dispatch(updateKidList(response.kids)))
-      .catch(err => this.props.dispatch(displaySnackbarMessage(err.message)));
+      .catch(err =>
+        this.props.dispatch(
+          displaySnackbarMessage(err.message || "Operacja nie powiodła się")
+        )
+      );
   };
 
   handleEditKid = (kid, kidIdx) => {
@@ -42,7 +50,11 @@ class KidsPage extends React.Component {
     this.props.dispatch(requestUpdateKidList());
     editKidNotifyApi(kid, kidIdx)
       .then(response => this.props.dispatch(updateKidList(response.kids)))
-      .catch(err => this.props.dispatch(displaySnackbarMessage(err.message)));
+      .catch(err =>
+        this.props.dispatch(
+          displaySnackbarMessage(err.message || "Operacja nie powiodła się")
+        )
+      );
   };
 
   render() {

@@ -78,7 +78,8 @@ class LogInForm extends React.Component {
             data.response.userKids,
             data.response.userNotifications,
             data.response.isAdmin,
-            data.response.userMetaNotification
+            data.response.userMetaNotification,
+            data.response.token
           )
         )
       )

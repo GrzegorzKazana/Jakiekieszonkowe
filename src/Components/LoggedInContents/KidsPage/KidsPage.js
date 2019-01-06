@@ -24,7 +24,7 @@ class KidsPage extends React.Component {
   handleAddKid = kid => {
     // this.props.dispatch(addKid(kid));
     this.props.dispatch(requestUpdateKidList());
-    addKidNotifyApi(kid)
+    addKidNotifyApi(kid, this.props.token)
       .then(response => this.props.dispatch(updateKidList(response.kids)))
       .catch(err =>
         this.props.dispatch(
@@ -36,7 +36,7 @@ class KidsPage extends React.Component {
   handleDeleteKid = kidIdx => {
     // this.props.dispatch(deleteKid(kidIdx));
     this.props.dispatch(requestUpdateKidList());
-    deleteKidNotifyApi(kidIdx)
+    deleteKidNotifyApi(kidIdx, this.props.token)
       .then(response => this.props.dispatch(updateKidList(response.kids)))
       .catch(err =>
         this.props.dispatch(
@@ -48,7 +48,7 @@ class KidsPage extends React.Component {
   handleEditKid = (kid, kidIdx) => {
     // this.props.dispatch(editKid(kid, kidIdx));
     this.props.dispatch(requestUpdateKidList());
-    editKidNotifyApi(kid, kidIdx)
+    editKidNotifyApi(kid, kidIdx, this.props.token)
       .then(response => this.props.dispatch(updateKidList(response.kids)))
       .catch(err =>
         this.props.dispatch(

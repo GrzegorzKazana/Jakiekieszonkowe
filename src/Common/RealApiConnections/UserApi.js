@@ -1,4 +1,4 @@
-import { Helpers } from "./Helpers";
+import { stringifyRequest, baseUrl } from "./Helpers";
 /**
  * REQUEST:
  * {
@@ -117,9 +117,9 @@ export const registerUser = user =>
  * }
  */
 const addKidEndpoint = "api/user/AddChild";
-export const addKid = kid =>
+export const addKid = (kid, token) =>
   new Promise((resolve, reject) =>
-    fetch(stringifyRequest(baseUrl, addKidEndpoint, { ...kid }))
+    fetch(stringifyRequest(baseUrl, addKidEndpoint, { ...kid, token }))
       .then(res => res.json())
       .then(json => (json.success ? resolve(json) : reject(json)))
       .catch(err => reject(err))
@@ -144,10 +144,14 @@ export const addKid = kid =>
  * just like addKid
  */
 const editKidEndpoint = "api/user/Edithild";
-export const editKid = (kid, kidIdx) =>
+export const editKid = (kid, kidIdx, token) =>
   new Promise((resolve, reject) =>
     fetch(
-      stringifyRequest(baseUrl, editKidEndpoint, { childId: kidIdx, ...kid })
+      stringifyRequest(baseUrl, editKidEndpoint, {
+        childId: kidIdx,
+        ...kid,
+        token
+      })
     )
       .then(res => res.json())
       .then(json => (json.success ? resolve(json) : reject(json)))
@@ -164,9 +168,11 @@ export const editKid = (kid, kidIdx) =>
  * just like addKid
  */
 const deleteKidEndpoint = "api/user/Edithild";
-export const deleteKid = kidIdx =>
+export const deleteKid = (kidIdx, token) =>
   new Promise((resolve, reject) =>
-    fetch(stringifyRequest(baseUrl, deleteKidEndpoint, { childId: kidIdx }))
+    fetch(
+      stringifyRequest(baseUrl, deleteKidEndpoint, { childId: kidIdx, token })
+    )
       .then(res => res.json())
       .then(json => (json.success ? resolve(json) : reject(json)))
       .catch(err => reject(err))
@@ -185,9 +191,11 @@ export const deleteKid = kidIdx =>
  * }
  */
 const changePasswordEndpoint = "api/user/ChangePassword";
-export const changePassword = (oldPassword, newPassword) =>
+export const changePassword = (oldPassword, newPassword, token) =>
   new Promise((resolve, reject) =>
-    fetch(stringifyRequest(baseUrl, changePasswordEndpoint, { newPassword }))
+    fetch(
+      stringifyRequest(baseUrl, changePasswordEndpoint, { newPassword, token })
+    )
       .then(res => res.json())
       .then(json => (json.success ? resolve(json) : reject(json)))
       .catch(err => reject(err))
@@ -217,10 +225,13 @@ export const changePassword = (oldPassword, newPassword) =>
  * }
  */
 const changeUserDataEndpoint = "api/user/ChangeUserData";
-export const changeUserData = data =>
+export const changeUserData = (data, token) =>
   new Promise((resolve, reject) =>
     fetch(
-      stringifyRequest(baseUrl, changeUserDataEndpoint, { cityId: data.cityId })
+      stringifyRequest(baseUrl, changeUserDataEndpoint, {
+        cityId: data.cityId,
+        token
+      })
     )
       .then(res => res.json())
       .then(json => (json.success ? resolve(json) : reject(json)))
@@ -247,12 +258,13 @@ export const changeUserData = data =>
  * }
  */
 const addNotificationEndpoint = "api/user/AddNotification";
-export const addNotification = data =>
+export const addNotification = (data, token) =>
   new Promise((resolve, reject) =>
     fetch(
       stringifyRequest(baseUrl, addNotificationEndpoint, {
         childId: data.kidId,
-        notificationOverLap: data.notificationOverLap
+        notificationOverLap: data.notificationOverLap,
+        token
       })
     )
       .then(res => res.json())
@@ -270,11 +282,12 @@ export const addNotification = data =>
  * same as addNotification
  */
 const deleteNotificationEndpoint = "api/user/DeleteNotification";
-export const deleteNotification = notificationId =>
+export const deleteNotification = (notificationId, token) =>
   new Promise((resolve, reject) =>
     fetch(
       stringifyRequest(baseUrl, deleteNotificationEndpoint, {
-        notificationId
+        notificationId,
+        token
       })
     )
       .then(res => res.json())
@@ -296,11 +309,12 @@ export const deleteNotification = notificationId =>
  * }
  */
 const changeMetaNotificationEndpoint = "api/user/ChangeMetaNotification";
-export const changeMetaNotification = isSubscribed =>
+export const changeMetaNotification = (isSubscribed, token) =>
   new Promise((resolve, reject) =>
     fetch(
       stringifyRequest(baseUrl, changeMetaNotificationEndpoint, {
-        isSubscribed
+        isSubscribed,
+        token
       })
     )
       .then(res => res.json())

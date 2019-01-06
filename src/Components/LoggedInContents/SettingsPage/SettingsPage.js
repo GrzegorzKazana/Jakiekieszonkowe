@@ -32,7 +32,11 @@ class SettingsPage extends React.Component {
   handlePasswordChange = data => {
     // this.props.dispatch(changePassword(data.newPassword));
     this.setState({ passwordChangeIssued: true });
-    changePasswordNotifyApi(data.oldPassword, data.newPassword)
+    changePasswordNotifyApi(
+      data.oldPassword,
+      data.newPassword,
+      this.props.token
+    )
       .then(data => {
         this.props.dispatch(
           displaySnackbarMessage("Zmienino hasło z powodzeniem")
@@ -50,7 +54,7 @@ class SettingsPage extends React.Component {
   handleUserDataChange = data => {
     // this.props.dispatch(changeUserData(data));
     this.props.dispatch(requestChangeUserData());
-    changeUserDataNotifyApi(data)
+    changeUserDataNotifyApi(data, this.props.token)
       .then(data => this.props.dispatch(changeUserData(data)))
       .catch(err =>
         this.props.dispatch(
@@ -64,7 +68,7 @@ class SettingsPage extends React.Component {
   handleAddNotification = data => {
     // this.props.dispatch(addUserNotification(data));
     this.props.dispatch(requestUpdateNotificationList());
-    addNotificationNotifyApi(data)
+    addNotificationNotifyApi(data, this.props.token)
       .then(data => this.props.dispatch(updateNotificationList(data.list)))
       .catch(err =>
         this.props.dispatch(
@@ -78,7 +82,7 @@ class SettingsPage extends React.Component {
   handleDeleteNotification = idx => {
     // this.props.dispatch(deleteUserNotification(idx));
     this.props.dispatch(requestUpdateNotificationList());
-    deleteNotificationNotifyApi(idx)
+    deleteNotificationNotifyApi(idx, this.props.token)
       .then(data => this.props.dispatch(updateNotificationList(data.list)))
       .catch(err =>
         this.props.dispatch(
@@ -92,7 +96,7 @@ class SettingsPage extends React.Component {
   handleToggleMetaNotification = isSubscribed => {
     // this.props.dispatch(deleteMetaNotification());
     this.setState({ metaNotificationChangeIssued: true });
-    changeMetaNotificationNotifyApi(isSubscribed)
+    changeMetaNotificationNotifyApi(isSubscribed, this.props.token)
       .then(data => {
         this.props.dispatch(changeMetaNotification(data.userMetaNotification));
         this.setState({ metaNotificationChangeIssued: false });

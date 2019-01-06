@@ -1,5 +1,6 @@
 const defaultState = {
   isAdmin: false,
+  token: "",
   userData: null,
   userDataFetching: false,
   userDataLoaded: false,
@@ -30,6 +31,7 @@ const UserInfoReducer = (state = defaultState, action) => {
         userDataLoaded: true,
         userKidsLoaded: true,
         userNotificationsLoaded: true,
+        token: action.token,
         userData: action.userData,
         userKids: action.userKids,
         userNotifications: action.userNotifications,

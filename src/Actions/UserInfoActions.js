@@ -7,14 +7,16 @@ export const userValidated = (
   userKids,
   userNotifications,
   isAdmin,
-  userMetaNotification
+  userMetaNotification,
+  token
 ) => ({
   type: "USER_VALIDATED",
   userData,
   userKids,
   userNotifications,
   isAdmin,
-  userMetaNotification
+  userMetaNotification,
+  token
 });
 
 export const requestUserValidationFailed = () => ({

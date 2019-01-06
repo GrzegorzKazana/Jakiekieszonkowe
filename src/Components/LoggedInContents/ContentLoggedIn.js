@@ -6,6 +6,7 @@ import NavBar from "./NavBar";
 import StatMap from "./MapPage/MapPage";
 import { connect } from "react-redux";
 import { logOut } from "../../Actions/UserInfoActions";
+import { logOutUser } from "../../Common/MockApiConnections/UserApi";
 
 const mapStateToProps = state => ({
   ...state.userInfo
@@ -21,6 +22,7 @@ class ContentLoggedIn extends React.Component {
 
   handleLogOut = () => {
     this.props.dispatch(logOut());
+    logOutUser(this.props.token);
   };
 
   render() {

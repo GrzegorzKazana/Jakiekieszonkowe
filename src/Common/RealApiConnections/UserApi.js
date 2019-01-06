@@ -321,3 +321,16 @@ export const changeMetaNotification = (isSubscribed, token) =>
       .then(json => (json.success ? resolve(json) : reject(json)))
       .catch(err => reject(err))
   );
+
+const logOutEndpoint = "api/user/LogOut";
+export const logOutUser = token =>
+  new Promise((resolve, reject) =>
+    fetch(
+      stringifyRequest(baseUrl, logOutEndpoint, {
+        token
+      })
+    )
+      .then(res => res.json())
+      .then(json => (json.success ? resolve(json) : reject(json)))
+      .catch(err => reject(err))
+  );

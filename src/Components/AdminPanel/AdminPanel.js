@@ -4,8 +4,10 @@ import AdminPanelDrawer from "./AdminPanelDrawer";
 import DictionaryPage from "./DictionaryPage";
 import { connect } from "react-redux";
 import { logOut } from "../../Actions/UserInfoActions";
+import { logOutUser } from "../../Common/MockApiConnections/UserApi";
 
 const mapStateToProps = state => ({
+  ...state.userInfo,
   ...state.cityDictionary,
   ...state.provinceDictionary,
   ...state.paymentPeriodDictionary,
@@ -19,6 +21,7 @@ class AdminPanel extends React.Component {
 
   handleLogOut = () => {
     this.props.dispatch(logOut());
+    logOutUser(this.props.token);
   };
 
   handlePageChange = selectedPageContent => {

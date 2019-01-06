@@ -402,3 +402,5 @@ export const changeMetaNotification = isSubscribed => {
     }, API_DELAY)
   );
 };
+
+export const logOutUser = token => console.log("loggedOut");

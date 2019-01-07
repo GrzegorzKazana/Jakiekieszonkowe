@@ -28,6 +28,13 @@ import {
   getMoneyIncludes
 } from "./Common/MockApiConnections/DictionariesApi";
 import {
+  getProvinceDictionary as getProvinceDictionaryRealApi,
+  getCityDictionary as getCityDictionaryRealApi,
+  getPaymentPeriodDictionary as getPaymentPeriodDictionaryRealApi,
+  getSchoolTypeDictionary as getSchoolTypeDictionaryRealApi,
+  getMoneyIncludes as getMoneyIncludesRealApi
+} from "./Common/RealApiConnections/DictionariesApi";
+import {
   requestMoneyIncludesList,
   moneyIncludesLoaded
 } from "./Actions/MoneyIncludesActions";
@@ -79,7 +86,8 @@ class App extends React.Component {
 
   loadProvinces = () => {
     this.props.dispatch(requestProvinceDictionary());
-    getProvinceDictionary()
+    // getProvinceDictionary()
+    getProvinceDictionaryRealApi()
       .then(data =>
         this.props.dispatch(provinceDictionaryLoaded(data.provinceList))
       )
@@ -88,14 +96,16 @@ class App extends React.Component {
 
   loadCities = () => {
     this.props.dispatch(requestCityDictionary());
-    getCityDictionary()
+    // getCityDictionary()
+    getCityDictionaryRealApi()
       .then(data => this.props.dispatch(provinceCityLoaded(data.cityList)))
       .catch(e => console.log(e));
   };
 
   loadSchoolTypes = () => {
     this.props.dispatch(requestSchoolTypeDictionary());
-    getSchoolTypeDictionary()
+    // getSchoolTypeDictionary()
+    getSchoolTypeDictionaryRealApi()
       .then(data =>
         this.props.dispatch(schoolTypeDicitonaryLoaded(data.schoolTypeList))
       )
@@ -104,7 +114,8 @@ class App extends React.Component {
 
   loadPaymentPeriod = () => {
     this.props.dispatch(requestPaymentPeriodDictionary());
-    getPaymentPeriodDictionary()
+    // getPaymentPeriodDictionary()
+    getPaymentPeriodDictionaryRealApi()
       .then(data =>
         this.props.dispatch(
           paymentPeriodDictionaryLoaded(data.paymentPeriodList)
@@ -115,7 +126,8 @@ class App extends React.Component {
 
   loadMoneyIncludes = () => {
     this.props.dispatch(requestMoneyIncludesList());
-    getMoneyIncludes()
+    // getMoneyIncludes()
+    getMoneyIncludesRealApi()
       .then(data =>
         this.props.dispatch(moneyIncludesLoaded(data.moneyIncludeList))
       )

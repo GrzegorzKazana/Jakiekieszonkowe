@@ -24,16 +24,17 @@ const API_DELAY = 10;
  *    }
  * }
  */
-const getCountryBasicStatsEndpoint = "api/stats/GetCountryStats";
+const getCountryBasicStatsEndpoint = "api/mapstats/GetCountryStats";
 export const getCountryBasicStats = (useParams, params) =>
   new Promise((resolve, reject) =>
     fetch(
       stringifyRequest(baseUrl, getCountryBasicStatsEndpoint, {
         useFilters: useParams,
         ageRangeMin: params.ageRangeValue.min,
-        ageRangeMin: params.ageRangeValue.max,
+        ageRangeMax: params.ageRangeValue.max,
         moneyIncludes: params.moneyIncludes,
-        schoolTypeId: params.schoolTypeId
+        schoolTypeId: params.schoolTypeId,
+        filterByMoneyIncludes: params.filterByMoneyIncludes
       })
     )
       .then(res => res.json())
@@ -66,16 +67,17 @@ export const getCountryBasicStats = (useParams, params) =>
  *    ]
  * }
  */
-const getProvinceBasicStatsEndpoint = "api/stats/GetProvinceStats";
+const getProvinceBasicStatsEndpoint = "api/mapstats/GetProvinceStats";
 export const getProvinceBasicStats = (useParams, params) =>
   new Promise((resolve, reject) =>
     fetch(
       stringifyRequest(baseUrl, getProvinceBasicStatsEndpoint, {
         useFilters: useParams,
         ageRangeMin: params.ageRangeValue.min,
-        ageRangeMin: params.ageRangeValue.max,
+        ageRangeMax: params.ageRangeValue.max,
         moneyIncludes: params.moneyIncludes,
-        schoolTypeId: params.schoolTypeId
+        schoolTypeId: params.schoolTypeId,
+        filterByMoneyIncludes: params.filterByMoneyIncludes
       })
     )
       .then(res => res.json())
@@ -111,7 +113,7 @@ export const getProvinceBasicStats = (useParams, params) =>
  *    ]
  * }
  */
-const getCityBasicStatsEndpoint = "api/stats/GetCityStats";
+const getCityBasicStatsEndpoint = "api/mapstats/GetCityStats";
 export const getCityBasicStats = (provId, useParams, params) =>
   new Promise((resolve, reject) =>
     fetch(
@@ -119,9 +121,10 @@ export const getCityBasicStats = (provId, useParams, params) =>
         provinceId: provId,
         useFilters: useParams,
         ageRangeMin: params.ageRangeValue.min,
-        ageRangeMin: params.ageRangeValue.max,
+        ageRangeMax: params.ageRangeValue.max,
         moneyIncludes: params.moneyIncludes,
-        schoolTypeId: params.schoolTypeId
+        schoolTypeId: params.schoolTypeId,
+        filterByMoneyIncludes: params.filterByMoneyIncludes
       })
     )
       .then(res => res.json())

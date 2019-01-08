@@ -30,10 +30,12 @@ const mapStateToProps = state => ({
 });
 class MapPage extends React.Component {
   defaultFilterParameters = {
-    ageRangeValue: { min: 1, max: 99 },
-    moneyIncludes: this.props.moneyIncludes.map(
-      moneyInclude => moneyInclude.id
-    ),
+    ageRangeValue: { min: 0, max: 100 },
+    filterByMoneyIncludes: false,
+    moneyIncludes: [],
+    // moneyIncludes: this.props.moneyIncludes.map(
+    //   moneyInclude => moneyInclude.id
+    // ),
     schoolTypeId: -1
   };
 

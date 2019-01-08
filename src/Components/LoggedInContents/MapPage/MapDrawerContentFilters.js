@@ -9,7 +9,9 @@ import {
   InputLabel,
   Select,
   Input,
-  MenuItem
+  MenuItem,
+  Switch,
+  Collapse
 } from "@material-ui/core";
 import InputRange from "react-input-range";
 //even tho its unused, it still needs to be imported for style to be applied
@@ -17,10 +19,9 @@ import xd from "react-input-range/lib/css/index.css";
 
 class MapDrawerContentFilters extends React.Component {
   state = {
-    ageRangeValue: { min: 10, max: 90 },
-    moneyIncludes: this.props.moneyIncludes.map(
-      moneyInclude => moneyInclude.id
-    ),
+    ageRangeValue: { min: 0, max: 100 },
+    filterByMoneyIncludes: false,
+    moneyIncludes: [],
     schoolTypeId: -1
   };
 
@@ -55,6 +56,7 @@ class MapDrawerContentFilters extends React.Component {
           position: "absolute",
           top: "72px",
           left: "0px",
+          right: "0px",
           bottom: "68px",
           overflow: "auto",
           overflowX: "hidden",
@@ -65,8 +67,8 @@ class MapDrawerContentFilters extends React.Component {
         <Typography variant="subtitle1">Wiek dziecka</Typography>
         <div style={{ padding: "16px 0px" }}>
           <InputRange
-            maxValue={99}
-            minValue={1}
+            maxValue={100}
+            minValue={0}
             value={this.state.ageRangeValue}
             onChange={ageRangeValue => this.setState({ ageRangeValue })}
           />
@@ -91,26 +93,43 @@ class MapDrawerContentFilters extends React.Component {
           </Select>
         </FormControl>
         <Divider style={{ margin: "8px 0px" }} />
-        {this.props.moneyIncludes.map((moneyInclude, idx) => (
-          <FormControl fullWidth key={idx}>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={this.state.moneyIncludes.includes(moneyInclude.id)}
-                  onChange={(e, val) => {
-                    this.setState(state => ({
-                      ...state,
-                      moneyIncludes: val
-                        ? state.moneyIncludes.concat(moneyInclude.id)
-                        : state.moneyIncludes.filter(x => x !== moneyInclude.id)
-                    }));
-                  }}
-                />
+        <FormControlLabel
+          control={
+            <Switch
+              checked={this.state.filterByMoneyIncludes}
+              onChange={e =>
+                this.setState({ filterByMoneyIncludes: e.target.checked })
               }
-              label={moneyInclude.name}
+              // value="checkedB"
+              color="primary"
             />
-          </FormControl>
-        ))}
+          }
+          label="Filtruj według bonusów kieszonkowego"
+        />
+        <Collapse in={this.state.filterByMoneyIncludes}>
+          {this.props.moneyIncludes.map((moneyInclude, idx) => (
+            <FormControl fullWidth key={idx}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={this.state.moneyIncludes.includes(moneyInclude.id)}
+                    onChange={(e, val) => {
+                      this.setState(state => ({
+                        ...state,
+                        moneyIncludes: val
+                          ? state.moneyIncludes.concat(moneyInclude.id)
+                          : state.moneyIncludes.filter(
+                              x => x !== moneyInclude.id
+                            )
+                      }));
+                    }}
+                  />
+                }
+                label={moneyInclude.name}
+              />
+            </FormControl>
+          ))}
+        </Collapse>
       </div>
     );
 

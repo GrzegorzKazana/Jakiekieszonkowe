@@ -12,6 +12,7 @@ import {
   getProvinceBasicStats,
   getCityBasicStats
 } from "../../../Common/MockApiConnections/MapStatsApi";
+import { getCountryBasicStats as getCountryBasicStatsRealApi } from "../../../Common/RealApiConnections/MapStatsApi";
 import {
   getComments,
   addComment,
@@ -171,7 +172,7 @@ class MapPage extends React.Component {
     this.setState({
       countryStatsFetching: true
     });
-    getCountryBasicStats(
+    getCountryBasicStatsRealApi(
       this.state.parametersActive,
       this.state.parametersState
     )

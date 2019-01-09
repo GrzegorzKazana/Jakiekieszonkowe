@@ -81,7 +81,11 @@ export const getProvinceBasicStats = (useParams, params) =>
       })
     )
       .then(res => res.json())
-      .then(json => (json.success ? resolve(json) : reject(json)))
+      .then(json =>
+        json.success
+          ? resolve({ ...json, provinceData: { list: json.provinceData } })
+          : reject(json)
+      )
       .catch(err => reject(err))
   );
 
@@ -128,6 +132,10 @@ export const getCityBasicStats = (provId, useParams, params) =>
       })
     )
       .then(res => res.json())
-      .then(json => (json.success ? resolve(json) : reject(json)))
+      .then(json =>
+        json.success
+          ? resolve({ ...json, cityData: { list: json.cityData } })
+          : reject(json)
+      )
       .catch(err => reject(err))
   );

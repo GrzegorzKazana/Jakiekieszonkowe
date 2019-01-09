@@ -61,10 +61,13 @@ export default class MapContent extends React.Component {
 
   style = feature => {
     const { provinceData } = this.props;
+    const provinceStat =
+      provinceData &&
+      provinceData.list.find(pd => pd.id === feature.properties.ID);
     return {
       fillColor:
-        provinceData && provinceData.list && provinceData.list.length > 0
-          ? this.mapAvgToColor(provinceData.list[feature.properties.ID].avg)
+        provinceStat && provinceStat.avg > 0
+          ? this.mapAvgToColor(provinceStat.avg)
           : "#F3F0E9",
       weight: 3,
       opacity: 1,
@@ -152,7 +155,7 @@ export default class MapContent extends React.Component {
             return (
               <Marker
                 key={idx}
-                position={city.position}
+                position={[city.latitude, city.longitude]}
                 onMouseOver={e => e.target.openPopup()}
                 onMouseOut={e => {
                   e.target.closePopup();

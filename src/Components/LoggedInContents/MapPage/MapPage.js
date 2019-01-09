@@ -12,7 +12,11 @@ import {
   getProvinceBasicStats,
   getCityBasicStats
 } from "../../../Common/MockApiConnections/MapStatsApi";
-import { getCountryBasicStats as getCountryBasicStatsRealApi } from "../../../Common/RealApiConnections/MapStatsApi";
+import {
+  getCountryBasicStats as getCountryBasicStatsRealApi,
+  getProvinceBasicStats as getProvinceBasicStatsRealApi,
+  getCityBasicStats as getCityBasicStatsRealApi
+} from "../../../Common/RealApiConnections/MapStatsApi";
 import {
   getComments,
   addComment,
@@ -94,7 +98,8 @@ class MapPage extends React.Component {
     });
     setTimeout(
       () =>
-        getCityBasicStats(
+        // getCityBasicStats(
+        getCityBasicStatsRealApi(
           provId,
           this.state.parametersActive,
           this.state.parametersState
@@ -131,7 +136,8 @@ class MapPage extends React.Component {
     this.setState({
       provinceStatsFetching: true
     });
-    getProvinceBasicStats(
+    // getProvinceBasicStats(
+    getProvinceBasicStatsRealApi(
       this.state.parametersActive,
       this.state.parametersState
     )

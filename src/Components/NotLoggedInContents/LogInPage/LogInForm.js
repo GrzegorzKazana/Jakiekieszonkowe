@@ -209,10 +209,14 @@ class LogInForm extends React.Component {
                 error={this.state.underValidation && !this.state.passwordValid}
               />
             </FormControl>
-            <Button fullWidth size="small" onClick={this.handleForgotPassword}>
+            <Button
+              fullWidth
+              onClick={this.handleForgotPassword}
+              style={{ margin: "10px 0px" }}
+            >
               zapomniałem hasła
             </Button>
-            <FormControlLabel
+            {/* <FormControlLabel
               control={
                 <Checkbox
                   value="remember"
@@ -220,7 +224,7 @@ class LogInForm extends React.Component {
                 />
               }
               label="Zapamiętaj hasło"
-            />
+            /> */}
             <Button
               fullWidth
               variant="contained"

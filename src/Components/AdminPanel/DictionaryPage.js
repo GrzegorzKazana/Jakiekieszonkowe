@@ -139,7 +139,7 @@ export default class DictionaryPage extends React.Component {
         <ConfirmDialog
           open={this.state.confirmDialogOpen}
           title="Definitywnie?"
-          text="Operacja usunięcia nie może być cofnięta"
+          text="Operacja usunięcia nie może być cofnięta oraz spowoduje usunięcię obiektów zależnych."
           onCancel={() =>
             this.setState({
               confirmDialogOpen: false,

@@ -37,8 +37,14 @@ export default class NavBar extends React.Component {
       userEmail
     } = this.props;
     return (
-      <AppBar position="static">
-        <Toolbar>
+      <AppBar
+        position="static"
+        style={{
+          background: "transparent",
+          boxShadow: "none"
+        }}
+      >
+        <Toolbar style={{ backgroundColor: `rgba(0,0,0,0.5)` }}>
           <Typography
             variant="h6"
             color="inherit"

@@ -22,15 +22,17 @@ import {
   addComment,
   toggleCommentUpvote
 } from "../../../Common/MockApiConnections/CommentsApi";
-// import {
-//   getComments as getCommentsRealApi,
-//   addComment as addCommentRealApi
-// } from "../../../Common/RealApiConnections/CommentsApi";
+import {
+  getComments as getCommentsRealApi,
+  addComment as addCommentRealApi,
+  toggleCommentUpvote as toggleCommentUpvoteRealApi
+} from "../../../Common/RealApiConnections/CommentsApi";
 import { connect } from "react-redux";
 
 const mapStateToProps = state => ({
   ...state.moneyIncludesDictionary,
-  ...state.schoolTypeDictionary
+  ...state.schoolTypeDictionary,
+  token: state.userInfo.token
 });
 class MapPage extends React.Component {
   defaultFilterParameters = {
@@ -91,6 +93,9 @@ class MapPage extends React.Component {
   };
 
   fetchCityStats = provId => {
+    if (!provId) {
+      return;
+    }
     //delay in order to let zoom animation end
     const delay = 300;
     this.setState({
@@ -255,7 +260,11 @@ class MapPage extends React.Component {
   };
 
   fetchComments = () => {
-    getComments(this.state.selectedProvinceId, this.state.selectedCityId)
+    getCommentsRealApi(
+      this.state.selectedProvinceId,
+      this.state.selectedCityId,
+      this.props.token
+    )
       .then(data =>
         this.setState({ comments: data.list, commentsFetching: false })
       )
@@ -279,7 +288,7 @@ class MapPage extends React.Component {
       )
     }));
     // propably should noify back end about upvote change
-    toggleCommentUpvote(commentId, !oldLikedState)
+    toggleCommentUpvoteRealApi(commentId, !oldLikedState, this.props.token)
       .then(data =>
         this.setState({ comments: data.list, commentsFetching: false })
       )
@@ -292,9 +301,12 @@ class MapPage extends React.Component {
   handleCommentPost = text => {
     // notify back end, and in return get new comment list
     this.setState({ commentsFetching: true });
-    addComment(this.state.selectedProvinceId, this.state.selectedCityId, {
-      content: text
-    })
+    addCommentRealApi(
+      this.state.selectedProvinceId,
+      this.state.selectedCityId,
+      text,
+      this.props.token
+    )
       .then(data =>
         this.setState({ comments: data.list, commentsFetching: false })
       )

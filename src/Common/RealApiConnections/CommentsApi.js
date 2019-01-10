@@ -1,3 +1,4 @@
+import { stringifyRequest, baseUrl } from "./Helpers";
 /**
  * REQUEST:
  * {
@@ -24,17 +25,16 @@
  *    ]
  * }
  */
-// const baseUrl = "http://localhost:8080/";
-// const esc = encodeURIComponent;
-// const stringifyRequest = (url, params) =>
-//   `${url}?${Object.keys(params)
-//     .map(k => esc(k) + "=" + esc(params[k]))
-//     .join("&")}`;
 
-export const getComments = (provinceId, cityId) =>
+const getCommentsEndpoint = "api/comments/GetComments";
+export const getComments = (provinceId, cityId, token) =>
   new Promise((resolve, reject) =>
     fetch(
-      "http://localhost:8080/api/comments/GetCommentsByProvinceAndCity?id_province=53&id_city=2"
+      stringifyRequest(baseUrl, getCommentsEndpoint, {
+        provinceId: provinceId || -1,
+        cityId: cityId || -1,
+        token
+      })
     )
       .then(res => res.json())
       .then(json => (json.success ? resolve(json) : reject(json)))
@@ -53,10 +53,16 @@ export const getComments = (provinceId, cityId) =>
  * RESPONSE:
  * just like getComments
  */
-export const addComment = (provId, cityId, comment) =>
+const addCommentEndpoint = "api/comments/AddComment";
+export const addComment = (provinceId, cityId, content, token) =>
   new Promise((resolve, reject) =>
     fetch(
-      "http://localhost:8080/api/comments/AddComment?provinceId=1&cityId=1&userId=1"
+      stringifyRequest(baseUrl, addCommentEndpoint, {
+        provinceId: provinceId || -1,
+        cityId: cityId || -1,
+        content,
+        token
+      })
     )
       .then(res => res.json())
       .then(json => (json.success ? resolve(json) : reject(json)))
@@ -73,10 +79,15 @@ export const addComment = (provId, cityId, comment) =>
  * RESPONSE:
  * just like getComments
  */
-export const toggleCommentUpvote = (commentId, liked) =>
+const toggleCommentUpvoteEndpoint = "api/comments/ToggleCommentUpvote";
+export const toggleCommentUpvote = (commentId, isLiked, token) =>
   new Promise((resolve, reject) =>
     fetch(
-      "http://localhost:8080/api/comments/AddComment?provinceId=1&cityId=1&userId=1"
+      stringifyRequest(baseUrl, toggleCommentUpvoteEndpoint, {
+        commentId,
+        isLiked,
+        token
+      })
     )
       .then(res => res.json())
       .then(json => (json.success ? resolve(json) : reject(json)))

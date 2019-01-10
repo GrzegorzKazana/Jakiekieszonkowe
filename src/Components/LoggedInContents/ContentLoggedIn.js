@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import { logOut } from "../../Actions/UserInfoActions";
 import { logOutUser } from "../../Common/MockApiConnections/UserApi";
 import { logOutUser as logOutUserRealApi } from "../../Common/RealApiConnections/UserApi";
+import BackgroudFrontImage from "../../Common/background_front.jpg";
 
 const mapStateToProps = state => ({
   ...state.userInfo
@@ -41,7 +42,8 @@ class ContentLoggedIn extends React.Component {
           height: "100vh",
           width: "100%",
           display: "flex",
-          flexDirection: "column"
+          flexDirection: "column",
+          backgroundImage: `url(${BackgroudFrontImage})`
         }}
       >
         <NavBar

@@ -35,28 +35,38 @@ export default class LogInPage extends React.Component {
           height: "100%",
           display: "flex",
           // flexDirection: "column",
-          justify: "center",
+          justifyContent: "center",
           alignItems: "center"
         }}
       >
-        <div style={{ padding: "40px", width: "100%" }}>
-          <Typography variant="h4" color="textPrimary">
-            Witaj w serwisie
-          </Typography>
-          <Typography variant="h3">
-            <b>JakieKieszonkowe.pl</b>
-          </Typography>
-          <Typography variant="h4" component="p">
-            Sprawdź, co Twoje dzieci <br />
-            sądzą o Twojej hojności!
-          </Typography>
-          <Button
-            variant="outlined"
-            style={{ margin: "10px 0px", padding: "15px" }}
-            onClick={this.handleOpenFaq}
-          >
-            Najczęściej zadawane pytania
-          </Button>
+        <div
+          style={{
+            padding: "40px",
+            width: "100%",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center"
+          }}
+        >
+          <div>
+            <Typography variant="h4" color="textPrimary">
+              Witaj w serwisie
+            </Typography>
+            <Typography variant="h3">
+              <b>JakieKieszonkowe.pl</b>
+            </Typography>
+            <Typography variant="h4" component="p">
+              Sprawdź, co Twoje dzieci <br />
+              sądzą o Twojej hojności!
+            </Typography>
+            <Button
+              variant="outlined"
+              style={{ margin: "10px 0px", padding: "15px" }}
+              onClick={this.handleOpenFaq}
+            >
+              Najczęściej zadawane pytania
+            </Button>
+          </div>
         </div>
       </div>
     );

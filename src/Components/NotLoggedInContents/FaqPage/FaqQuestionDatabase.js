@@ -24,5 +24,16 @@ export const getFaq = () => [
     q: "Czy informacje prezentowane na portalu są wiarygodne i aktualne?",
     a:
       "Jak najbardziej! Wszyscy użytkownicy są weryfikowani, natomiast dane statystyczne są aktualizowane codziennie."
+  },
+  {
+    q: "Czy mogę zmienić udostępnione przeze mnie dane?",
+    a:
+      "Tak, w tym celu należy przejść na swój profil lub listę dzieci, a następnie otworzyć odpowiedni formularz i zmienić w nim informacje."
+  },
+  {
+    q:
+      "Czy mogę wyrazić w jakiś sposób swoją opinię na temat podanych statystyk i zweryfikować ją z opiniami innych użytkowników?",
+    a:
+      "Tak. Przeglądając dane statystyczne można wypowiedzieć się w formie komentarza, przeczytać komentarze innych użytkowników, oraz ocenić je pozytywnie bądź negatywnie."
   }
 ];

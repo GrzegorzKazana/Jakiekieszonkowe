@@ -346,7 +346,7 @@ export const logOutUser = token =>
       .catch(err => reject(err))
   );
 
-const forgotPasswordEndpoint = "api/user/ForgotPassword";
+const forgotPasswordEndpoint = "api/user/ResetPassword";
 export const forgotPassword = email =>
   new Promise((resolve, reject) =>
     fetch(stringifyRequest(baseUrl, forgotPasswordEndpoint, { email }))

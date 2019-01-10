@@ -78,6 +78,9 @@ class LogInForm extends React.Component {
   };
 
   handleForgotPassword = () => {
+    if (!this.state.emailValid) {
+      return;
+    }
     forgotPasswordRealApi(this.state.email)
       .then(data =>
         this.showSnackbarMessage("Na konto email została widomość resetująca")

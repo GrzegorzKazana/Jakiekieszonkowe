@@ -30,7 +30,7 @@ export default class FaqDialog extends React.Component {
                 key={idx}
                 question={item.q}
                 answer={item.a}
-                index={idx}
+                index={idx + 1}
               />
             ))}
           </DialogContent>

@@ -1,44 +1,28 @@
 export const getFaq = () => [
   {
-    q:
-      "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit?",
+    q: "Dla kogo przeznaczony jest ten portal?",
     a:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id vestibulum quam. Nullam justo libero, pellentesque eget porta ut, accumsan ac urna. Nam eleifend, ipsum eget bibendum auctor, ligula tellus auctor ex, sit amet luctus diam neque eu odio. Nullam pulvinar semper interdum. Aliquam a nisi bibendum, sollicitudin urna nec, varius mi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed eu velit massa."
+      "Portal ten jest przeznaczony przede wszystkim dla rodziców, którzy muszą ustalić, ile kieszonkowego swoje dziecko/dzieci będzie/będą potrzebować do w miarę normalnego funkcjonowania w swoim mieście. Rodzice (zalogowany użytkownik) mogą dodać informacje o swoim dziecku i przeglądać dane statystyczne z interesującego ich miasta/regionu. Na tej podstawie rodzice mogą o wiele lepiej dobrać odpowiednią kwote kieszonkowego dla swoich pociech. Dodatkowo użytkownik może otrzymywać przypomnienia o zbliżającym się terminie dokonania wpłaty kieszonkowego, a także jeśli nastąpiła zmiana danych statystycznych dla wybranego miasta/regionu. Może także skomentować albo przeglądać komentarze dla danego wątku."
   },
   {
-    q: "Neque porro quisquam est qui dolorem?",
+    q: "Dlaczego warto zapoznać się z portalem jakiekieszonkowe?",
     a:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id vestibulum quam."
-  },
-  {
-    q:
-      "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur?",
-    a: "Lorem ipsum dolor sit amet, consectetur."
-  },
-  {
-    q: "Neque porro quisquam?",
-    a:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id vestibulum quam. Nullam justo libero, pellentesque eget porta ut, accumsan ac urna. Nam eleifend, ipsum eget bibendum auctor, ligula tellus auctor ex, sit amet luctus diam neque eu odio. Nullam pulvinar semper interdum. Aliquam a nisi bibendum, sollicitudin urna nec, varius mi."
+      'Chyba każdy, kto ma dzieci w trochę starszym wieku, stał przed dylematem, ile pieniędzy dać swojemu dziecku, żeby z jednej strony wystarczyło mu na miarę swoich potrzeb, a z drugiej zbytnio nie obciążało budżetu domowego i zbytnio nie zostało "ozpuszczone". Teraz stanie się to dużo łatwiejsze! Oto powstał portal jakiekieszonkowe.pl, dzięki któremu możesz podejrzeć dane statystyczne dla interesującego Cię miasta/regionu! Wystarczy, że się zalogujesz i już będziesz mógł zobaczyć, jak Twoje kieszonkowe prezentują się na tle innych!'
   },
   {
     q:
-      "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit?",
+      "W jakim celu mam udostępniać swoje prywatne dane, jak i dane mojego dziecka?",
     a:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id vestibulum quam. Nullam justo libero, pellentesque eget porta ut, accumsan ac urna. Nam eleifend, ipsum eget bibendum auctor, ligula tellus auctor ex, sit amet luctus diam neque eu odio. Nullam pulvinar semper interdum. Aliquam a nisi bibendum, sollicitudin urna nec, varius mi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed eu velit massa."
+      "Ty także możesz pomóc innym dobrać odpowiednie kieszonkowe! Twoje dane zostaną zapisane do bazy danych portalu i pozwolą na dokładniejsze wyliczenie średnich kieszonkowych!"
   },
   {
-    q: "Neque porro quisquam est qui dolorem?",
+    q: "Czy udostępnione dane są dostępne dla wszystkich?",
     a:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id vestibulum quam."
+      "Absolutnie nie! Inni użytkownicy nie będą mogli zobaczyć Twoich wrażliwych danych, zostaną one wykorzystane jedynie do aktualizacji danych statystycznych."
   },
   {
-    q:
-      "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur?",
-    a: "Lorem ipsum dolor sit amet, consectetur."
-  },
-  {
-    q: "Neque porro quisquam?",
+    q: "Czy informacje prezentowane na portalu są wiarygodne i aktualne?",
     a:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id vestibulum quam. Nullam justo libero, pellentesque eget porta ut, accumsan ac urna. Nam eleifend, ipsum eget bibendum auctor, ligula tellus auctor ex, sit amet luctus diam neque eu odio. Nullam pulvinar semper interdum. Aliquam a nisi bibendum, sollicitudin urna nec, varius mi."
+      "Jak najbardziej! Wszyscy użytkownicy są weryfikowani, natomiast dane statystyczne są aktualizowane codziennie."
   }
 ];

@@ -7,7 +7,12 @@ import Checkbox from "@material-ui/core/Checkbox";
 import LockIcon from "@material-ui/icons/LockOutlined";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import { TextField, Paper, CircularProgress } from "@material-ui/core";
+import {
+  TextField,
+  Paper,
+  CircularProgress,
+  LinearProgress
+} from "@material-ui/core";
 
 import {
   validateInputEmail,
@@ -21,10 +26,18 @@ import {
   requestUserValidationFailed
 } from "../../../Actions/UserInfoActions";
 import { validateUserApiCall } from "../../../Common/MockApiConnections/UserApi";
-import { validateUserApiCall as validateUserApiCallRealApi } from "../../../Common/RealApiConnections/UserApi";
+import {
+  validateUserApiCall as validateUserApiCallRealApi,
+  forgotPassword as forgotPasswordRealApi
+} from "../../../Common/RealApiConnections/UserApi";
 
 const mapStateToProps = state => ({
-  ...state.userInfo
+  ...state.userInfo,
+  provincesLoaded: state.provinceDictionary.provincesLoaded,
+  citiesLoaded: state.cityDictionary.citiesLoaded,
+  paymentPeriodLoaded: state.paymentPeriodDictionary.paymentPeriodLoaded,
+  schoolTypeLoaded: state.schoolTypeDictionary.schoolTypeLoaded,
+  moneyIncludesLoaded: state.moneyIncludesDictionary.moneyIncludesLoaded
 });
 class LogInForm extends React.Component {
   state = {
@@ -35,6 +48,13 @@ class LogInForm extends React.Component {
     rememberMe: false,
     underValidation: false
   };
+
+  dictionariesLoaded = () =>
+    this.props.provincesLoaded &&
+    this.props.citiesLoaded &&
+    this.props.paymentPeriodLoaded &&
+    this.props.schoolTypeLoaded &&
+    this.props.moneyIncludesLoaded;
 
   handleEmailChange = event => {
     this.setState({
@@ -58,7 +78,11 @@ class LogInForm extends React.Component {
   };
 
   handleForgotPassword = () => {
-    this.showSnackbarMessage("Na konto email została widomość aktywacyjna");
+    forgotPasswordRealApi(this.state.email)
+      .then(data =>
+        this.showSnackbarMessage("Na konto email została widomość resetująca")
+      )
+      .catch(err => this.showSnackbarMessage(err.message));
   };
 
   handleLogIn = () => {
@@ -69,6 +93,9 @@ class LogInForm extends React.Component {
     };
     if (!this.state.emailValid || !this.state.passwordValid) {
       return;
+    }
+    if (!this.dictionariesLoaded()) {
+      this.showSnackbarMessage("Błąd połączenia.");
     }
     this.props.dispatch(requestUserValidation());
     // validateUserApiCall(user.email, user.password)
@@ -95,8 +122,21 @@ class LogInForm extends React.Component {
 
   render() {
     const { onRegisterClick } = this.props;
+    const loading = !this.dictionariesLoaded();
+    const loadingBar = (
+      <LinearProgress
+        color="secondary"
+        style={{
+          position: "absolute",
+          top: "0px",
+          left: "0px",
+          right: "0px"
+        }}
+      />
+    );
     return (
       <Paper style={{ height: "100%", width: "100%" }}>
+        {loading && loadingBar}
         <Grid
           style={{ padding: "20px", height: "100%" }}
           container

@@ -33,15 +33,36 @@ class AdminPanel extends React.Component {
   render() {
     const drawerWidth = "256px";
     const dictionaries = [
-      { name: "Miasta", page: 0, content: this.props.cities },
-      { name: "Województwa", page: 1, content: this.props.provinces },
-      { name: "Rodzaje szkół", page: 2, content: this.props.schoolType },
+      {
+        name: "Miasta",
+        page: 0,
+        content: this.props.cities,
+        loaded: this.props.citiesLoaded
+      },
+      {
+        name: "Województwa",
+        page: 1,
+        content: this.props.provinces,
+        loaded: this.props.provincesLoaded
+      },
+      {
+        name: "Rodzaje szkół",
+        page: 2,
+        content: this.props.schoolType,
+        loaded: this.props.schoolTypeLoaded
+      },
       {
         name: "Bonusy kieszonkowego",
         page: 3,
-        content: this.props.moneyIncludes
+        content: this.props.moneyIncludes,
+        loaded: this.props.moneyIncludesLoaded
       },
-      { name: "Okresy wypłat", page: 4, content: this.props.paymentPeriod }
+      {
+        name: "Okresy wypłat",
+        page: 4,
+        content: this.props.paymentPeriod,
+        loaded: this.props.paymentPeriodLoaded
+      }
     ];
     return (
       <div
@@ -77,14 +98,15 @@ class AdminPanel extends React.Component {
             />
           </div>
           <div style={{ height: "100%", flexGrow: "1" }}>
-            {this.state.selectedPageContent < dictionaries.length && (
-              <DictionaryPage
-                dictionary={
-                  dictionaries[this.state.selectedPageContent].content
-                }
-                title={dictionaries[this.state.selectedPageContent].name}
-              />
-            )}
+            {this.state.selectedPageContent < dictionaries.length &&
+              dictionaries[this.state.selectedPageContent].loaded && (
+                <DictionaryPage
+                  dictionary={
+                    dictionaries[this.state.selectedPageContent].content
+                  }
+                  title={dictionaries[this.state.selectedPageContent].name}
+                />
+              )}
           </div>
         </div>
       </div>

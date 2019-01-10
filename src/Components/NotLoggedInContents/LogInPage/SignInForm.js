@@ -11,12 +11,14 @@ import {
   Checkbox,
   FormControlLabel,
   FormControl,
-  Button
+  Button,
+  LinearProgress
 } from "@material-ui/core";
 import {
   validateNewEmail,
   validateNewPassword
 } from "../../../Common/InputValidation";
+import TermsDialog from "../TermsPage/TermsDialog";
 import { displaySnackbarMessage } from "../../../Actions/InfoSnackbarActions";
 import { registerUser } from "../../../Common/MockApiConnections/UserApi";
 import { registerUser as registerUserRealApi } from "../../../Common/RealApiConnections/UserApi";
@@ -28,6 +30,7 @@ const mapStateToProps = state => ({
 });
 class SignInForm extends React.Component {
   state = {
+    termsDialogOpen: false,
     email: "",
     password: "",
     passwordRepeat: "",
@@ -130,10 +133,23 @@ class SignInForm extends React.Component {
 
   render() {
     const { onCancel } = this.props;
+    const loading = !this.props.provincesLoaded || !this.props.citiesLoaded;
+    const loadingBar = (
+      <LinearProgress
+        color="secondary"
+        style={{
+          position: "absolute",
+          top: "0px",
+          left: "0px",
+          right: "0px"
+        }}
+      />
+    );
     return (
       <Paper style={{ height: "100%", width: "100%" }}>
+        {loading && loadingBar}
         <Grid
-          style={{ padding: "20px", height: "100%" }}
+          style={{ padding: "20px", height: "100%", position: "relative" }}
           container
           direction="column"
           justify="flex-end"
@@ -168,6 +184,7 @@ class SignInForm extends React.Component {
               >
                 <InputLabel htmlFor="name-simple">Województwo</InputLabel>
                 <Select
+                  disabled={!this.props.provincesLoaded}
                   value={this.state.provinceId}
                   onChange={this.handleProvinceChange}
                   input={<Input id="name-simple" />}
@@ -188,7 +205,7 @@ class SignInForm extends React.Component {
               >
                 <InputLabel htmlFor="name-simple">Miasto</InputLabel>
                 <Select
-                  disabled={this.state.cityDisabled}
+                  disabled={this.state.cityDisabled || this.props.citiesLoaded}
                   value={this.state.cityId}
                   onChange={this.handleCityChange}
                   input={<Input id="name-simple2" />}
@@ -244,7 +261,14 @@ class SignInForm extends React.Component {
                         : "black"
                   }}
                 >
-                  Przeczytałem i zatwierdzam regulamin *
+                  Przeczytałem i zatwierdzam{" "}
+                  <a
+                    href="#"
+                    onClick={e => this.setState({ termsDialogOpen: true })}
+                  >
+                    regulamin
+                  </a>{" "}
+                  *
                 </p>
               }
             />
@@ -268,6 +292,10 @@ class SignInForm extends React.Component {
             </Button>
           </form>
         </Grid>
+        <TermsDialog
+          open={this.state.termsDialogOpen}
+          onClose={e => this.setState({ termsDialogOpen: false })}
+        />
       </Paper>
     );
   }

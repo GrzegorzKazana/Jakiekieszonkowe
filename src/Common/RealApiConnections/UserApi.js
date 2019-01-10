@@ -345,3 +345,12 @@ export const logOutUser = token =>
       .then(json => (json.success ? resolve(json) : reject(json)))
       .catch(err => reject(err))
   );
+
+const forgotPasswordEndpoint = "api/user/ForgotPassword";
+export const forgotPassword = email =>
+  new Promise((resolve, reject) =>
+    fetch(stringifyRequest(baseUrl, forgotPasswordEndpoint, { email }))
+      .then(res => res.json())
+      .then(json => (json.success ? resolve(json) : reject(json)))
+      .catch(err => reject(err))
+  );

@@ -9,8 +9,6 @@ export default class KidsEntry extends React.Component {
         title="Dzieci"
         subtitle={
           <div>
-            Jakiś tekst podsumowyjący (stwierdzający ilość dzieci, lub ich
-            brak), w stylu: <br />
             Zarejestrowano wypłaty dla <b>{numberOfKids}</b> dzieci.
             {numberOfKids > 0 && "Dane gromadzone od "}
             <b>{numberOfKids > 0 && firstKidDate}</b>

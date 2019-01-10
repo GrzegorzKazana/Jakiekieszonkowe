@@ -205,7 +205,7 @@ class SignInForm extends React.Component {
               >
                 <InputLabel htmlFor="name-simple">Miasto</InputLabel>
                 <Select
-                  disabled={this.state.cityDisabled || this.props.citiesLoaded}
+                  disabled={this.state.cityDisabled || !this.props.citiesLoaded}
                   value={this.state.cityId}
                   onChange={this.handleCityChange}
                   input={<Input id="name-simple2" />}

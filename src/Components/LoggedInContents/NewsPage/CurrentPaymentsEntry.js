@@ -12,16 +12,24 @@ export default class NewsEntry extends React.Component {
   render() {
     const { kidsArray } = this.props;
     return (
-      <PageEntry title="Bieżące wypłaty">
+      <PageEntry
+        title="Bieżące wypłaty"
+        subtitle={
+          kidsArray.length === 0 &&
+          "Tutaj pojawią się informacje o wypłatach kieszonkowych."
+        }
+      >
         <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Imię dziecka</TableCell>
-              <TableCell numeric>Kwota (zł)</TableCell>
-              <TableCell>Poprzednia wypłata</TableCell>
-              <TableCell>Nadchodząca wypłata</TableCell>
-            </TableRow>
-          </TableHead>
+          {kidsArray.length > 0 && (
+            <TableHead>
+              <TableRow>
+                <TableCell>Imię dziecka</TableCell>
+                <TableCell numeric>Kwota (zł)</TableCell>
+                <TableCell>Poprzednia wypłata</TableCell>
+                <TableCell>Nadchodząca wypłata</TableCell>
+              </TableRow>
+            </TableHead>
+          )}
           <TableBody>
             {kidsArray.map((kid, idx) => {
               return (

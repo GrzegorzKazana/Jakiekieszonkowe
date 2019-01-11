@@ -12,7 +12,14 @@ export default class Page extends React.Component {
           ...style
         }}
       >
-        <div style={{ height: "100%", backgroundColor: `rgba(0,0,0,0.3)` }}>
+        <div
+          style={{
+            height: "100%",
+            backgroundColor: `rgba(0,0,0,0.3)`,
+            overflowY: "auto",
+            overflowX: "hidden"
+          }}
+        >
           <Grid container justify="center" style={{ padding: "8px 8px" }}>
             {childrenArr.map((value, index) => {
               return (

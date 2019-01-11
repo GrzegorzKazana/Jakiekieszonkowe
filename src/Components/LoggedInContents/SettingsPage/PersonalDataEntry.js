@@ -46,7 +46,9 @@ export default class PersonalDataEntry extends React.Component {
                   <Typography variant="subtitle1">Kraj:</Typography>
                 </TableCell>
                 <TableCell numeric>
-                  <Typography variant="h6">{userData.country}</Typography>
+                  <Typography variant="h6">
+                    {userData.country || "Polska"}
+                  </Typography>
                 </TableCell>
               </TableRow>
               <TableRow>

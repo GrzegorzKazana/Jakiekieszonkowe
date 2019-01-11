@@ -46,6 +46,7 @@ import {
 } from "./Actions/UserInfoActions";
 import { validateUserApiCall } from "./Common/MockApiConnections/UserApi";
 import { validateUserApiCall as validateUserApiCallRealApi } from "./Common/RealApiConnections/UserApi";
+import BackgroudFrontImage from "./Common/background_front.jpg";
 
 const mapStateToProps = state => ({
   ...state.userInfo,
@@ -136,7 +137,13 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div
+        style={{
+          backgroundImage: `url(${BackgroudFrontImage})`,
+          minWidth: "700px",
+          scrollX: "hidden"
+        }}
+      >
         {!this.props.userDataLoaded && <LogInPage />}
         {this.props.userDataLoaded &&
           (this.props.isAdmin ? <AdminPanel /> : <ContentLoggedIn />)}

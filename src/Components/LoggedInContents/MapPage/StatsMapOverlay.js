@@ -21,7 +21,7 @@ export default class StatsMapOverlay extends React.Component {
             <TableRow>
               <TableCell style={{ padding: "5px 0px" }}>
                 <Typography variant="subtitle1">
-                  Średnie kieszonkowe:
+                  Średnie kieszonkowe:&nbsp;
                 </Typography>
               </TableCell>
               <TableCell numeric style={{ padding: "5px 0px" }}>
@@ -33,7 +33,7 @@ export default class StatsMapOverlay extends React.Component {
             <TableRow>
               <TableCell style={{ padding: "5px 0px" }}>
                 <Typography variant="subtitle1">
-                  Odchylenie standardowe:
+                  Odchylenie standardowe:&nbsp;
                 </Typography>
               </TableCell>
               <TableCell numeric style={{ padding: "5px 0px" }}>
@@ -44,7 +44,9 @@ export default class StatsMapOverlay extends React.Component {
             </TableRow>
             <TableRow>
               <TableCell style={{ padding: "5px 0px" }}>
-                <Typography variant="subtitle1">Ilość użytkowników:</Typography>
+                <Typography variant="subtitle1">
+                  Ilość użytkowników:&nbsp;
+                </Typography>
               </TableCell>
               <TableCell numeric style={{ padding: "5px 0px" }}>
                 <Typography variant="h6">

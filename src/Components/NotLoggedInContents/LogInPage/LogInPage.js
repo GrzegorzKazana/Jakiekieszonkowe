@@ -41,7 +41,7 @@ export default class LogInPage extends React.Component {
       >
         <div
           style={{
-            padding: "40px",
+            margin: "40px",
             width: "100%",
             display: "flex",
             flexDirection: "row",
@@ -49,9 +49,7 @@ export default class LogInPage extends React.Component {
           }}
         >
           <div>
-            <Typography variant="h4" color="textPrimary">
-              Witaj w serwisie
-            </Typography>
+            <Typography variant="h4">Witaj w serwisie</Typography>
             <Typography variant="h3">
               <b>JakieKieszonkowe.pl</b>
             </Typography>
@@ -73,7 +71,7 @@ export default class LogInPage extends React.Component {
     return (
       <div
         style={{
-          backgroundImage: `url(${BackgroudFrontImage})`,
+          // backgroundImage: `url(${BackgroudFrontImage})`,
           backgroundColor: `rgba(0,0,0,0.3)`,
           display: "flex",
           flexWrap: "wrap",
@@ -83,10 +81,10 @@ export default class LogInPage extends React.Component {
           justifyContent: "flex-start"
         }}
       >
-        <div style={{ flexGrow: 1, backgroundColor: `rgba(255,255,255,0.2)` }}>
+        <div style={{ flexGrow: 1, backgroundColor: `rgba(255,255,255,0.3)` }}>
           {welcomeSection}
         </div>
-        <div style={{ flexGrow: 1, backgroundColor: `rgba(0,0,0,0.2)` }}>
+        <div style={{ flexGrow: 1, backgroundColor: `rgba(0,0,0,0.1)` }}>
           {/* <Button
             variant="text"
             color="inherit"

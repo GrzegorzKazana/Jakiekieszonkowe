@@ -40,8 +40,7 @@ export default class MapContent extends React.Component {
     lng: 20.15,
     zoom: 6,
     zoomBounds: null,
-    maxBounds: null,
-    provinceBasicMapStats: null
+    maxBounds: null
   };
 
   mapAvgToColor = avg => {
@@ -100,7 +99,8 @@ export default class MapContent extends React.Component {
     this.refs.map.leafletElement.fitBounds(e.target.getBounds(), {
       maxZoom: 8
     });
-    this.props.clickedOnProvince(provId);
+    //delay to let animation finish
+    setTimeout(() => this.props.clickedOnProvince(provId), 250);
   };
 
   clickedOnMap = e => {

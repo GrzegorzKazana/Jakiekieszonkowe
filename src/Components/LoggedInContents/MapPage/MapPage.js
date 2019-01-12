@@ -69,11 +69,11 @@ class MapPage extends React.Component {
     const selectedProvince = this.state.provinceStats.list.find(
       x => x.id === id
     );
-    this.setState(state => ({
+    this.setState({
       selectedCityId: null,
       selectedProvinceId: id,
       selectedStatistic: selectedProvince
-    }));
+    });
     if (this.state.commentDrawerOpen) {
       this.fetchComments();
     }
@@ -95,45 +95,40 @@ class MapPage extends React.Component {
     if (!provId) {
       return;
     }
-    //delay in order to let zoom animation end
-    const delay = 300;
     this.setState({
       cityStatsFetching: true
     });
-    setTimeout(
-      () =>
-        // getCityBasicStats(
-        getCityBasicStatsRealApi(
-          provId,
-          this.state.parametersActive,
-          this.state.parametersState
-        )
-          .then(data => {
-            //if city is currently selected and refetching stats e.g. after filter change
-            //selected statistic needs to be updated
-            this.setState(state =>
-              state.selectedProvinceId !== null && state.selectedCityId !== null
-                ? {
-                    cityStatsFetching: false,
-                    cityStats: data.cityData,
-                    selectedStatistic: data.cityData.list.find(
-                      cd => cd.id === state.selectedCityId
-                    )
-                  }
-                : {
-                    cityStatsFetching: false,
-                    cityStats: data.cityData
-                  }
-            );
-          })
-          .catch(err => {
-            console.log("failed to getch basic city map data", err);
-            this.setState({
-              cityStatsFetching: false
-            });
-          }),
-      delay
-    );
+
+    // getCityBasicStats(
+    getCityBasicStatsRealApi(
+      provId,
+      this.state.parametersActive,
+      this.state.parametersState
+    )
+      .then(data => {
+        //if city is currently selected and refetching stats e.g. after filter change
+        //selected statistic needs to be updated
+        this.setState(state =>
+          state.selectedProvinceId !== null && state.selectedCityId !== null
+            ? {
+                cityStatsFetching: false,
+                cityStats: data.cityData,
+                selectedStatistic: data.cityData.list.find(
+                  cd => cd.id === state.selectedCityId
+                )
+              }
+            : {
+                cityStatsFetching: false,
+                cityStats: data.cityData
+              }
+        );
+      })
+      .catch(err => {
+        console.log("failed to getch basic city map data", err);
+        this.setState({
+          cityStatsFetching: false
+        });
+      });
   };
 
   fetchProvinceStats = () => {

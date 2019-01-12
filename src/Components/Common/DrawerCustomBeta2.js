@@ -130,6 +130,10 @@ class Drawer extends React.Component {
     this.mounted = true;
   }
 
+  shouldComponentUpdate = (nextProps, nextState) => {
+    return nextProps.open;
+  };
+
   render() {
     const {
       anchor: anchorProp,

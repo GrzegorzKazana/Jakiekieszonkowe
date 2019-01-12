@@ -2,8 +2,6 @@ import React from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import LockIcon from "@material-ui/icons/LockOutlined";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -25,7 +23,6 @@ import {
   userValidated,
   requestUserValidationFailed
 } from "../../../Actions/UserInfoActions";
-import { validateUserApiCall } from "../../../Common/MockApiConnections/UserApi";
 import {
   validateUserApiCall as validateUserApiCallRealApi,
   forgotPassword as forgotPasswordRealApi

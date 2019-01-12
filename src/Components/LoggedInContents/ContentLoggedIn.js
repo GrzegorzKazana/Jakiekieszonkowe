@@ -6,7 +6,6 @@ import NavBar from "./NavBar";
 import StatMap from "./MapPage/MapPage";
 import { connect } from "react-redux";
 import { logOut } from "../../Actions/UserInfoActions";
-import { logOutUser } from "../../Common/MockApiConnections/UserApi";
 import { logOutUser as logOutUserRealApi } from "../../Common/RealApiConnections/UserApi";
 import BackgroudFrontImage from "../../Common/background_front.jpg";
 

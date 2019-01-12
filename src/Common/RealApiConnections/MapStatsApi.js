@@ -1,5 +1,4 @@
-import { stringifyRequest, baseUrl, excludeKeyFromObject } from "./Helpers";
-const API_DELAY = 10;
+import { stringifyRequest, baseUrl } from "./Helpers";
 /**
  * REQUEST:
  * {

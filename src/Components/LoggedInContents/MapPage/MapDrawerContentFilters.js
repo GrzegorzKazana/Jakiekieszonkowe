@@ -15,7 +15,7 @@ import {
 } from "@material-ui/core";
 import InputRange from "react-input-range";
 //even tho its unused, it still needs to be imported for style to be applied
-import xd from "react-input-range/lib/css/index.css";
+import InputRangeStyles from "react-input-range/lib/css/index.css";
 
 class MapDrawerContentFilters extends React.Component {
   state = {

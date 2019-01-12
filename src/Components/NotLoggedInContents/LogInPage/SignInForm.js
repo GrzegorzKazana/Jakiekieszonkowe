@@ -20,7 +20,6 @@ import {
 } from "../../../Common/InputValidation";
 import TermsDialog from "../TermsPage/TermsDialog";
 import { displaySnackbarMessage } from "../../../Actions/InfoSnackbarActions";
-import { registerUser } from "../../../Common/MockApiConnections/UserApi";
 import { registerUser as registerUserRealApi } from "../../../Common/RealApiConnections/UserApi";
 import { connect } from "react-redux";
 

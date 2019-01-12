@@ -3,7 +3,6 @@ import { Grid, Button, Typography } from "@material-ui/core";
 import LogInForm from "./LogInForm";
 import SignInForm from "./SignInForm";
 import FaqDialog from "../FaqPage/FaqDialog";
-import BackgroudFrontImage from "../../../Common/background_front.jpg";
 
 export default class LogInPage extends React.Component {
   state = {

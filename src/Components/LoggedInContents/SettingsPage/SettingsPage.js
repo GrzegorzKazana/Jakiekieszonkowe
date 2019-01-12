@@ -14,13 +14,6 @@ import {
 } from "../../../Actions/UserInfoActions";
 import { displaySnackbarMessage } from "../../../Actions/InfoSnackbarActions";
 import {
-  changePassword as changePasswordNotifyApi,
-  changeUserData as changeUserDataNotifyApi,
-  addNotification as addNotificationNotifyApi,
-  deleteNotification as deleteNotificationNotifyApi,
-  changeMetaNotification as changeMetaNotificationNotifyApi
-} from "../../../Common/MockApiConnections/UserApi";
-import {
   changePassword as changePasswordNotifyRealApi,
   changeUserData as changeUserDataNotifyRealApi,
   addNotification as addNotificationNotifyRealApi,

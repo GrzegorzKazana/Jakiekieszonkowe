@@ -10,11 +10,6 @@ import {
   updateKidListFailed
 } from "../../../Actions/UserInfoActions";
 import {
-  addKid as addKidNotifyApi,
-  editKid as editKidNotifyApi,
-  deleteKid as deleteKidNotifyApi
-} from "../../../Common/MockApiConnections/UserApi";
-import {
   addKid as addKidNotifyRealApi,
   editKid as editKidNotifyRealApi,
   deleteKid as deleteKidNotifyRealApi

@@ -21,13 +21,6 @@ import {
 } from "./Actions/PaymentPeriodDictionaryActions";
 import { connect } from "react-redux";
 import {
-  getProvinceDictionary,
-  getCityDictionary,
-  getPaymentPeriodDictionary,
-  getSchoolTypeDictionary,
-  getMoneyIncludes
-} from "./Common/MockApiConnections/DictionariesApi";
-import {
   getProvinceDictionary as getProvinceDictionaryRealApi,
   getCityDictionary as getCityDictionaryRealApi,
   getPaymentPeriodDictionary as getPaymentPeriodDictionaryRealApi,
@@ -39,13 +32,7 @@ import {
   moneyIncludesLoaded
 } from "./Actions/MoneyIncludesActions";
 import { hideSnackbarMessage } from "./Actions/InfoSnackbarActions";
-import {
-  requestUserValidation,
-  userValidated,
-  requestUserValidationFailed
-} from "./Actions/UserInfoActions";
-import { validateUserApiCall } from "./Common/MockApiConnections/UserApi";
-import { validateUserApiCall as validateUserApiCallRealApi } from "./Common/RealApiConnections/UserApi";
+// import { validateUserApiCall } from "./Common/MockApiConnections/UserApi";
 import BackgroudFrontImage from "./Common/background_front.jpg";
 
 const mapStateToProps = state => ({
@@ -63,27 +50,27 @@ class App extends React.Component {
     // this.mockOnlyAutoLogIn("user", "user");
   };
 
-  // mockup only, auto log in
-  mockOnlyAutoLogIn = (email, pass) => {
-    this.props.dispatch(requestUserValidation());
-    validateUserApiCall(email, pass)
-      .then(data =>
-        this.props.dispatch(
-          userValidated(
-            data.userData,
-            data.userKids,
-            data.userNotifications,
-            data.isAdmin,
-            data.userMetaNotification,
-            data.token
-          )
-        )
-      )
-      .catch(err => {
-        this.props.dispatch(requestUserValidationFailed());
-        console.log("failed to authorize in auto log in mode");
-      });
-  };
+  // // mockup only, auto log in
+  // mockOnlyAutoLogIn = (email, pass) => {
+  //   this.props.dispatch(requestUserValidation());
+  //   validateUserApiCall(email, pass)
+  //     .then(data =>
+  //       this.props.dispatch(
+  //         userValidated(
+  //           data.userData,
+  //           data.userKids,
+  //           data.userNotifications,
+  //           data.isAdmin,
+  //           data.userMetaNotification,
+  //           data.token
+  //         )
+  //       )
+  //     )
+  //     .catch(err => {
+  //       this.props.dispatch(requestUserValidationFailed());
+  //       console.log("failed to authorize in auto log in mode");
+  //     });
+  // };
 
   loadProvinces = () => {
     this.props.dispatch(requestProvinceDictionary());

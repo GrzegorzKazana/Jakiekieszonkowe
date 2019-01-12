@@ -8,20 +8,10 @@ import { Button, LinearProgress } from "@material-ui/core";
 import { ArrowForwardIos, Comment } from "@material-ui/icons";
 import "leaflet/dist/leaflet.css";
 import {
-  getCountryBasicStats,
-  getProvinceBasicStats,
-  getCityBasicStats
-} from "../../../Common/MockApiConnections/MapStatsApi";
-import {
   getCountryBasicStats as getCountryBasicStatsRealApi,
   getProvinceBasicStats as getProvinceBasicStatsRealApi,
   getCityBasicStats as getCityBasicStatsRealApi
 } from "../../../Common/RealApiConnections/MapStatsApi";
-import {
-  getComments,
-  addComment,
-  toggleCommentUpvote
-} from "../../../Common/MockApiConnections/CommentsApi";
 import {
   getComments as getCommentsRealApi,
   addComment as addCommentRealApi,

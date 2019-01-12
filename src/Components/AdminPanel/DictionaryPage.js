@@ -23,7 +23,6 @@ export default class DictionaryPage extends React.Component {
   };
 
   submitDelete = () => {
-    console.log(this.state.selectedDictionaryRow);
     const prom = this.props.onDelete(
       this.state.selectedDictionaryRow,
       this.props.token
@@ -37,8 +36,6 @@ export default class DictionaryPage extends React.Component {
   };
 
   submitInput = data => {
-    console.log(this.state.selectedDictionaryRow);
-
     this.closeInputDialog();
     if (this.state.selectedDictionaryRow === null) {
       //adding new row
@@ -55,7 +52,10 @@ export default class DictionaryPage extends React.Component {
     const { dictionary } = this.props;
     const columnNames = Object.keys(dictionary[0]);
     return (
-      <Paper square style={{ width: "100%", height: "100%" }}>
+      <Paper
+        square
+        style={{ width: "100%", height: "100%", minWidth: "1024px" }}
+      >
         <div
           style={{
             height: "100%",
@@ -87,7 +87,7 @@ export default class DictionaryPage extends React.Component {
                   .map((name, idx) => (
                     <col key={idx} />
                   ))}
-                <col style={{ width: "100px" }} />
+                <col style={{ minWidth: "100px" }} />
               </colgroup>
               <TableHead>
                 <TableRow>
@@ -105,7 +105,7 @@ export default class DictionaryPage extends React.Component {
                     {Object.keys(dictRow).map((key, idx) => (
                       <TableCell key={idx}>{dictRow[key]}</TableCell>
                     ))}
-                    <TableCell style={{ padding: "0px" }}>
+                    <TableCell style={{ padding: "0px", minWidth: "96px" }}>
                       <IconButton
                         onClick={() =>
                           this.setState({

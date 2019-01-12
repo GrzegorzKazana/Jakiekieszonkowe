@@ -21,7 +21,7 @@ export default class AdminPanelDrawer extends React.Component {
   };
   render() {
     return (
-      <Paper square style={{ height: "100%" }}>
+      <Paper square style={{ height: "100%", minWidth: "256px" }}>
         <List>
           <ListItem
             button

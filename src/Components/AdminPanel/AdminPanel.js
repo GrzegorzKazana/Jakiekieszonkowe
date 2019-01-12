@@ -151,51 +151,62 @@ class AdminPanel extends React.Component {
         <NavBarAdmin onLogOut={this.handleLogOut} userEmail="admin" />
         <div
           style={{
+            height: "100%",
+            width: "100%",
             display: "flex",
-            flex: "1",
-            flexDirection: "row",
-            alignItems: "stretch",
-            justifyContent: "flex-start"
+            flexDirection: "row"
           }}
         >
           <div
             style={{
-              width: drawerWidth,
-              height: "100%",
-              overflow: "auto",
-              overflowX: "hidden",
-              padding: "0px 2px"
+              display: "flex",
+              flex: "1",
+              flexDirection: "row",
+              alignItems: "stretch",
+              justifyContent: "flex-start"
             }}
           >
-            <AdminPanelDrawer
-              dictionaries={dictionaries}
-              onPageSelected={this.handlePageChange}
-            />
-          </div>
-          <div style={{ height: "100%", flexGrow: "1" }}>
-            {this.state.selectedPageContent < dictionaries.length &&
-              dictionaries[this.state.selectedPageContent].loaded && (
-                <DictionaryPage
-                  token={this.props.token}
-                  dictionary={
-                    dictionaries[this.state.selectedPageContent].content
-                  }
-                  title={dictionaries[this.state.selectedPageContent].name}
-                  onAdd={dictionaries[this.state.selectedPageContent].handleAdd}
-                  onEdit={
-                    dictionaries[this.state.selectedPageContent].handleEdit
-                  }
-                  onDelete={
-                    dictionaries[this.state.selectedPageContent].handleDelete
-                  }
-                  promiseHandler={responseHandler(
-                    dictionaries[this.state.selectedPageContent]
-                      .responseFetchAction,
-                    dictionaries[this.state.selectedPageContent]
-                      .responseFullfillAction
-                  )}
-                />
-              )}
+            <div
+              style={{
+                width: drawerWidth,
+                height: "100%",
+                overflow: "auto",
+                overflowX: "hidden",
+                padding: "0px 2px"
+              }}
+            >
+              <AdminPanelDrawer
+                dictionaries={dictionaries}
+                onPageSelected={this.handlePageChange}
+              />
+            </div>
+            <div style={{ height: "100%", flexGrow: "1" }}>
+              {this.state.selectedPageContent < dictionaries.length &&
+                dictionaries[this.state.selectedPageContent].loaded && (
+                  <DictionaryPage
+                    token={this.props.token}
+                    dictionary={
+                      dictionaries[this.state.selectedPageContent].content
+                    }
+                    title={dictionaries[this.state.selectedPageContent].name}
+                    onAdd={
+                      dictionaries[this.state.selectedPageContent].handleAdd
+                    }
+                    onEdit={
+                      dictionaries[this.state.selectedPageContent].handleEdit
+                    }
+                    onDelete={
+                      dictionaries[this.state.selectedPageContent].handleDelete
+                    }
+                    promiseHandler={responseHandler(
+                      dictionaries[this.state.selectedPageContent]
+                        .responseFetchAction,
+                      dictionaries[this.state.selectedPageContent]
+                        .responseFullfillAction
+                    )}
+                  />
+                )}
+            </div>
           </div>
         </div>
       </div>

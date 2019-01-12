@@ -10,7 +10,7 @@ export default class KidsEntry extends React.Component {
         subtitle={
           <div>
             Zarejestrowano wypłaty dla <b>{numberOfKids}</b> dzieci.
-            {numberOfKids > 0 && "Dane gromadzone od "}
+            {numberOfKids > 0 && "Kieszonkowe wypłacane od "}
             <b>{numberOfKids > 0 && firstKidDate}</b>
             {numberOfKids > 0 && "."}
           </div>

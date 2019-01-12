@@ -77,7 +77,8 @@ export default class LogInPage extends React.Component {
           flex: "1",
           flexDirection: "row",
           alignItems: "stretch",
-          justifyContent: "flex-start"
+          justifyContent: "flex-start",
+          height: "100vh"
         }}
       >
         <div style={{ flexGrow: 1, backgroundColor: `rgba(255,255,255,0.3)` }}>
@@ -104,7 +105,7 @@ export default class LogInPage extends React.Component {
             container
             justify="center"
             alignItems="center"
-            style={{ height: "100vh" }}
+            style={{ height: "100%" }}
           >
             <Grid
               item

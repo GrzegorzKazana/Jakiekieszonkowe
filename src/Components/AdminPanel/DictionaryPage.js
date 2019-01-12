@@ -13,10 +13,6 @@ import {
 } from "@material-ui/core";
 import { Edit, Delete, Add } from "@material-ui/icons";
 import ConfirmDialog from "./../Common/ConfirmDialog";
-import {
-  dictionaryChange,
-  dictionaryRowDelete
-} from "./../../Common/MockApiConnections/AdminApi";
 import DictionaryRowInputDialog from "./DictionaryRowInputDialog";
 
 export default class DictionaryPage extends React.Component {
@@ -27,7 +23,12 @@ export default class DictionaryPage extends React.Component {
   };
 
   submitDelete = () => {
-    dictionaryRowDelete(this.state.selectedDictionaryRow.id);
+    console.log(this.state.selectedDictionaryRow);
+    const prom = this.props.onDelete(
+      this.state.selectedDictionaryRow,
+      this.props.token
+    );
+    this.props.promiseHandler(prom);
     this.setState({ confirmDialogOpen: false, selectedDictionaryRow: null });
   };
 
@@ -36,15 +37,25 @@ export default class DictionaryPage extends React.Component {
   };
 
   submitInput = data => {
+    console.log(this.state.selectedDictionaryRow);
+
     this.closeInputDialog();
-    dictionaryChange(data);
+    if (this.state.selectedDictionaryRow === null) {
+      //adding new row
+      const prom = this.props.onAdd(data, this.props.token);
+      this.props.promiseHandler(prom);
+    } else {
+      //edditing existing row
+      const prom = this.props.onEdit(data, this.props.token);
+      this.props.promiseHandler(prom);
+    }
   };
 
   render() {
     const { dictionary } = this.props;
     const columnNames = Object.keys(dictionary[0]);
     return (
-      <Paper style={{ width: "100%", height: "100%" }}>
+      <Paper square style={{ width: "100%", height: "100%" }}>
         <div
           style={{
             height: "100%",

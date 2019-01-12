@@ -10,7 +10,7 @@ import { Person, Star, StarBorder, Send } from "@material-ui/icons";
 import CollapsingList from "../../Common/CollapsingList";
 
 const CommentComponent = props => (
-  <div style={{ padding: "0px 4px" }}>
+  <div style={{ padding: "0px 4px 8px 4px" }}>
     <div
       style={{
         display: "flex",

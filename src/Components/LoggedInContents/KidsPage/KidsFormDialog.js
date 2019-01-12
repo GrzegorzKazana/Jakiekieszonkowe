@@ -60,6 +60,9 @@ class KidsFormDialog extends React.Component {
 
   handleNumnericChange = name => event => {
     const value = parseInt(event.target.value) || "";
+    if (value < 0) {
+      return;
+    }
     this.setState({ [name]: value });
   };
 
@@ -180,7 +183,7 @@ class KidsFormDialog extends React.Component {
           label="Kwota"
           type="number"
           id="simple-start-adornment"
-          defaultValue={this.state.quota}
+          value={this.state.quota}
           onChange={this.handleNumnericChange("quota")}
           error={this.state.underValidation && this.state.quota === ""}
           InputProps={{

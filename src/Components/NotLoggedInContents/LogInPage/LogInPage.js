@@ -53,8 +53,8 @@ export default class LogInPage extends React.Component {
               <b>JakieKieszonkowe.pl</b>
             </Typography>
             <Typography variant="h4" component="p">
-              Sprawdź, co Twoje dzieci <br />
-              sądzą o Twojej hojności!
+              Dowiedz się, jakie kieszonkowe
+              <br /> jest właściwe dla twojego dziecka
             </Typography>
             <Button
               variant="outlined"

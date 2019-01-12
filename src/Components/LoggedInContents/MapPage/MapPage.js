@@ -59,6 +59,9 @@ class MapPage extends React.Component {
       selectedCityId: id,
       selectedStatistic: selectedCity
     }));
+    if (this.state.commentDrawerOpen) {
+      this.fetchComments();
+    }
   };
 
   clickedOnProvince = id => {
@@ -71,6 +74,9 @@ class MapPage extends React.Component {
       selectedProvinceId: id,
       selectedStatistic: selectedProvince
     }));
+    if (this.state.commentDrawerOpen) {
+      this.fetchComments();
+    }
   };
 
   clickedOnCountry = () => {
@@ -80,6 +86,9 @@ class MapPage extends React.Component {
       cityStats: null,
       selectedStatistic: state.countryStats
     }));
+    if (this.state.commentDrawerOpen) {
+      this.fetchComments();
+    }
   };
 
   fetchCityStats = provId => {
@@ -250,6 +259,7 @@ class MapPage extends React.Component {
   };
 
   fetchComments = () => {
+    this.setState({ commentsFetching: true });
     getCommentsRealApi(
       this.state.selectedProvinceId,
       this.state.selectedCityId,

@@ -53,6 +53,7 @@ export default class NotificationSettingsEntry extends React.Component {
         <Collapse in={!this.props.loading}>
           {this.props.userNotifications.length > 0 && (
             <NotificationList
+              kidsArray={this.props.userKids}
               notificationArray={this.props.userNotifications}
               handleDelete={this.deleteNotification}
             />

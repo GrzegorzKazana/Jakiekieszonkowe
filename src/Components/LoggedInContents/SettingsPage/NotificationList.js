@@ -20,7 +20,12 @@ export default class NotificationList extends React.Component {
           {notificationArray.map((notif, idx) => {
             return (
               <ListItem key={idx} divider={idx !== lastElementId}>
-                <ListItemText primary={notif.name} />
+                <ListItemText
+                  primary={
+                    this.props.kidsArray.find(kid => kid.id === notif.kidId)
+                      .name
+                  }
+                />
                 <ListItemText
                   primary={notif.notificationOverlap + " dzień/dni"}
                 />

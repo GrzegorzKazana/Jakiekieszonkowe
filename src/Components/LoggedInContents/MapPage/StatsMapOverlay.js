@@ -5,17 +5,40 @@ import {
   Table,
   TableBody,
   TableRow,
-  TableCell
+  TableCell,
+  Tooltip,
+  IconButton
 } from "@material-ui/core";
+import { Help } from "@material-ui/icons";
 
 export default class StatsMapOverlay extends React.Component {
   render() {
     const { stats } = this.props;
+    const helpChip = (
+      <Tooltip
+        title="<h6>Dane prezentowane w przeliczeniu na miesiąc</h6>"
+        placement="left"
+      >
+        <IconButton aria-label="Info">
+          <Help />
+        </IconButton>
+      </Tooltip>
+    );
     return (
       <Paper style={{ ...this.props.style, padding: "16px" }}>
-        <Typography variant="h4" color="textSecondary">
-          {stats ? stats.name : "---"}
-        </Typography>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center"
+          }}
+        >
+          <Typography variant="h4" color="textSecondary">
+            {stats ? stats.name : "---"}
+          </Typography>
+          {helpChip}
+        </div>
         <Table>
           <TableBody>
             <TableRow>

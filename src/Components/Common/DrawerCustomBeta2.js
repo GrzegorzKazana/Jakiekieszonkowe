@@ -131,7 +131,7 @@ class Drawer extends React.Component {
   }
 
   shouldComponentUpdate = (nextProps, nextState) => {
-    return nextProps.open;
+    return nextProps.open || this.props.open !== nextProps.open;
   };
 
   render() {

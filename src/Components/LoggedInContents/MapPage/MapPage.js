@@ -65,6 +65,9 @@ class MapPage extends React.Component {
   };
 
   clickedOnProvince = id => {
+    if (!id) {
+      return;
+    }
     this.fetchCityStats(id);
     const selectedProvince = this.state.provinceStats.list.find(
       x => x.id === id

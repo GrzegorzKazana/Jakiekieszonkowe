@@ -10,7 +10,7 @@ export default class NewsEntry extends React.Component {
         subtitle={
           <div>
             Witamy ponownie. Ostatnia wizyta miała miejsce{" "}
-            <b>{lastLogInDate}</b> o godzinie <b>20:00</b>.
+            <b>{lastLogInDate}</b>.
           </div>
         }
       />

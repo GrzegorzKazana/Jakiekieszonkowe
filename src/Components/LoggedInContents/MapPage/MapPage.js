@@ -276,6 +276,7 @@ class MapPage extends React.Component {
   handleCommentUpvoteChange = commentId => {
     const oldLikedState = this.state.comments.find(c => c.id === commentId)
       .liked;
+    console.log(commentId, oldLikedState);
     // perform change locally for greater UX
     this.setState(state => ({
       commentsFetching: true,

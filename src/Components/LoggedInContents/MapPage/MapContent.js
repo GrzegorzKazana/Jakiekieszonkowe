@@ -47,7 +47,7 @@ export default class MapContent extends React.Component {
     const { provinceData } = this.props;
     const min = provinceData ? provinceData.min : avg;
     const max = provinceData ? provinceData.max : avg;
-    const idx = Math.floor(((colors.length - 1) * (avg - min)) / max);
+    const idx = Math.floor(((colors.length - 1) * (avg - min)) / (max - min));
     return colors[idx];
   };
 

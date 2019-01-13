@@ -56,7 +56,7 @@ export default class AdminPanelDrawer extends React.Component {
             </List>
           </Collapse>
           <Divider />
-          <ListItem
+          {/* <ListItem
             button
             onClick={() =>
               this.props.onPageSelected(this.props.dictionaries.length)
@@ -66,7 +66,7 @@ export default class AdminPanelDrawer extends React.Component {
               <Timeline />
             </ListItemIcon>
             <ListItemText inset primary="Statystyki portalu" />
-          </ListItem>
+          </ListItem> */}
         </List>
       </Paper>
     );

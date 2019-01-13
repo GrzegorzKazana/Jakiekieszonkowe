@@ -16,7 +16,7 @@ export default class StatsMapOverlay extends React.Component {
     const { stats } = this.props;
     const helpChip = (
       <Tooltip
-        title={<h6>Dane prezentowane w przeliczeniu na miesiąc</h6>}
+        title={<h3>Dane prezentowane w przeliczeniu na miesiąc</h3>}
         placement="left"
       >
         <IconButton aria-label="Info">
@@ -68,7 +68,7 @@ export default class StatsMapOverlay extends React.Component {
             <TableRow>
               <TableCell style={{ padding: "5px 0px" }}>
                 <Typography variant="subtitle1">
-                  Ilość użytkowników:&nbsp;
+                  Ilość kieszonkowych:&nbsp;
                 </Typography>
               </TableCell>
               <TableCell numeric style={{ padding: "5px 0px" }}>

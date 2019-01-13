@@ -49,7 +49,10 @@ export default class LogInPage extends React.Component {
         >
           <div>
             <Typography variant="h4">Witaj w serwisie</Typography>
-            <Typography variant="h3">
+            <Typography
+              variant="h3"
+              // style={{ textShadow: "2px 2px #A8976A" }}
+            >
               <b>JakieKieszonkowe.pl</b>
             </Typography>
             <Typography variant="h4" component="p">

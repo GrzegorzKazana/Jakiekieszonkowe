@@ -7,13 +7,13 @@ Create website dedicated to parents, who want to keep track of their pocket mone
 
 ---
 ## Used technologies and implementation
-[**React**](https://reactjs.org/) - webpage design
-[**React-Redux**](https://react-redux.js.org/) - state management
-[**Material UI**](https://material-ui.com/) - prefab components
-[**Leaflet**](https://leafletjs.com/) - interactive map
-[**React-Leaflet**](https://react-leaflet.js.org/) - react leaflet wrapper
+[**React**](https://reactjs.org/) - webpage design\
+[**React-Redux**](https://react-redux.js.org/) - state management\
+[**Material UI**](https://material-ui.com/) - prefab components\
+[**Leaflet**](https://leafletjs.com/) - interactive map\
+[**React-Leaflet**](https://react-leaflet.js.org/) - react leaflet wrapper\
 
-Website communicates with C# back-end API, available at:
+Website communicates with C# back-end API, available at:\
 [https://github.com/RuXeR97/jakiekieszonkowe](https://github.com/RuXeR97/jakiekieszonkowe)
 
 ---
